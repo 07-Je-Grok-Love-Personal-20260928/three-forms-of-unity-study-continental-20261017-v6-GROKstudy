@@ -2,7 +2,7 @@
 用法：python3 tools/qa.py [--shots] [--nojs] [--rm] [页面...]  （file:// 打开）"""
 import sys,os,glob,json
 from playwright.sync_api import sync_playwright
-args=sys.argv[1:]; shots='--shots' in args; nojs='--nojs' in args; rm='--rm' in args
+args=sys.argv[1:]; shots='--shots' in args; nojs='--nojs' in args; rm='--rm' in args; opn='--open' in args
 pages=[a for a in args if a.endswith('.html')] or sorted(glob.glob('*.html'))
 W=[360,390,768,1280,1440]
 JS_OVER='''()=>{
@@ -30,6 +30,7 @@ with sync_playwright() as p:
             pg=ctx.new_page(); errs=[]
             pg.on('pageerror',lambda e:errs.append(str(e))); pg.on('console',lambda m:errs.append(m.text) if m.type=='error' else None)
             pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(300)
+            if opn: pg.evaluate("document.querySelectorAll('details').forEach(e=>e.open=true)")
             if not nojs:
                 # 滚动一遍以触发 reveal / 进度
                 h=pg.evaluate('document.documentElement.scrollHeight')

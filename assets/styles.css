@@ -539,3 +539,15 @@ table.stk td:first-child{color:var(--gold2);font-weight:700;white-space:nowrap}
  table.stk td::before{content:attr(data-l);display:inline-block;margin-right:8px;padding:0 8px;border-radius:6px;background:rgba(255,255,255,.1);color:var(--mut);font-size:.86rem;font-weight:700}
  table.stk td:first-child::before{display:block;width:max-content;margin-bottom:2px}}
 table.stk td:first-child::before{display:none!important}
+/* 动画时间轴 */
+.metro{margin:14px 0;padding:12px 14px;border-radius:14px;background:var(--gl);border:1px solid rgba(255,255,255,.08);min-width:0}
+.mscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.metro svg{display:block;width:100%;height:auto;min-width:860px}
+.metro .shint{display:none;margin:0 0 4px;color:var(--gold2)}@media(max-width:1000px){.metro .shint{display:block}}
+.mline{stroke:var(--gold);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:100;opacity:.7}
+.mdot{fill:var(--c);stroke:#fff;stroke-width:2.5}.mstem{stroke:var(--c);stroke-width:2;opacity:.8}
+.my{fill:var(--c);font-size:21px;font-weight:800}.mt{fill:#fff;font-size:18px;font-weight:700}.ms{fill:#c3cde2;font-size:16px}
+.js .metro:not(.in) .mline{stroke-dashoffset:100}.js .metro.in .mline{animation:mdraw 1.6s ease-out backwards}
+@keyframes mdraw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.js .metro:not(.in) .mst{opacity:0}.js .metro.in .mst{animation:mpop .6s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:calc(var(--i)*.22s + .2s)}
+@keyframes mpop{from{opacity:0;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){.js .metro .mline,.js .metro .mst{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}}

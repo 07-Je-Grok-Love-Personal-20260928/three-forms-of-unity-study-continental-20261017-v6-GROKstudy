@@ -38,3 +38,21 @@ def whole_block(pid, title, intro, steps, bt_rows, ct_cards, ct_note, rr_cards, 
     l3 += L3(f"{pid}-w5", "六个角度读一遍：同一份文本，六种问法", angles(ang_rows) + key(memo), "eye", "多角度")
     CUR["zero"] = 0
     return L2(f"{pid}-whole", "0", title, l3)
+
+def metro(title, items, cap=""):
+    """动画 SVG 时间轴（等距站点，上下交错标注）。items: (年代, 标题, 小注, 颜色)。"""
+    n = len(items); W = 1000; H = 300; x0, x1 = 70, W - 70; step = (x1 - x0) / (n - 1); y = H / 2
+    s = f'<figure class="metro reveal"><p class="shint">← 左右滑动看全部站点 →</p><div class="mscroll"><svg viewBox="0 0 {W} {H}" role="img" aria-label="{H_esc(title)}"><path class="mline" d="M{x0} {y:.0f}L{x1} {y:.0f}" pathLength="100"/>'
+    for i, (yr, t, sub, c) in enumerate(items):
+        x = x0 + i * step; up = (i % 2 == 0); ty = y - 38 if up else y + 50
+        s += (f'<g class="mst" style="--i:{i};--c:{c}"><circle cx="{x:.0f}" cy="{y:.0f}" r="11" class="mdot"/><path d="M{x:.0f} {y + (-12 if up else 12):.0f}L{x:.0f} {y + (-30 if up else 30):.0f}" class="mstem"/>')
+        if up:
+            s += f'<text x="{x:.0f}" y="{ty - 56:.0f}" class="my" text-anchor="middle">{yr}</text><text x="{x:.0f}" y="{ty - 32:.0f}" class="mt" text-anchor="middle">{t}</text><text x="{x:.0f}" y="{ty - 10:.0f}" class="ms" text-anchor="middle">{sub}</text>'
+        else:
+            s += f'<text x="{x:.0f}" y="{ty:.0f}" class="my" text-anchor="middle">{yr}</text><text x="{x:.0f}" y="{ty + 24:.0f}" class="mt" text-anchor="middle">{t}</text><text x="{x:.0f}" y="{ty + 46:.0f}" class="ms" text-anchor="middle">{sub}</text>'
+        s += '</g>'
+    return s + f'</svg></div><figcaption>{cap or title}</figcaption></figure>'
+
+def H_esc(t):
+    import html
+    return html.escape(t)
