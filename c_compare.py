@@ -2,6 +2,8 @@
 from core import *
 import c_refs
 from c_common import *
+from whole import pagecore
+
 from widgets import *
 
 def chips(items):
@@ -27,7 +29,7 @@ def xmatrix():
     return out+'</tbody></table></div>'
 
 def part_compare():
-    b = L2("cp-table","5.1","三份文件一览",
+    b = pagecore("三份文件，三种体裁，一个福音：BC 告白、HC 教导、Dort 护卫。","BC 信｜HC 慰｜Dort 守","“联合”不是合并成一份，而是教会通过签署书共同接受。")+L2("cp-table","5.1","三份文件一览",
       table(["","比利时信条 BC","海德堡要理问答 HC","多特信经 Dort"],[
         ["年代","1561（1562 呈送国王）","1563（1月19日序言）","1618–1619"],
         ["地点","尼德兰南部（今比利时一带）","德国海德堡（普法尔茨）","荷兰多德雷赫特"],

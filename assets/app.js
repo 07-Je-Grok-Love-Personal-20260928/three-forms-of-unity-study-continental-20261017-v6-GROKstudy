@@ -94,4 +94,13 @@ var steps=$$('.step');if(steps.length){var tot=0,got=0;(T.pages||[]).forEach(fun
 var pct=tot?Math.round(got/tot*100):0;var rf=$('#ringf'),rn=$('#ringn');if(rf)rf.setAttribute('stroke-dasharray',pct+' 100');if(rn)rn.textContent=pct+'%';var a=$('#readn'),z=$('#readt');if(a)a.textContent=got;if(z)z.textContent=tot;
 var q=ld(QK,null),qe=$('#quizs');if(qe&&q)qe.textContent=q.s+' / '+q.t+(q.d<q.t?'（未答完）':'');
 var rp=$('#resetp');if(rp)rp.onclick=function(){try{localStorage.removeItem(KEY);localStorage.removeItem(QK)}catch(e){}location.reload()}}
+
+/* v6 辅助区块：目录/链接/哈希跳转时自动展开所在的 <details>；全部展开/收起 */
+(function(){function openFor(el){var o=false,p=el;while(p&&p!==d.body){if(p.tagName==='DETAILS'&&!p.open){p.open=true;o=true}p=p.parentElement}return o}
+function tgt(h){if(!h)return null;try{h=decodeURIComponent(h)}catch(e){}return d.getElementById(h)}
+function go(){var t=tgt(location.hash.slice(1));if(t&&openFor(t)){setTimeout(function(){t.scrollIntoView()},40);setTimeout(function(){t.scrollIntoView()},400)}}
+addEventListener('hashchange',go);go();
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="#"]');if(!a)return;var h=a.getAttribute('href'),i=h.indexOf('#');if(i<0)return;var f=h.slice(0,i);if(f&&f!==location.pathname.split('/').pop())return;var t=tgt(h.slice(i+1));if(t)openFor(t)});
+$$('[data-secall]').forEach(function(x){x.onclick=function(){var on=x.dataset.secall==='open';$$('details.secd').forEach(function(e){e.open=on})}});
+})();
 })();

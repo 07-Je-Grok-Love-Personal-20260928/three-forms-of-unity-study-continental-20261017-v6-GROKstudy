@@ -12,14 +12,22 @@ TOC = []  # (l1id, l1title, [(id,title)])
 def L1(id, num, title, ico, lead, body):
     TOC.append((id, f"{num}、{title}", PEND[:], CUR["f"])); PEND.clear()
     return f'<section class="l1" id="{id}"><header class="l1h reveal"><span class="ico">{ic(ico,"ic big")}</span><div><div class="kick">第{num}部分</div><h2>{num}、{title}</h2><p class="lead">{lead}</p></div></header>{body}</section>'
+SEC = set(['bi-refx', 'rx-bible', 'hcd-ppl', 'hcd-use', 'rx-hc', 'bcd-ppl', 'bcd-use', 'bcd-feat', 'rx-bc', 'dd-co', 'dd-miss', 'dd-ppl', 'dd-use', 'rx-dort', 'cp-use', 'rx-compare', 'cp-ref', 'wm-inst', 'wm-time', 'wm-sab', 'rx-west', 'mem-rf', 'rx-memory', 'src-cci', 'src-refx', 'src-ver', 'src-method'])
 def L2(id, num, title, body):
-    CUR["c2"] += 1; num = f'{CUR["n"]}.{CUR["c2"]}'
+    if id.endswith("-whole") or id == "hcd-angles":
+        num = f'{CUR["n"]}.0'  # v6：导读区块不占用既有编号，保持全站既有“见 x.y”引用不变
+    else:
+        CUR["c2"] += 1; num = f'{CUR["n"]}.{CUR["c2"]}'
     kids = PEND3[:]; PEND3.clear()
     PEND.append((id, f"{num} {title}", kids))
-    return f'<section class="l2 reveal" id="{id}"><h3><span class="n">{num}</span>{ic(l2icon(title))}{title}</h3>{body}</section>'
+    cls = "l2 reveal"
+    if id in SEC:
+        cls += " sec"
+        body = f'<details class="secd"><summary>展开：{title}<small>辅助内容 · 默认折叠</small></summary><div class="secb">{body}</div></details>'
+    return f'<section class="{cls}" id="{id}"><h3><span class="n">{num}</span>{ic(l2icon(title))}{title}</h3>{body}</section>'
 def L3(id, title, body, icon="cross", tag="", cls="", sub="", bar=None):
     """三级标题：编号 = 所属二级编号 + 序号（所属二级尚未登记，故用 c2+1）。返回 <section class=l3>。"""
-    k = len(PEND3) + 1; num = f'{CUR["n"]}.{CUR["c2"]+1}.{k}'
+    k = len(PEND3) + 1; num = f'{CUR["n"]}.{0 if CUR.get("zero") else CUR["c2"]+1}.{k}'
     PEND3.append((id, f"{num} {title}"))
     t = f'<span class="l3t">{tag}</span>' if tag else ""
     s = f'<small class="l3s">{sub}</small>' if sub else ""

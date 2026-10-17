@@ -2,6 +2,7 @@
 import re
 from core import *
 from c_common import *
+from c_whole import *
 from widgets import *
 
 _dt=J("dort")
@@ -76,7 +77,7 @@ def dort4_l2():
 
 def part_dort():
     nitems=sum(len(h["items"]) for h in _dt["heads"]); nerr=sum(len(v) for v in ERR.values())
-    b = L2("dd-struct","4.1","结构：四项教义，63 个条目，正反两面",
+    b = pagecore("救恩全然出于神的恩典：拣选—救赎—归正—保守，并明确驳斥34条错谬。","四项（第三、四项合一）＋错谬反驳；“TULIP”是后来的英文口诀","“特定救赎”与普世性经文的关系；弃绝（reprobation）的表述怎样牧养。")+whole_dt()+L2("dd-struct","4.1","结构：四项教义，63 个条目，正反两面",
       '<p>多特信经（Canons of Dort）是1618–1619年多特大会对阿米念主义“五点”的回应。CCI 的导言说，它“又称为《反对抗辩派的五大点》”，每一项都包括<b>正反两方面</b>：一方面陈述改革宗的正确教义，一方面驳斥错谬。结构上虽只分四个部分（第三、第四项合并），但仍说它有五项教义。</p>'
       + table(["项","CCI 标题","条目数（含“错谬反驳”）","其中驳斥的错谬数（本站统计）"],[[h["num"],h["title"],str(len(h["items"])),str(len(ERR[h["num"]]))] for h in _dt["heads"]]+[["合计","","<b>"+str(nitems)+"</b>","<b>"+str(nerr)+"</b>"]],"cmp")
       + flow([("第一项","拣选与弃绝","#d4af37"),("第二项","基督的死与救赎","#5aa9e6"),("第三、四项","人的败坏与向神归正","#e07a5f"),("第五项","真信徒能持守信仰","#81b29a")])
