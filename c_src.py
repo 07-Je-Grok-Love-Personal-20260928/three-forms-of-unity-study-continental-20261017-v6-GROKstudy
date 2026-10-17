@@ -50,7 +50,7 @@ def part_src(bodies):
         ["Clarence Stam 的 HC 讲道","第二、三、五部分：LD52 讲道指出三份文件都以“真信徒能持守信仰”收束（转述）"],
         ["《真理的火焰》","儿童教会史读物：与三份文件的人物、事件联系（转述）"]],"cmp")
       + note("没有逐字收录 CCI 的《我属于》课文、讲道、仪文与图书全文，以免大段复制；需要时请直接阅读原页。"))
-    ref=[("ccreformed.org（洛杉矶恩约教会）","信仰页：认信三项联合信条，并说信仰“连接在古代大公教会的主干之上”","https://www.ccreformed.org/our-belief/"),
+    ref=[("ccreformed.org（洛杉矶恩约教会）","信仰页：古代信经与三联合信条构成教义准则；说古代信经“把我们连结在古代基督教会上”，三联合信条“把我们连结在十六、十七世纪广大的改革宗传统中”","https://www.ccreformed.org/our-belief/"),
       ("reformedbeginner.net（改革宗初学者）","“大公信经”专页：统称使徒、尼西亚、亚他那修与迦克墩","https://www.reformedbeginner.net/ecumenical-creeds/"),
       ("canrc.org（加拿大归正教会）","Beliefs 页（英文）：采纳三大信经与三大信条；人的文件只有人的权威","https://canrc.org/beliefs"),
       ("urcna.org（北美联合改革宗）","Ecumenical Creeds 与信经页（英文）：脚注把“降在阴间”“大公”连到信条","https://www.urcna.org/creeds"),

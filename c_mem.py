@@ -69,7 +69,7 @@ def part_mem():
       '<div class="mn reveal"><p><b class="hl-s">HC：罪 · 救 · 谢</b>——主日 1–4 / 5–31 / 32–52；问1 的安慰串起全书。</p>'
       '<p><b class="hl-f">BC：神 · 经 · 人 · 基督 · 恩 · 教 · 末</b>——七群：神、圣经、创造与人、基督与拣选、救恩的应用、教会与圣礼、政府与末日。</p>'
       '<p><b class="hl-g">Dort：一选 二赎 三四归 五守</b>——拣选、基督之死、败坏与归信、保守；每项都有“驳”。</p>'
-      '<p>年份：<b>1561 信条 · 1563 问答 · 1618–19 多特</b>——“一五六一信条，一五六三问答，一六一八多特”。</p>'
+      '<p>年份：<b>1561 信条 · 1563 问答 · 1618–19 多特</b>——（本站口诀：信条1561、问答1563、多特1618）。</p>'
       '<p>体裁：<b>我们相信（BC）· 我（HC）· 我们断定（Dort）</b>。</p></div>'
       '<div class="legend"><span class="kchip">重点</span><span class="hchip">难点</span></div>')
     mind = '<div class="mind reveal"><div class="mc">三项联合信条<br><small>一个信仰 · 三种文体</small></div><div class="mb">' + "".join(f'<div class="mbr" style="--c:{c}"><b>{t}</b><ul>' + "".join(f"<li>{x}</li>" for x in xs) + "</ul></div>" for t,xs,c in [

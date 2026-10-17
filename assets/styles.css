@@ -210,3 +210,4 @@ th{background:rgba(212,175,55,.16);color:var(--gold2);white-space:nowrap}tr:nth-
 .srcd{margin:8px 0;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}.srcd summary{cursor:pointer;padding:10px 14px;color:var(--gold2);font-weight:700}.srcd ul{margin:0;padding:4px 14px 12px 34px;font-size:.88rem;overflow-wrap:anywhere}
 .wk{min-width:640px}.wk td:first-child{text-align:center;font-weight:700;color:var(--gold2)}
 @media(prefers-reduced-motion:reduce){.bk i,.h3s,.bt{transition:none!important;animation:none!important}.js .bars:not(.in) .bk i{width:var(--w)}.js .hc3:not(.in) .h3s,.js .bcm:not(.in) .bt{opacity:1;transform:none}.dl-js .dpan.on{animation:none}}
+@media(max-width:700px){.map::before{content:"← 左右滑动查看地图 →";display:block;position:sticky;left:0;font-size:.78rem;color:var(--gold2);padding:0 4px 4px}}

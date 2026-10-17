@@ -19,7 +19,7 @@ ERR={h["num"]:errors_of(h) for h in _dt["heads"]}
 def tulip_svg():
     L=[("T","#e07a5f","全然败坏","Total depravity"),("U","#d4af37","无条件拣选","Unconditional election"),("L","#5aa9e6","有限／特定救赎","Limited atonement"),("I","#a78bfa","不可抗拒的恩典","Irresistible grace"),("P","#81b29a","圣徒蒙保守","Perseverance of the saints")]
     R=[("第三、四项教义","3-4 人的败坏与归正","#e07a5f"),("第一项教义","1 拣选与弃绝","#d4af37"),("第二项教义","2 基督之死与救赎","#5aa9e6"),("第三、四项教义","3-4 归正的恩典","#a78bfa"),("第五项教义","5 圣徒蒙保守","#81b29a")]
-    s='<figure class="tulipf reveal"><svg viewBox="0 0 760 330" role="img" aria-label="通称 TULIP 的五个字母与多特信经四项教义的对应关系"><defs></defs>'
+    s='<figure class="tulipf reveal"><svg viewBox="0 0 760 356" role="img" aria-label="通称 TULIP 的五个字母与多特信经四项教义的对应关系"><defs></defs>'
     for i,(l,c,zh,en) in enumerate(L):
         y=40+i*62
         s+=f'<g class="tl-l"><circle cx="60" cy="{y}" r="22" fill="{c}" fill-opacity=".25" stroke="{c}" stroke-width="2"/><text x="60" y="{y+7}" text-anchor="middle" class="tl-let">{l}</text><text x="96" y="{y-2}" class="tl-zh">{zh}</text><text x="96" y="{y+16}" class="tl-en">{en}</text></g>'
@@ -30,7 +30,7 @@ def tulip_svg():
     # 线：字母 i → 右侧 box i（T→3-4，U→1，L→2，I→3-4，P→5）。右侧顺序已与字母顺序一致，但对应的 Dort 顺序是 1,2,3-4,5 → 交叉说明
     for i,(l,c,zh,en) in enumerate(L):
         y=40+i*62; s+=f'<path d="M236,{y} C 360,{y} 400,{y} 518,{y}" class="tl-ln" style="stroke:{c};--d:{i*.18:.2f}s"/>'
-    s+='<text x="380" y="316" text-anchor="middle" class="tl-note">T、I 同属 Dort 第三、四项（合为一项）；U 对应第一项；L 对应第二项；P 对应第五项。</text></svg><figcaption>通称 TULIP 的五个字母与多特信经四项教义的对应（本站示意图）。字母顺序是后来的英文口诀，不是多特信经的结构。</figcaption></figure>'
+    s+='<text x="380" y="344" text-anchor="middle" class="tl-note">T、I 同属 Dort 第三、四项（合为一项）；U 对应第一项；L 对应第二项；P 对应第五项。</text></svg><figcaption>通称 TULIP 的五个字母与多特信经四项教义的对应（本站示意图）。字母顺序是后来的英文口诀，不是多特信经的结构。</figcaption></figure>'
     return s
 
 def layers():
@@ -84,7 +84,7 @@ def part_dort():
     # 4.4 地图
     pts=["多德雷赫特","莱顿","海牙","阿姆斯特丹","乌得勒支","埃姆登","不来梅","卡塞尔","海德堡","巴塞尔","苏黎世","伯尔尼","日内瓦","伦敦"]
     m=mapsvg("dt","多德雷赫特大会：荷兰与外国代表来源",pts,routes=[("伦敦","多德雷赫特"),("海德堡","多德雷赫特"),("不来梅","多德雷赫特"),("卡塞尔","多德雷赫特"),("巴塞尔","多德雷赫特"),("日内瓦","多德雷赫特")],hl=("多德雷赫特",),bbox=(-2,12,46,54),
-       off={"多德雷赫特":(14,-10,'start'),"莱顿":(-14,-6,'end'),"海牙":(-14,2,'end'),"阿姆斯特丹":(14,-6,'start'),"乌得勒支":(14,4,'start'),"埃姆登":(14,-4,'start'),"不来梅":(14,-4,'start'),"卡塞尔":(14,8,'start'),"海德堡":(14,10,'start'),"巴塞尔":(-14,10,'end'),"苏黎世":(14,14,'start'),"伯尔尼":(-14,22,'end'),"日内瓦":(-14,22,'end'),"伦敦":(-14,-8,'end')},
+       off={"多德雷赫特":(14,30,'start'),"莱顿":(-14,-14,'end'),"海牙":(-14,16,'end'),"阿姆斯特丹":(14,-6,'start'),"乌得勒支":(14,4,'start'),"埃姆登":(14,-4,'start'),"不来梅":(14,-4,'start'),"卡塞尔":(14,8,'start'),"海德堡":(14,10,'start'),"巴塞尔":(-14,10,'end'),"苏黎世":(14,14,'start'),"伯尔尼":(-14,22,'end'),"日内瓦":(14,-8,'start'),"伦敦":(-14,-8,'end')},
        blobs=[("荷兰省与联省",5.0,52.0,1.4,0.9,"#d4af37")],cap="；路线代表外国代表的派出地示意（具体名单与路线，约）。")
     cd=cards([("🏙️","多德雷赫特","荷兰省的古老城市，位于河流交汇处，适合集会（本站概括，约）；1572年荷兰各城市在此集会，被视为荷兰独立的象征之一（约）。","#d4af37"),
               ("🎓","莱顿","荷兰最早的大学（1575，约）；阿米念任教、争论的发源地（CCI）。","#a78bfa"),

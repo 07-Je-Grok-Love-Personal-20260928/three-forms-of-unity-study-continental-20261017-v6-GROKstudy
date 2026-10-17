@@ -122,7 +122,7 @@ def part_westminster():
        ["加拿大改革宗神学院","持守无谬的圣经，如大公信经与比利时信条、海德堡要理问答、多特信经所总结（页面意思，转述）","<a href='https://canadianreformedseminary.ca/about/discover-crts/' target='_blank' rel='noopener'>canadianreformedseminary.ca</a>"],
        ["西敏神学院 WTS","核心信念：以威斯敏斯特标准所含教义体系为主，“其次”也参照其他改革宗信条","<a href='https://www.wts.edu/about/mission-values' target='_blank' rel='noopener'>wts.edu</a>"],
        ["改革宗神学院 CRTS（台北）","学院信仰：全球改革宗教会的信条，其中列有使徒信经、海德堡要理问答、威斯敏斯特信条及大小要理问答","<a href='https://crts.edu/en/intro/' target='_blank' rel='noopener'>crts.edu/en/intro</a>"],
-       ["洛杉矶恩约教会 CCRC","宣告古代信经与三项联合信条为教义准则，并提供三联合信条中英对照版与王一牧师讲解的链接","<a href='https://www.ccreformed.org/our-belief/' target='_blank' rel='noopener'>ccreformed.org/our-belief</a>"],
+       ["洛杉矶恩约教会 CCRC","宣告古代信经与三联合信条为教义准则，并提供《三联合信条》中英对照版 PDF；其讲道库另设《比利时信条》等教理课程系列（页面署名含王一牧师等讲员；系列页只见搜索摘录）","<a href='https://www.ccreformed.org/our-belief/' target='_blank' rel='noopener'>ccreformed.org/our-belief</a>"],
        ["改革宗初学者","“大公信经”栏含使徒信经、尼西亚信经、亚他那修信经与迦克墩定义；另有“威敏斯特准则”栏","<a href='https://www.reformedbeginner.net/ecumenical-creeds/' target='_blank' rel='noopener'>reformedbeginner.net</a>"]],"wmt")
       + note("<b>关于网站之间的关系：</b>本站只陈述每个页面自己说了什么；页面上没看到的隶属、合作或背书关系一概不写。各机构完整立场以其官方文件为准。"))
     b += L2("wm-diff","6.9","小结：怎样读这两条线",
