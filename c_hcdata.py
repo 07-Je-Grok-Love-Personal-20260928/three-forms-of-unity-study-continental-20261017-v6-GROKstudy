@@ -55,3 +55,21 @@ HCD={
 51:("第五个祈求：免我们的债","求神因基督的血免我们的债；我们也“从心里饶恕”别人（问126）。","饶恕是“已被饶恕者”的新习惯。",[23],[],"","K"),
 52:("第六个祈求与结尾","“不叫我们遇见试探”：求保守，使我们不被撒但、世界、肉体胜过（问127）；结尾荣耀颂（问128）；“阿们”意味着“确实是这样，祷告被垂听”（问129）。","以“阿们”结束全书：信靠，是对“神一定垂听”的确信。",[26],["5.7","5.8"],"","K"),
 }
+
+# ---- 引号纪律：只有与 CCI 文本逐字一致的片段才保留“ ”；其余作为本站转述，去掉引号 ----
+import re as _re, json as _json
+def _nm(s): return _re.sub(r'[\s，。；：、！？“”‘’「」『』"\'（）()…—–·,.;:]|⟦\d+⟧','',s)
+def _corpus():
+    c=""
+    for q,(a,b) in __import__("quotes").HC.items(): c+=a+b
+    for v in _json.load(open("data/ib_summ.json",encoding="utf-8")).values(): c+=" ".join(v) if isinstance(v,list) else str(v)
+    return _nm(c)
+_C=_corpus()
+def _fix(s):
+    if not isinstance(s,str): return s
+    def f(m):
+        x=m.group(1)
+        parts=[p for p in _re.split(r'……|…',x) if len(_nm(p))>=4]
+        return m.group(0) if (parts and all(_nm(p) in _C for p in parts)) or len(_nm(x))<4 else x
+    return _re.sub(r'“([^”]+)”',f,s)
+HCD={n:tuple(_fix(x) if i in (1,2,5) else x for i,x in enumerate(v)) for n,v in HCD.items()}

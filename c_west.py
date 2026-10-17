@@ -16,7 +16,7 @@ def part_westminster():
     rows=[
      ["圣经：充分与最高权威",
       "BC 7："+Q("BC 7","我们相信，圣经中包含了神全部的旨意")+"；"+Q("BC 7","我们不可认为出自人手的任何著作与圣经具有同等价值")+"；BC 5：圣灵在我们心中作见证（"+bl(5)+"）",
-      "WCF 1.6："+ql("expressly set down in Scripture, or by good and necessary consequence may be deduced from Scripture")+"；1.5："+ql("the inward work of the Holy Spirit bearing witness by and with the Word")+"；1.10：最高审判者是“在圣经中说话的圣灵”；WSC 2：圣经是"+ql("the only rule")+"",
+      "WCF 1.6："+ql("expressly set down in Scripture, or by good and necessary consequence may be deduced from Scripture")+"；1.5："+ql("the inward work of the Holy Spirit bearing witness by and with the Word")+"；1.10：最高审判者是在圣经中说话的圣灵（转述）；WSC 2：圣经是"+ql("the only rule")+"",
       "<b>实质同。</b>WCF 1.6 明说“必然推论”并承认敬拜与治理里有“人类情境”可凭自然之光与基督徒审慎安排；BC 7 与 32 更直接地强调“不可加添”与不束缚良心（本站判断）。"],
      ["三位一体与基督论","BC 8–11、18–19；HC 24–25、35（姊妹站已逐句对读）","WCF 2.3、8.2；WLC 9–11、36–40；WSC 6、21–22","<b>实质同。</b>详细对读见姊妹站与本站第五部分。"],
      ["预定与拣选",
@@ -26,7 +26,7 @@ def part_westminster():
      ["基督的死与有效",
       "Dort 2.8："+Q("DORT 2.8","将称义的信心唯独赐给他们")+"；BC 21；HC 37–44",
       "WCF 8.5、8.8；3.6："+ql("Neither are any other redeemed by Christ")+"…"+ql("but the elect only")+"；WLC 59",
-      "<b>实质同。</b>Dort 2.5 另强调福音应当“不加分别地对万国万民”宣讲（"+dl("2",5)+"）；WCF 对应处在 7.3 与 10 章的“白白提供、使人愿意”。"],
+      "<b>实质同。</b>Dort 2.5 另强调福音应当“不加分别地对万国万民”宣讲（"+dl("2",5)+"）；WCF 对应处在 7.3 与 10 章：白白提供救恩，并使人愿意。"],
      ["人的败坏与意志",
       "BC 14："+Q("BC 14","我们弃绝一切与圣经相悖的有关人自由意志的教导")+"；Dort 3-4.3："+Q("DORT 3-4.3","若没有圣灵使人重生的恩典，人既没有意愿，也没有能力转向神并改邪归正")+"；HC 8",
       "WCF 9.3："+ql("wholly lost all ability of will to any spiritual good accompanying salvation")+"；10.2：人"+ql("altogether passive")+"；WLC 25",
@@ -114,12 +114,12 @@ def part_westminster():
       + note("日期取自 CCI 与 Heritage Reformed 页面自述；“约”表示出处本身存在不确定。"))
     b += L2("wm-inst","6.8","机构立场（各自网站的说法）",
       table(["机构","页面所述（转述）","链接"],[
-       ["加拿大归正教会 CanRC","采用三大信经与三项联合信条；强调“作为人的文件只有人的权威，唯有神的话语有神圣权威”","<a href='https://canrc.org/beliefs' target='_blank' rel='noopener'>canrc.org/beliefs</a>"],
+       ["加拿大归正教会 CanRC","采用三大信经与三项联合信条；强调作为人的文件只有人的权威，唯有神的话语有神圣权威","<a href='https://canrc.org/beliefs' target='_blank' rel='noopener'>canrc.org/beliefs</a>"],
        ["北美联合改革宗 URCNA","在“信条”栏同列三大信经与三项联合信条；各信经页附脚注，如“大公”指普世，并交叉引用 BC 27、HC 54","<a href='https://www.urcna.org/creeds' target='_blank' rel='noopener'>urcna.org/creeds</a>"],
        ["Heritage Reformed Churches","自述使用三大古代信经与三项联合信条；并另行<b>也采纳</b>威斯敏斯特标准（页面明说）","<a href='https://heritagereformed.com/about-the-hrc/doctrinal-standards-and-worship/' target='_blank' rel='noopener'>heritagereformed.com</a>"],
        ["正统长老会 OPC","标准为威斯敏斯特信条与大小要理问答（opc.org 提供全文）","<a href='https://opc.org/standards.html' target='_blank' rel='noopener'>opc.org/standards.html</a>"],
        ["新教改革宗教会 PRCA","三项联合信条为教义标准；另有三大信经，并加上迦克墩信条（页面说明：因其教义体现于 BC 19）。<i>该站对自动抓取显示验证页，此行取自搜索结果所摘页面文字。</i>","<a href='https://www.prca.org/about/official-standards/creeds' target='_blank' rel='noopener'>prca.org</a>"],
-       ["加拿大改革宗神学院","“持守无谬的圣经，如大公信经与比利时信条、海德堡要理问答、多特信经所总结”（页面意思）","<a href='https://canadianreformedseminary.ca/about/discover-crts/' target='_blank' rel='noopener'>canadianreformedseminary.ca</a>"],
+       ["加拿大改革宗神学院","持守无谬的圣经，如大公信经与比利时信条、海德堡要理问答、多特信经所总结（页面意思，转述）","<a href='https://canadianreformedseminary.ca/about/discover-crts/' target='_blank' rel='noopener'>canadianreformedseminary.ca</a>"],
        ["西敏神学院 WTS","核心信念：以威斯敏斯特标准所含教义体系为主，“其次”也参照其他改革宗信条","<a href='https://www.wts.edu/about/mission-values' target='_blank' rel='noopener'>wts.edu</a>"],
        ["改革宗神学院 CRTS（台北）","学院信仰：全球改革宗教会的信条，其中列有使徒信经、海德堡要理问答、威斯敏斯特信条及大小要理问答","<a href='https://crts.edu/en/intro/' target='_blank' rel='noopener'>crts.edu/en/intro</a>"],
        ["洛杉矶恩约教会 CCRC","宣告古代信经与三项联合信条为教义准则，并提供三联合信条中英对照版与王一牧师讲解的链接","<a href='https://www.ccreformed.org/our-belief/' target='_blank' rel='noopener'>ccreformed.org/our-belief</a>"],
