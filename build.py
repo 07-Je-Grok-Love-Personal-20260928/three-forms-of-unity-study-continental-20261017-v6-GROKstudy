@@ -16,8 +16,9 @@ PARTS={"bible":c_bible.part_bible,"hc":c_hc.part_hc,"bc":c_bc.part_bc,"dort":c_d
  "hct":libs.part_hct,"bct":libs.part_bct,"dtt":libs.part_dtt,"creedsx":libs.part_creedsx,"memory":c_mem.part_mem}
 FILE={k:f for k,f,_,_ in PAGES}; LABEL={k:t for k,_,t,_ in PAGES}
 BODY={}
+L1N={"bible":1,"hc":2,"bc":3,"dort":4,"compare":5,"westminster":6,"hct":7,"bct":8,"dtt":9,"creedsx":10,"memory":11,"sources":12}
 for k,_,_,_ in PAGES[1:]:
-    core.CUR["f"]=FILE[k]
+    core.CUR["f"]=FILE[k]; core.CUR["n"]=L1N[k]; core.CUR["c2"]=0
     if k=="sources": BODY[k]=c_src.part_src(BODY)
     else: BODY[k]=PARTS[k]()
 TOC=core.TOC
@@ -38,7 +39,12 @@ def toc_html(cur):
     t+='<a class="tochome'+(' on' if cur=="index" else '')+'" href="index.html">🏠 首页 · 学习路径与进度</a><ol>'
     for id,title,subs,f in TOC:
         page=[k for k,ff in FILE.items() if ff==f][0]
-        t+=f'<li class="t1{" cur" if page==cur else ""}" data-page="{page}"><div class="t1r"><a href="{f}#{id}">{title}</a><button class="tg" type="button" aria-label="展开或收起" aria-expanded="true">▾</button></div><ol>'+"".join(f'<li><a href="{f}#{s}">{st}</a></li>' for s,st in subs)+"</ol></li>"
+        def sub(s):
+            sid,st,kids=s
+            if not kids: return f'<li class="t2"><a href="{f}#{sid}">{st}</a></li>'
+            return (f'<li class="t2 has closed"><div class="t2r"><a href="{f}#{sid}">{st}</a><button class="tg2" type="button" aria-label="展开或收起三级标题" aria-expanded="false">▾</button></div><ol>'
+                    +"".join(f'<li class="t3"><a href="{f}#{i}">{tt}</a></li>' for i,tt in kids)+"</ol></li>")
+        t+=f'<li class="t1{" cur" if page==cur else ""}" data-page="{page}"><div class="t1r"><a href="{f}#{id}">{title}</a><button class="tg" type="button" aria-label="展开或收起" aria-expanded="true">▾</button></div><ol>'+"".join(sub(s) for s in subs)+"</ol></li>"
     return t+"</ol></nav>"
 def tabs(cur):
     return '<nav class="ptabs" aria-label="页面导航">'+"".join(f'<a href="{f}"{" class=on aria-current=page" if k==cur else ""}>{t}</a>' for k,f,t,_ in PAGES)+'</nav>'

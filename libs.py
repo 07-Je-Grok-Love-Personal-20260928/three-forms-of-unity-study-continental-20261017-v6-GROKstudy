@@ -4,6 +4,7 @@
 import json,re,html as H
 from core import *
 from c_common import CREEDS_SITE
+from c_titles import HC52
 def J(n): return json.load(open(f"data/{n}.json",encoding="utf-8"))
 CCI="https://ccifellowship.org"
 def fn(s): return re.sub(r"⟦(\d+)⟧",r'<sup class="fn">\1</sup>',H.escape(s,quote=False))
@@ -34,7 +35,7 @@ def part_bct():
     for gid,num,gt,lo,hi in BCG:
         x=""
         for a in D["articles"][lo-1:hi]:
-            x+=f'<article class="art" id="bc-{a["n"]}"><h4 class="ah"><span class="an">{a["n"]}</span>{H.escape(a["title"])}</h4>{blocks_html(a["blocks"])}<p class="src">{src_link(a["url"])}</p></article>'
+            x+=L3(f'bc-{a["n"]}',H.escape(a["title"]),blocks_html(a["blocks"])+f'<p class="src">{src_link(a["url"])}</p>',"scroll",cls="art tx")
         b += L2(gid,num,gt,x)
     return L1("bct","八","比利时信条全文（37条）","scroll","德布利（Guido de Brès）所著；CCI 中文版逐字收录。", b)
 
@@ -64,7 +65,7 @@ def part_hct():
         x=""
         for ld in lds[lo-1:hi]:
             n=ld["n"]
-            x+=f'<article class="art ld" id="ld{n}"><h4 class="ah"><span class="an">主日{n}</span>问{rng[n][0]}–{rng[n][1]}</h4>{blocks_html(ld["blocks"])}<p class="src">{src_link(ld["url"])} · {src_link(CCI+"/books/i-belong/"+ibref(n),"CCI《我属于》学习课程")}</p></article>'
+            x+=L3(f'ld{n}',f"主日{n} · {HC52[n][0]}",blocks_html(ld["blocks"])+f'<p class="src">{src_link(ld["url"])} · {src_link(CCI+"/books/i-belong/"+ibref(n),"CCI《我属于》学习课程")}</p>',HC52[n][3],sub=f"问{rng[n][0]}–{rng[n][1]}",cls="art tx ld")
         b += L2(gid,num,gt,x)
     b += note("<b>分组说明：</b>“第一部/第二部/第三部”及“子神和我们的得赎”“圣灵神和我们的成圣”“我们得称为义”“圣言与圣礼”“圣洗礼”“圣餐”“十诫”“祷告”等标题均为 CCI 页面的目录名；“主日5–10”一组 CCI 未另立标题，本站按其内容（中保、信心、使徒信经、三一、创造与护理）命名。")
     return L1("hct","七","海德堡要理问答全文（129问）","scroll","乌尔西努与俄利维亚努（1563）；CCI 中文版逐字收录，含 52 主日。", b)
@@ -85,20 +86,48 @@ def part_dtt():
         for it in h["items"]:
             err = it["title"]=="错谬反驳"
             lab = "驳" if err else str(it["n"])
-            x+=f'<article class="art{" err" if err else ""}" id="dort-{h["id"]}-{it["n"]}"><h4 class="ah"><span class="an">{lab}</span>{H.escape(it["title"])}</h4>{blocks_html(it["blocks"])}<p class="src">{src_link(it["url"])}</p></article>'
+            x+=L3(f'dort-{h["id"]}-{it["n"]}',H.escape(it["title"]),blocks_html(it["blocks"])+f'<p class="src">{src_link(it["url"])}</p>',"alert" if err else "scroll",cls="art tx"+(" err" if err else ""))
         b += L2(f"dt-{h['id']}",num,h["title"]+f'（项{h["num"]}）',x+f'<p class="src">{src_link(h["url"],"CCI 本项总页")}</p>')
     return L1("dtt","九","多特信经全文（四项教义）","scroll","1618–1619 多特大会；CCI 中文版逐字收录，含正反两面（教义与错谬反驳）。", b)
-# ===== 十、三大信经原文（附录） =====
+# ===== 十、三大信经原文（附录）：背诵版 + CCI 整段原文 =====
+import creedlib as CL
+def _rc(inner): return f'<div class="rc" data-recite>{inner}</div>'
 def part_creedsx():
     C=J("creeds")
-    b = L2("cr-intro","10.1","说明：为什么放在最后（附录）",
+    b = L2("cr-intro","10.1","说明：背诵版与原文的关系",
       f'<p class="ex">{H.escape(C["index_intro"])}</p><p class="src">{src_link(C["index_url"],"CCI《赞美手册》普世信经总目")}</p>'
       + exact_note('上面这一段同为 CCI 原文。')
-      + key('三项联合信条（BC 9）接受这三份古代信经。本站把它们的 CCI 中文原文放在附录，方便与第七至九部分对读；逐句讲解、诵读与记忆工具在姊妹站<a href="'+CREEDS_SITE+'" target="_blank" rel="noopener">《三大公教会信经 · 欧陆改革宗深读》</a>。'))
+      + key('每部信经分两层：<b>背诵版</b>（按条或按主题分组，一行一句，带编号与背诵工具）与<b>CCI 整段原文</b>（每条下的最后一个小节）。背诵版只切分、不改字；两者逐字相同（tools/verify_recite.py 核对）。')
+      + note('三项联合信条（BC 9）接受这三份古代信经。逐句讲解、诵读与记忆工具在姊妹站<a href="'+CREEDS_SITE+'" target="_blank" rel="noopener">《三大公教会信经 · 欧陆改革宗深读》</a>。'))
     def block(key_,ztitle):
         d=C[key_]
         return f'<h4 class="qh">CCI 导言（原文）</h4><p class="ex">{H.escape(d["intro"])}</p><h4 class="qh">{H.escape(ztitle)}（原文）</h4>'+"".join(f'<p class="ex cr">{H.escape(p)}</p>' for p in d["paras"])+f'<p class="src">{src_link(d["url"])}</p>'
-    b += L2("cr-ap","10.2","使徒信经",block("apostles","使徒信经")+note("CCI 中文本把“降在阴间”接在“被埋葬”之后（见原文）。对读：HC 22–58、BC 9。"))
-    b += L2("cr-ni","10.3","尼西亚信经（又称尼西亚—君士坦丁堡信经）",block("nicene","尼西亚信经")+note("CCI 文本含“圣灵……从父和子而出”；CCI 导言自己说明东方教会至今不接受这一句。对读：BC 10–11。"))
-    b += L2("cr-at","10.4","亚他那修信经",block("athanasian","亚他那修信经")+hard("<b>编号差异（已核对）：</b>CCI 导言说“第二部分包括第29-43点”，但其正文编号只到第42点（第42点是“这是大公信仰……阿们”）。对读：BC 8–11、18–19。"))
-    return L1("creedsx","十","附录：三大信经原文（CCI）","scroll","CCI《赞美手册》中文版逐字收录；逐句讲解见姊妹站。", b)
+    def parted(parts,titles,texts,pref,sec):
+        x=CL.TOOL+'<div class="rc" data-recite>'
+        for pn,pt,pico,nos in parts:
+            x+=f'<h4 class="rpart">{ic(pico,"ic sm")}第{pn}段 · {pt}</h4>'
+            for n in nos:
+                t,ico,sub=titles[n]
+                x+=L3(f"{pref}-a{n}",t,CL.art(n,CL.lines(texts[n])),ico,sub=sub,cls="ldc rcs")
+        return x+'</div>'
+    # 使徒信经
+    ap=CL.apostles(C)
+    x=parted(CL.AP_PARTS,CL.AP_TITLES,ap,"ap","ap")
+    x+=L3("ap-txt","CCI 导言与原文整段（逐字）",block("apostles","使徒信经")+note("CCI 中文本把“降在阴间”接在“被埋葬”之后（见原文）。对读：HC 22–58、BC 9。"),"scroll",cls="tx")
+    b += L2("cr-ap","10.2","使徒信经 · 12 条 · 3 段（背诵版）",x)
+    ni=CL.nicene(C)
+    x=parted(CL.NI_PARTS,CL.NI_TITLES,ni,"ni","ni")
+    x+=L3("ni-txt","CCI 导言与原文整段（逐字）",block("nicene","尼西亚信经")+note("CCI 文本含“圣灵……从父和子而出”；CCI 导言自己说明东方教会至今不接受这一句。对读：BC 10–11。"),"scroll",cls="tx")
+    b += L2("cr-ni","10.3","尼西亚信经 · 13 节 · 4 段（背诵版，对应 CCI 7 段）",x)
+    at=CL.athanasian(C)
+    x=CL.TOOL+'<div class="rc" data-recite>'
+    for pn,pt,pico,gs in CL.AT_PARTS:
+        x+=f'<h4 class="rpart">{ic(pico,"ic sm")}{pn} · {pt}</h4>'
+        for g in gs:
+            nm,lo,hi,gi=CL.AT_GROUPS[g]
+            body="".join(CL.art(k,CL.lines(at[k])) for k in range(lo,hi+1))
+            x+=L3(f"at-g{g}",f"第{lo}–{hi}点 · {nm}" if hi!=lo else f"第{lo}点 · {nm}",body,gi,sub=f"{hi-lo+1} 点",cls="ldc rcs")
+    x+='</div>'
+    x+=L3("at-txt","CCI 导言与原文整段（逐字）",block("athanasian","亚他那修信经")+hard("<b>编号差异（已核对）：</b>CCI 导言说“第二部分包括第29-43点”，但其正文编号只到第42点（第42点是“这是大公信仰……阿们”）。对读：BC 8–11、18–19。"),"scroll",cls="tx")
+    b += L2("cr-at","10.4","亚他那修信经 · 42 点 · 11 组（背诵版）",x)
+    return L1("creedsx","十","附录：三大信经原文与背诵版（CCI）","scroll","CCI《赞美手册》中文版逐字收录；背诵版一行一句；逐句讲解见姊妹站。", b)

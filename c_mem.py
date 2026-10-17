@@ -2,6 +2,7 @@
 from core import *
 from c_common import *
 from c_hcdata import HCD
+from c_titles import HC52,BC37,BC_GROUPS,PART_RANGE,DORT_SUB
 
 FLIPS=[
  ("HC 问1：你唯一的安慰是什么？", Q("HC 1","我的身体和灵魂都不属于我自己，而属于我信实的救主耶稣基督")+"。三重内容：罪债已还、脱离魔鬼权势、天父保守。"),
@@ -51,7 +52,7 @@ def plan():
     rows=[]
     for n in range(1,53):
         a,b_=HCRANGE[n]
-        hc=f'{hl(n,"LD "+str(n))}（问{a}–{b_}）{HCD[n][0]}'
+        hc=f'{hl(n,"LD "+str(n))}（问{a}–{b_}）{HC52[n][0]}'
         if n<=37: co=f'{bl(n,"BC "+str(n))} {BCT[n]}'
         elif n in WEEKS_D:
             lab,h,lo,hi=WEEKS_D[n]
@@ -63,6 +64,35 @@ def plan():
         else: co=f'总复习：{bl(37,"BC 37")} · {dl("5",9,"Dort 5.9")}–{dl("5",15,"5.15")} · {hq(1,"HC 问1")}'
         rows.append([str(n),hc,co,"周一读正文，周二读概要与应用，周三背一问，周四写三句，周日听讲道时对照" if n==1 else ""])
     return rows
+
+PC={"总纲":"p0","困苦":"p1","拯救":"p2","感恩":"p3"}
+def mi(key,cls,href,b,t,sm):
+    return f'<div class="mi {cls}" data-k="{key}"><a href="{href}"><b>{b}</b>{t}<small>{sm}</small></a><input type="checkbox" aria-label="已背熟：{b} {t}"></div>'
+def ring(label):
+    return f'<div class="mring" data-mring="{label}"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="rb"/><circle cx="60" cy="60" r="52" class="rf" pathLength="100" stroke-dasharray="0 100"/></svg><div><b class="mn1">0</b> / <b class="mn2">0</b> 已背熟<br><small>勾选保存在本机浏览器（localStorage），不上传。</small></div></div>'
+def titles_l2():
+    out=""
+    # 52 主日
+    x=ring("hc")+'<p>标题与第二部分 2.8、原文库第七部分使用<b>同一份</b>52 个主日标题；点标题跳到对应讲解，右侧勾选“已背熟”会让罗盘上的弧段变亮。口诀＝每个主日三个关键词。</p>'
+    for part,lab,lo,hi in PART_RANGE:
+        items="".join(mi(f"hc{n}",PC[part],f"hc.html#hd-ld{n}",f"主日{n}",HC52[n][0],f"问{HCRANGE[n][0]}–{HCRANGE[n][1]} · {HC52[n][2]}").replace('<div class="mi','<div id="mm-ld%d" class="mi'%n,1) for n in range(lo,hi+1))
+        x+=L3(f"mm-p{PC[part]}",f"{lab}（主日{lo}"+(f"–{hi}" if hi!=lo else "")+"）",f'<div class="mst">{items}</div>',"list",cls="mmg")
+    out+=L2("mem-52","11.2","52 主日标题速记（可勾选“已背熟”）",x)
+    # BC 37
+    x=ring("bc")+'<p>37 条的短标题（本站学习标题）与口诀；CCI 的正式条目标题见第八部分。</p>'
+    for gid,lab,col,lo,hi,ico in BC_GROUPS:
+        items="".join(mi(f"bc{n}","p2",f"bct.html#bc-{n}",f"第{n}条",BC37[n][0],BC37[n][1]) for n in range(lo,hi+1))
+        x+=L3(f"mm-bc{gid}",f"{lab}（第{lo}–{hi}条）",f'<div class="mst">{items}</div>',ico,cls="mmg")
+    out+=L2("mem-bc","11.3","比利时信条 37 条标题速记",x)
+    # Dort
+    x='<p>四项教义各分若干子主题；每个子主题对应 CCI 条目号范围，点开到原文。</p>'
+    for h in J("dort")["heads"]:
+        sub=DORT_SUB[h["id"]]
+        li="".join(f'<li style="--c:#d4af37"><b>{r}</b><span><b>{t}</b>：{kw}</span><a href="dtt.html#dort-{h["id"]}-{lo}">原文</a></li>' for r,t,kw,lo,hi in sub)
+        li+=f'<li style="--c:#e07a5f"><b>驳</b><span><b>错谬反驳</b>：逐条驳斥抗辩派的错谬</span><a href="dtt.html#dort-{h["id"]}-{len(h["items"])}">原文</a></li>'
+        x+=L3(f"mm-dt{h['id']}",h["title"],f'<ul class="subth">{li}</ul>',"shield",cls="mmg")
+    out+=L2("mem-dt","11.4","多特信经四项标题速记",x)
+    return out
 
 def part_mem():
     b = L2("mem-mn","11.1","口诀",
@@ -78,7 +108,8 @@ def part_mem():
       ("⚖️ Dort",["1618–19 · 多特","4 项 · 63 条目","正反两面 · 驳谬误","保守的安慰"],"#d4af37"),
       ("📖 圣经根基",["创造—堕落—救赎—成全","恩典之约","基督是中保与元首"],"#a78bfa"),
       ("🔗 三大信经",["BC 9 接受","HC 22–58 对读使徒信经","附录原文"],"#e07a5f")]) + "</div></div>"
-    b += L2("mem-mind","11.2","思维导图", mind)
+    b += titles_l2()
+    b += L2("mem-mind","11.5","思维导图", mind)
     b += L2("mem-flip","11.3","翻卡（点击翻面）", '<div class="flips">' + "".join(f'<button class="flip reveal" aria-pressed="false" type="button"><span class="fi"><span class="ff">{a}</span><span class="fb">{c}</span></span></button>' for a,c in FLIPS) + '</div><p class="fcount">已翻 <b id="fc">0</b> / '+str(len(FLIPS))+'</p>')
     b += L2("mem-quiz","11.4",f"自测（{len(QUIZ)}题）", '<div class="quiz">' + "".join(f'<div class="qq reveal" data-ans="{a}"><p><b>{i+1}.</b> {q}</p><div class="opts">' + "".join(f'<button class="opt" data-i="{j}" type="button">{o}</button>' for j,o in enumerate(os)) + '</div></div>' for i,(q,os,a) in enumerate(QUIZ)) + f'</div><p class="score">得分：<b id="qs">0</b> / {len(QUIZ)} <button class="btn ghost" id="qreset" type="button">重做</button></p>')
     b += L2("mem-one","11.5","一页总结",

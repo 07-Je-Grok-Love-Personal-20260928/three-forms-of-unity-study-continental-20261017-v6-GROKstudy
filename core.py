@@ -3,17 +3,27 @@
 
 from extra import *
 import html as H
-V = "v20261017-1"
-CUR = {"f": None}
+V = "v20261017-2"
+CUR = {"f": None, "n": 0, "c2": 0}
 PEND = []
+PEND3 = []
 TOC = []  # (l1id, l1title, [(id,title)])
 
 def L1(id, num, title, ico, lead, body):
     TOC.append((id, f"{num}、{title}", PEND[:], CUR["f"])); PEND.clear()
     return f'<section class="l1" id="{id}"><header class="l1h reveal"><span class="ico">{ic(ico,"ic big")}</span><div><div class="kick">第{num}部分</div><h2>{num}、{title}</h2><p class="lead">{lead}</p></div></header>{body}</section>'
 def L2(id, num, title, body):
-    PEND.append((id, f"{num} {title}"))
+    CUR["c2"] += 1; num = f'{CUR["n"]}.{CUR["c2"]}'
+    kids = PEND3[:]; PEND3.clear()
+    PEND.append((id, f"{num} {title}", kids))
     return f'<section class="l2 reveal" id="{id}"><h3><span class="n">{num}</span>{ic(l2icon(title))}{title}</h3>{body}</section>'
+def L3(id, title, body, icon="cross", tag="", cls="", sub="", bar=None):
+    """三级标题：编号 = 所属二级编号 + 序号（所属二级尚未登记，故用 c2+1）。返回 <section class=l3>。"""
+    k = len(PEND3) + 1; num = f'{CUR["n"]}.{CUR["c2"]+1}.{k}'
+    PEND3.append((id, f"{num} {title}"))
+    t = f'<span class="l3t">{tag}</span>' if tag else ""
+    s = f'<small class="l3s">{sub}</small>' if sub else ""
+    return f'<section class="l3 reveal {cls}" id="{id}"><h4 class="l3h"><span class="n3">{num}</span>{ic(icon,"ic sm")}<span class="l3x">{title}</span>{s}{t}</h4>{body}</section>'
 def key(t): return f'<div class="call key"><b>🔑 重点</b>{t}</div>'
 def hard(t): return f'<div class="call hard"><b>⚠️ 难点</b>{t}</div>'
 def note(t): return f'<div class="call note"><b>📌 说明</b>{t}</div>'

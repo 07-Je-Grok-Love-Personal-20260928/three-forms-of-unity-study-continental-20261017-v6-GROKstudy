@@ -12,8 +12,9 @@ var tb=$('#tocbtn'),tx=$('#tocx');if(tb)tb.onclick=tog;if(tx)tx.onclick=tog;
 $$('#toc a').forEach(function(a){a.addEventListener('click',function(){if(!wide())b.classList.remove('tocopen')})});
 $$('.tg').forEach(function(t){t.onclick=function(){var li=t.closest('.t1');li.classList.toggle('closed');t.setAttribute('aria-expanded',!li.classList.contains('closed'))}});
 $$('#toc .t1').forEach(function(li){if(!li.classList.contains('cur')){li.classList.add('closed');var g=$('.tg',li);if(g)g.setAttribute('aria-expanded','false')}});
+$$('.tg2').forEach(function(t){t.onclick=function(){var li=t.closest('.t2');li.classList.toggle('closed');t.setAttribute('aria-expanded',!li.classList.contains('closed'))}});
 var links={};$$('#toc .t1.cur a').forEach(function(a){var h=a.getAttribute('href');links[h.split('#')[1]]=a});
-var secs=$$('section[id]'),cur=null;
+var secs=$$('section.l1[id],section.l2[id],section.l3[id]'),cur=null;
 var rd=ld(KEY,{}),mine=rd[PG]||[];
 function markRead(id){if(mine.indexOf(id)<0){mine.push(id);rd[PG]=mine;sv(KEY,rd);var a=links[id];if(a)a.classList.add('done');upd()}}
 function upd(){var c=$('#pgread');if(c)c.textContent=mine.length}
@@ -21,7 +22,7 @@ mine.forEach(function(id){var a=links[id];if(a)a.classList.add('done')});
 var pend=$$('.reveal');function sweep(){if(!pend.length)return;pend=pend.filter(function(el){if(el.classList.contains('in'))return false;if(el.getBoundingClientRect().top<innerHeight){el.classList.add('in');return false}return true})}
 function spy(){sweep();var y=innerHeight*0.25,act=null;for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<y)act=secs[i];if(secs[i].classList.contains('l2')&&r.top<innerHeight*0.6&&r.bottom>0)markRead(secs[i].id)}
 var id=act&&act.id;if(act&&act.classList.contains('l1')){var f=$('.l2',act);if(f&&f.getBoundingClientRect().top<y)id=f.id}
-if(id!==cur){$$('#toc a.on').forEach(function(a){a.classList.remove('on')});var a=links[id];if(a){a.classList.add('on');var l1=a.closest('.t1');if(l1){l1.classList.remove('closed')}if(wide()&&!b.classList.contains('tochide')){var t=$('#toc'),r2=a.getBoundingClientRect();if(r2.top<60||r2.bottom>innerHeight-40)t.scrollTop+=r2.top-innerHeight/2}}cur=id}
+if(id!==cur){$$('#toc a.on').forEach(function(a){a.classList.remove('on')});var a=links[id];if(a){a.classList.add('on');var l1=a.closest('.t1');if(l1){l1.classList.remove('closed')}var t2=a.closest('.t2.has');if(t2){t2.classList.remove('closed');var g2=$('.tg2',t2);if(g2)g2.setAttribute('aria-expanded','true')}if(wide()&&!b.classList.contains('tochide')){var t=$('#toc'),r2=a.getBoundingClientRect();if(r2.top<60||r2.bottom>innerHeight-40)t.scrollTop+=r2.top-innerHeight/2}}cur=id}
 var h=d.documentElement,m=h.scrollHeight-innerHeight;var p=$('#prog');if(p)p.style.width=(m>0?h.scrollTop/m*100:0)+'%'}
 var tk=0;addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(function(){spy();tk=0})}},{passive:true});spy();upd();
 /* counters */
@@ -53,6 +54,20 @@ $$('[data-dl]').forEach(function(w){var ps=$$('.dpan',w),ns=$$('.dnav a',w);if(!
 ns.forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(a.dataset.p)})});
 function hash(){var h=location.hash.slice(1);if(h&&d.getElementById(h)&&w.contains(d.getElementById(h))&&d.getElementById(h).classList.contains('dpan')){show(h);d.getElementById(h).scrollIntoView()}}
 show(ps[0].id);hash();addEventListener('hashchange',hash)});
+/* recite */
+$$('[data-rtool]').forEach(function(tb){var rc=tb.nextElementSibling;if(!rc||!rc.hasAttribute('data-recite'))return;var ls=$$('.rls li',rc),timer=null,i=0,btn=$('[data-rplay]',tb);
+function mode(m){rc.classList.remove('m-hide','m-cue');ls.forEach(function(l){l.classList.remove('show')});if(m==='hide')rc.classList.add('m-hide');if(m==='cue')rc.classList.add('m-cue');$$('[data-rm]',tb).forEach(function(x){x.classList.toggle('ghost',x.dataset.rm!==m)})}
+$$('[data-rm]',tb).forEach(function(x){x.onclick=function(){stop();mode(x.dataset.rm)}});
+ls.forEach(function(l){l.addEventListener('click',function(){if(rc.classList.contains('m-hide')||rc.classList.contains('m-cue'))l.classList.toggle('show')})});
+function stop(){if(timer){clearInterval(timer);timer=null}ls.forEach(function(l){l.classList.remove('now')});if(btn)btn.textContent='▶ 跟读'}
+function step(){ls.forEach(function(l){l.classList.remove('now')});if(i>=ls.length){stop();return}var l=ls[i++];l.classList.add('now');l.classList.add('show');var r=l.getBoundingClientRect();if(r.top<80||r.bottom>innerHeight-60)l.scrollIntoView({block:'center',behavior:rm?'auto':'smooth'})}
+if(btn)btn.onclick=function(){if(timer){stop();return}i=0;var sp=+($('[data-rspeed]',tb).value)||1700;btn.textContent='■ 停止';step();timer=setInterval(step,sp)}});
+/* mastery */
+(function(){var MK='tfu1.mas',m=ld(MK,{});var items=$$('.mi[data-k]');if(!items.length&&!$$('.cseg').length)return;
+function paint(){items.forEach(function(e){var k=e.dataset.k,on=!!m[k];e.classList.toggle('done',on);var c=$('input',e);if(c)c.checked=on});
+$$('[data-mring]').forEach(function(r){var p=r.dataset.mring,all=items.filter(function(e){return e.dataset.k.indexOf(p)===0}),n=all.filter(function(e){return m[e.dataset.k]}).length;var a=$('.mn1',r),z=$('.mn2',r),f=$('.rf',r);if(a)a.textContent=n;if(z)z.textContent=all.length;if(f)f.setAttribute('stroke-dasharray',(all.length?n/all.length*100:0)+' 100')});
+$$('.cseg').forEach(function(s){s.classList.toggle('done',!!m['hc'+s.dataset.n])})}
+items.forEach(function(e){var c=$('input',e);if(c)c.onchange=function(){if(c.checked)m[e.dataset.k]=1;else delete m[e.dataset.k];sv(MK,m);paint()}});paint()})();
 /* index progress */
 var steps=$$('.step');if(steps.length){var tot=0,got=0;(T.pages||[]).forEach(function(p){var n=p.n,c=(rd[p.k]||[]).length;if(c>n)c=n;tot+=n;got+=c;var st=$('.step[data-pg="'+p.k+'"]');if(st){var i=$('.bar i',st),e=$('.pc',st);if(i)i.style.width=(n?c/n*100:0)+'%';if(e)e.textContent=c?(c>=n?'✓ 已读完':'已读 '+c+'/'+n):'未读';if(c>=n&&n)st.classList.add('done')}});
 var pct=tot?Math.round(got/tot*100):0;var rf=$('#ringf'),rn=$('#ringn');if(rf)rf.setAttribute('stroke-dasharray',pct+' 100');if(rn)rn.textContent=pct+'%';var a=$('#readn'),z=$('#readt');if(a)a.textContent=got;if(z)z.textContent=tot;

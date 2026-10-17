@@ -3,6 +3,7 @@ from core import *
 from c_common import *
 from widgets import *
 from c_hcdata import HCD
+from c_titles import HC52,PART_RANGE
 import re
 
 PARTS_HC=[("第一部 论人的罪和愁苦",11,"主日1–4 · 问1–11（含“唯一的安慰”）","#e07a5f","#ld1"),
@@ -15,16 +16,34 @@ def xr(n):
     if dt: parts.append("Dort "+"、".join(dl(x,None,x) for x in dt))
     if oth: parts.append(oth)
     return "；".join(parts) if parts else "—"
-def ld_items(lo,hi,col):
-    rows=[]
-    for n in range(lo,hi+1):
-        t,e,a,bc,dt,oth,flag=HCD[n]; q1,q2=HCRANGE[n]
-        mark={"K":'<span class="kchip">重点</span>',"H":'<span class="hchip">难点</span>'}.get(flag,"")
-        rows.append(f'<details class="ex reveal" style="--c:{col}" id="hd-ld{n}"><summary><span class="q">主日{n} · {t}　<small>问{q1}{"–"+str(q2) if q2!=q1 else ""}</small></span>{mark}</summary><div class="exb">'
-          f'<p><i>精义</i>{e}</p><p><i>CCI 概述</i>{QI(n,ibsum(n))}（{ibl(n,"《我属于》第"+ibk(n)+"课")}'+("；该课合并了几个主日" if "-" in ibk(n) else "")+'）</p>'
-          f'<p class="k"><i>应用</i>{a}</p><p><i>对照</i>{xr(n)}</p><p><i>原文</i><a href="#ld{n}">读主日{n}全文（问{q1}{"–"+str(q2) if q2!=q1 else ""}）</a></p></div></details>')
-    return '<div class="exeg">'+"".join(rows)+'</div><div class="exctl"><button class="btn" data-open=".exeg">全部展开</button><button class="btn ghost" data-close=".exeg">全部收起</button></div>'
-
+PCLS={"总纲":"p0","困苦":"p1","拯救":"p2","感恩":"p3"}
+def ld_l3(n):
+    t,e,a,bc,dt,oth,flag=HCD[n]; q1,q2=HCRANGE[n]
+    _,part,kw,icon=HC52[n]; qr=f"问{q1}"+(f"–{q2}" if q2!=q1 else "")
+    mark={"K":'<span class="kchip">重点</span>',"H":'<span class="hchip">难点</span>'}.get(flag,"")
+    body=(f'<div class="l3m"><span class="pch {PCLS[part]}">{part}</span><span class="qr">{qr}</span>{mark}<span class="kw">{"".join(f"<i>{w}</i>" for w in kw.replace("＋","·").split("·"))}</span></div>'
+      f'<p><i class="lb">精义</i>{e}</p>'
+      f'<p><i class="lb">CCI 概述</i>{QI(n,ibsum(n))}（{ibl(n,"《我属于》第"+ibk(n)+"课")}'+("；该课合并了几个主日" if "-" in ibk(n) else "")+'）</p>'
+      f'<p class="k"><i class="lb">应用</i>{a}</p><p><i class="lb">对照</i>{xr(n)}</p>'
+      f'<p class="lk"><a href="#ld{n}">读主日{n}全文（{qr}）</a> · <a href="memory.html#mm-ld{n}">记忆页：速记与已背熟</a></p>')
+    return L3(f"hd-ld{n}",f"主日{n} · {t}",body,icon,sub=qr,cls=f"ldc {PCLS[part]}")
+def ld_items(lo,hi,col=None):
+    return "".join(ld_l3(n) for n in range(lo,hi+1))
+def compass():
+    import math
+    cx=cy=170; R=148; r=104; out=[]
+    for n in range(1,53):
+        a0=-math.pi/2+(n-1)/52*2*math.pi+0.012; a1=-math.pi/2+n/52*2*math.pi-0.012
+        p=(lambda a,rr:(cx+rr*math.cos(a),cy+rr*math.sin(a)))
+        x0,y0=p(a0,R); x1,y1=p(a1,R); x2,y2=p(a1,r); x3,y3=p(a0,r)
+        t,part=HC52[n][0],HC52[n][1]
+        am=(a0+a1)/2; lx,ly=p(am,R+13)
+        out.append(f'<a href="#hd-ld{n}" class="cseg {PCLS[part]}" style="--d:{n*22}ms" data-n="{n}"><title>主日{n} · {t}</title><path d="M{x0:.1f} {y0:.1f}A{R} {R} 0 0 1 {x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}A{r} {r} 0 0 0 {x3:.1f} {y3:.1f}Z"/>'
+                   +(f'<text x="{lx:.1f}" y="{ly+3.5:.1f}" text-anchor="middle">{n}</text>' if n in (1,5,10,15,20,25,31,32,36,40,45,50) else '')+'</a>')
+    leg="".join(f'<span class="lg {PCLS[k]}"><i></i>{lab} · 主日{lo}'+(f"–{hi}" if hi!=lo else "")+'</span>' for k,lab,lo,hi in PART_RANGE)
+    return ('<div class="cmp reveal"><svg viewBox="-14 -14 368 368" role="img" aria-label="52 主日罗盘：点按任一主日跳到对应标题"><circle cx="170" cy="170" r="92" class="chub"/>'+"".join(out)
+            +'<text x="170" y="160" text-anchor="middle" class="cbig">52</text><text x="170" y="184" text-anchor="middle" class="csm">主日 · 129 问</text></svg>'
+            f'<div class="cleg">{leg}<p class="cn">点按弧段跳到对应主日；弧段颜色＝所属部分。</p></div></div>')
 def part_hc():
     # 2.1 结构
     b = L2("hcd-struct","2.1","结构：从一个安慰，到三部分，到“阿们”",
@@ -102,11 +121,14 @@ def part_hc():
       ("第三部：感恩——律法成为新生命的路","#81b29a",[("成因与处境","如果得救是出于恩典，为何还要行善？第三部从问86开始回答：感恩，且善行是信心的果子。"),("内容","悔改：旧人死、新人生（问88–90）；善事的三条标准：出于真信心、合乎律法、为神的荣耀（问91）；十诫逐条（问92–115）；祷告是感恩的主要部分，主祷文逐句（问116–129）。"),("联系","BC 24–25；Dort 5.12–13；出20；太5–7、6:9–13。"),("难点","问114–115：今生没有人能完全遵守，但仍要严格宣讲十诫——律法在此是“成圣的规则”，而不是“称义的条件”。"),("应用","把“十诫”读成“爱的细则”，把“主祷文”读成“感恩的呼吸”。")])],open_first=True)
     b += L2("hcd-parts","2.7","三部分深读：成因、内容、联系、难点、应用",d)
     # 2.8 52 主日
-    b += L2("hcd-52","2.8","52 主日精义：逐主日的精义、应用与对照",
-      '<p>每一个主日一行：<b>精义</b>（本站撰写）、<b>CCI 概述</b>（《我属于》栏目的原文摘引）、<b>应用</b>、<b>对照</b>（BC、Dort、信经）、以及到原文库的链接。红色小条＝难点，金色＝重点。CCI 在部分课程里把几个主日合在一课。</p>'
-      + '<h4 class="qh">第一部 论人的罪和愁苦（主日1–4）</h4>'+ld_items(1,4,"#e07a5f")
-      + '<h4 class="qh">第二部 论我们的得救（主日5–31）</h4>'+ld_items(5,31,"#d4af37")
-      + '<h4 class="qh">第三部 论感恩（主日32–52）</h4>'+ld_items(32,52,"#81b29a"))
+    def pdiv(t,sub): return f'<h4 class="qh pdv">{t}<small>{sub}</small></h4>'
+    b += L2("hcd-52","2.8","52 主日精义：逐主日的主题标题、精义、应用与对照",
+      '<p>每个主日一个三级标题（编号 2.8.1–2.8.52 与主日一一对应；目录、正文与记忆页使用同一份标题）。每个主日含：<b>三个关键词</b>（口诀）、<b>精义</b>（本站撰写）、<b>CCI 概述</b>（《我属于》栏目的原文摘引）、<b>应用</b>、<b>对照</b>（BC、Dort、信经）与原文链接。红色小条＝难点，金色＝重点。标题按欧陆改革宗的通行讲法拟定，不是 CCI 原文标题。</p>'
+      + compass()
+      + pdiv("总纲 · 唯一的安慰","主日1")+ld_items(1,1)
+      + pdiv("困苦 Miseria · 认识罪与愁苦","主日2–4 · 问3–11")+ld_items(2,4)
+      + pdiv("拯救 Liberatio · 信经与圣礼","主日5–31 · 问12–85")+ld_items(5,31)
+      + pdiv("感恩 Gratitudo · 十诫与主祷文","主日32–52 · 问86–129")+ld_items(32,52))
     # 2.9 专题
     sp=deep([
       ("主日1：唯一的安慰","#d4af37",[("成因与处境","为教导年轻人而写的书，选择以“安慰”而不是“定义”开篇——这是一种牧养的判断。16世纪的信徒生活中死亡与逼迫并不遥远（本站概括，约）。"),("说什么","问1：身体与灵魂都属于救主；他的血偿还罪债、救我脱离魔鬼；天父护理；圣灵确保永生并使我甘心为他而活。问2：必须知道三件事（罪与愁苦、得救、感恩）。"),("联系",bl(13)+"（护理的安慰）、"+bl(26)+"；"+dl("5",9)+"（确信）；主日52的“阿们”。"),("应用","把“我属于谁”写在每天的开始；孩子问“人死了去哪里”时，可以用问1回答。")]),

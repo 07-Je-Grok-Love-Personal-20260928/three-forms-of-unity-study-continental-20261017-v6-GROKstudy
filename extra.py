@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
 P = {
+"crown":'<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/><path d="M5 19h14"/>',
+"sun":'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+"arrowup":'<path d="M12 20V5M6 11l6-6 6 6"/><path d="M5 21h14"/>',
+"drop":'<path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/>',
+"cup":'<path d="M6 4h12l-1 8a5 5 0 0 1-10 0z"/><path d="M12 15v5M8 21h8"/>',
+"hands":'<path d="M8 21l-3-6 3-9 2 1-1 6 3-5 2 1-2 5 2-3 2 1-3 7z"/>',
+"bread":'<path d="M4 12a8 6 0 0 1 16 0v6H4z"/><path d="M9 12v3M13 12v3M17 12v3"/>',
+"play":'<path d="M7 4l13 8-13 8z"/>',
+"eye":'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+"list":'<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',
+"check":'<path d="M4 12l5 5L20 6"/>',
+"mic":'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
 "book":'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/>',
 "dove":'<path d="M3 13c4 0 6-3 7-7 2 3 5 4 9 4-1 5-5 9-11 9H5l2-3"/><circle cx="16" cy="8" r=".8"/>',
 "flame":'<path d="M12 3c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 3-6 1 2 2 3 3 3 0-3-1-5 0-8z"/>',

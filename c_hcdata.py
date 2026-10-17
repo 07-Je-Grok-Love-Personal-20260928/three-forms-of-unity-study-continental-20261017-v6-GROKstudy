@@ -73,3 +73,6 @@ def _fix(s):
         return m.group(0) if (parts and all(_nm(p) in _C for p in parts)) or len(_nm(x))<4 else x
     return _re.sub(r'“([^”]+)”',f,s)
 HCD={n:tuple(_fix(x) if i in (1,2,5) else x for i,x in enumerate(v)) for n,v in HCD.items()}
+
+from c_titles import HC52 as _T
+for _n in list(HCD): HCD[_n]=(_T[_n][0],)+tuple(HCD[_n][1:])

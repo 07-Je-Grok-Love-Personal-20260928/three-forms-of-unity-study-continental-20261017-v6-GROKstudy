@@ -54,6 +54,23 @@ def layers():
     nav='<nav class="dnav" aria-label="选择一项教义">'+"".join(f'<a href="#{i}" data-p="{i}" style="--c:{c}">{t}</a>' for i,c,t in [("dl-1","#d4af37","第一项 · U"),("dl-2","#5aa9e6","第二项 · L"),("dl-34","#e07a5f","第三、四项 · T·I"),("dl-5","#81b29a","第五项 · P")])+'</nav>'
     return f'<div class="dlayers reveal" data-dl>{nav}{"".join(P)}</div>'
 
+def dort4_l2():
+    from c_titles import DORT_SUB
+    cols={"section1":"#d4af37","section2":"#5aa9e6","section3-4":"#e07a5f","section5":"#81b29a"}
+    ico={"section1":"key","section2":"cross","section3-4":"dove","section5":"shield"}
+    mx=max(len(h["items"]) for h in _dt["heads"])
+    x=('<p>四项教义各一个三级标题（4.2.1–4.2.4）；每项下列出<b>子主题</b>（按 CCI 条目号分段，本站学习标题）和到原文的链接。</p>'
+       +'<div class="dh4">'+"".join(f'<a href="#dd-h{h["num"]}" style="--c:{cols[h["id"]]}"><b>第{h["num"]}项</b><small>{h["title"].split(" ",1)[-1]}</small><small>{len(h["items"])-1} 条 + 驳</small></a>' for h in _dt["heads"])+'</div>')
+    for h in _dt["heads"]:
+        sub=DORT_SUB[h["id"]]; c=cols[h["id"]]; n=len(h["items"])
+        li="".join(f'<li style="--c:{c}"><b>{r}</b><span><b>{t}</b>：{kw}</span><a href="dtt.html#dort-{h["id"]}-{lo}">原文</a></li>' for r,t,kw,lo,hi in sub)
+        li+=f'<li style="--c:#e07a5f"><b>驳</b><span><b>错谬反驳</b>：逐条驳斥抗辩派的错谬</span><a href="dtt.html#dort-{h["id"]}-{n}">原文</a></li>'
+        body=(f'<div class="l3m"><span class="pch p2" style="background:{c}">第{h["num"]}项</span><span class="qr">{n-1} 条 + 错谬反驳</span></div>'
+              f'<div class="abar" style="--w:{round((n-1)/mx*100)}%"><i></i></div>'
+              f'<ul class="subth">{li}</ul><p class="lk"><a href="dtt.html#dt-{h["id"]}">读本项全文（CCI 原文）</a></p>')
+        x+=L3(f'dd-h{h["num"]}',h["title"],body,ico[h["id"]],sub=f'{n-1} 条',cls="ldc")
+    return L2("dd-4","4.2","四项教义主题目录：子主题与条目范围",x)
+
 def part_dort():
     nitems=sum(len(h["items"]) for h in _dt["heads"]); nerr=sum(len(v) for v in ERR.values())
     b = L2("dd-struct","4.1","结构：四项教义，63 个条目，正反两面",
@@ -69,6 +86,7 @@ def part_dort():
               ("国际大会","CCI：多特大会是一次国际性的大会，与会代表主要来自荷兰改革宗教会，另有27位来自其他国家的教会（本站补：包括英国、普法尔茨、黑森、瑞士、不来梅等，约）。"),
               ("教义与错谬同写","大会不仅驳斥抗辩派的五点，也同时阐明改革宗教导的五大点：“无条件的拣选、特定的救赎、人的全然败坏、不可抗拒的恩典和圣徒永蒙保守”（CCI 导言原文）。"),
               ("签署与教会规章","签署书要求圣职人员认同三大联合信条（CCI）；同一时期多特还采纳了教会规章（CCI 教会规章导言）。")])
+    b += dort4_l2()
     b += L2("dd-story","4.2","故事线：从莱顿到多德雷赫特",st)
     # 4.3 时间线
     tl=[("1560前后","阿米念出生（约）","雅各·阿米念（Jacobus Arminius）；莱顿大学教授（CCI：“莱顿大学的神学教授阿米念”）。","#a78bfa"),

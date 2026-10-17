@@ -13,6 +13,26 @@ def bcmap():
         out+=f'<a class="bt" href="#bc-{n}" style="--c:{c};--i:{n}" title="第{n}条 {t}：{BCE[n]}"><b>{n}</b><small>{t[:8]}</small></a>'
     return out+'</div><p class="bcn">点任一方块跳到原文（本站已把 CCI 的 37 条按内容着色分群，这是本站的分组）。</p></div>'
 
+def _first(ref,txt):
+    t=txt.split("。")[0]
+    if len(t)>84:
+        k=t.find("，",34); t=t[:k] if k>0 else t[:84]
+    elif txt.find("。")>=0: t=t+"。"
+    return t
+def bc37_l2():
+    from c_titles import BC37,BC_GROUPS
+    from quotes import BC
+    x=('<p>37 条按七群分，每条一个三级标题（编号 3.2.1–3.2.37）：<b>短标题</b>（本站学习标题）、<b>口诀</b>、<b>CCI 首句</b>（逐字摘引）与原文链接；CCI 的正式条目标题见第八部分。颜色＝所属群。</p>'
+       +'<nav class="bcn" aria-label="七群">'+"".join(f'<a href="#bcg-{g}" style="border-color:{c}">{lab} {lo}–{hi}</a>' for g,lab,c,lo,hi,_ in BC_GROUPS)+'</nav>')
+    for g,lab,col,lo,hi,ico in BC_GROUPS:
+        x+=f'<h4 class="qh pdv" id="bcg-{g}" style="border-left:4px solid {col}">{lab}<small>第{lo}–{hi}条</small></h4>'
+        for n in range(lo,hi+1):
+            t,kw,ic_=BC37[n]; q=_first("BC "+str(n),BC[n])
+            body=(f'<div class="l3m"><span class="pch p2" style="background:{col}">{lab}</span><span class="qr">{BCT[n]}</span><span class="kw">{"".join(f"<i>{w}</i>" for w in kw.replace("＋","·").split("·"))}</span></div>'
+                  f'<p><i class="lb">CCI 首句</i>{Q("BC "+str(n),q)}</p><p class="lk"><a href="bct.html#bc-{n}">读第{n}条全文（CCI 原文）</a> · <a href="memory.html#mem-bc">记忆页：标题速记</a></p>')
+            x+=L3(f"bcd-a{n}",f"第{n}条 · {t}",body,ic_,sub=f"BC {n}",cls="ldc")
+    return L2("bcd-37","3.2","37 条主题标题目录：短标题、口诀与首句",x)
+
 def part_bc():
     b = L2("bcd-map","3.1","结构：37 条的地图",
       '<p>比利时信条（BC，又名《真基督教信条》）按教义条目写成，从“只有一位神”开始，到“主耶稣啊，我愿你来”结束。CCI 的原文库按条目逐条列出；本页把它们<b>按内容分成七群</b>并画成地图（本站分组，不是 CCI 的目录）：</p>'
@@ -27,6 +47,7 @@ def part_bc():
               ("呈送国王","CCI：第二年（1562）一份抄本连同信徒请愿书送到腓利二世手中：愿在一切合法的事上顺服政府；若要否认信条，宁愿“背受鞭笞，舌被刀割，身受火刑”。相传还有把抄本抛过图尔奈城堡围墙的故事（相传，约，史料有争议）。"),
               ("殉道","CCI：初衷（使信徒免受逼迫）没有实现，德布利于1567年为主殉道，成为成千上万名殉道者之一；一般记为在瓦朗谢讷被处死（约）。"),
               ("信条存留","CCI：信条得到荷兰许多教会欢迎；16世纪最后三十年间的几次总会审议并正式采纳；1618–1619年多特大会经仔细修订（主要在文字）正式纳为三项联合信条之一。")])
+    b += bc37_l2()
     b += L2("bcd-story","3.2","德布利的故事：一份信条与一个殉道者",st)
     # 3.3 时间线
     tl=[("1522","德布利出生（约）","一般记为生于蒙斯（Mons）；此处年份与地点约。","#a78bfa"),
