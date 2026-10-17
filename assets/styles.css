@@ -379,3 +379,7 @@ table.cmp td{vertical-align:top}
 .rfd[open] .refs2.rq{animation:rfin .35s both}
 @keyframes rfin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.rfd[open] .refs2.rq{animation:none}.rfd>summary::after,.rfd>summary .rfi{transition:none}}
+.l3m .kchip,.l3m .hchip{padding:2px 10px;border-radius:999px;font-size:.76rem;font-weight:700;letter-spacing:.04em;color:#fff3c9;border:1px solid rgba(212,175,55,.5)}
+.l3m .hchip{color:#ffd9cf;border-color:rgba(224,122,95,.6)}
+.rfd>summary{position:relative;padding-right:30px}.rfd>summary::after{position:absolute;right:11px;top:50%;margin:-.6em 0 0}
+.rfd[open]>summary::after{transform:rotate(180deg)}

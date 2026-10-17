@@ -100,7 +100,7 @@ def titles_l2():
         for n in range(lo,hi+1):
             r=hc_rows(n); fl=[v for _,l in r for v in l]
             if fl: rows.append((f"主日{n}",fl))
-        x+=L3(f"mm-rh{PC[part]}",f"HC 经文速查 · {lab}（主日{lo}–{hi}）",rdet(f"主日{lo}–{hi}",rows,sum(len(l) for _,l in rows)),"book",cls="mmg")
+        x+=L3(f"mm-rh{PC[part]}",f"HC 经文速查 · {lab}（主日{lo}"+(f"–{hi}" if hi!=lo else "")+"）",rdet(f"主日{lo}"+(f"–{hi}" if hi!=lo else ""),rows,sum(len(l) for _,l in rows)),"book",cls="mmg")
     for gid,lab,col,lo,hi,ico in BC_GROUPS:
         rows=[r for n in range(lo,hi+1) for r in bc_rows(n)]
         x+=L3(f"mm-rb{gid}",f"BC 经文速查 · {lab}（第{lo}–{hi}条）",rdet(f"第{lo}–{hi}条",rows,sum(len(l) for _,l in rows)),"scroll",cls="mmg")
