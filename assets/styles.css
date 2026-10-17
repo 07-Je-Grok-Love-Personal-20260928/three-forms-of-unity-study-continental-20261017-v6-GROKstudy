@@ -351,3 +351,17 @@ body.tocdrag iframe{pointer-events:none}
 .cm.diff{background:rgba(224,122,95,.1);border-color:rgba(224,122,95,.4)}.cm.diff h5{color:#ffb4a0}
 table.cmp.xqt td:first-child,table.cmp.mx td:first-child{white-space:normal;min-width:8.5em;font-weight:600}
 table.cmp td{vertical-align:top}
+/* ===== v3：轻量动效（尊重 reduced-motion）===== */
+@media(prefers-reduced-motion:no-preference){
+ .l2 h3 .ic,.l3h .ic{transition:transform .5s cubic-bezier(.3,1.5,.5,1)}.js .l2.reveal:not(.in) h3 .ic,.js .l3.reveal:not(.in) .l3h .ic{transform:scale(.4) rotate(-25deg);opacity:0}
+ .js .l2.reveal.in h3 .ic,.js .l3.reveal.in .l3h .ic{animation:icpop .7s .1s cubic-bezier(.3,1.5,.5,1) backwards}
+ @keyframes icpop{from{transform:scale(.3) rotate(-30deg);opacity:0}}
+ .rf1 .nb{transition:transform .25s}.rf1:hover .nb{transform:scale(1.25)}
+ .js .refs2:not(.in){opacity:1}
+ .rno{transition:transform .3s,box-shadow .3s}.rart:hover .rno{transform:scale(1.12);box-shadow:0 0 16px rgba(243,217,139,.55)}
+ .call.key{position:relative;overflow:hidden}.call.key::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(243,217,139,.12) 50%,transparent 65%);transform:translateX(-120%);animation:shine 6s 1.5s infinite}
+ @keyframes shine{to{transform:translateX(120%)}}
+ .card{transition:transform .3s,box-shadow .3s}.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+ .xq{transition:background .3s}.xq:hover{background:rgba(243,217,139,.2)}
+ #tocgrip::before{animation:gripin 1.6s 1s ease-out 2}@keyframes gripin{50%{height:120px;box-shadow:0 0 18px rgba(243,217,139,.7)}}
+}

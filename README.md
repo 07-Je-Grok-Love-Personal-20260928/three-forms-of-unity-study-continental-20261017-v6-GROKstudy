@@ -1,4 +1,4 @@
-# 三项联合信条 · 欧陆改革宗深读（v20261017-2）
+# 三项联合信条 · 欧陆改革宗深读（v20261017-3）
 
 比利时信条（BC）、海德堡要理问答（HC）、多特信经（Dort）的中文多页学习站：先从整本圣经与圣约看，再逐条深读，并附比较、签署书、威斯敏斯特对照、背诵与自测。
 
@@ -25,6 +25,10 @@ index 首页（学习路径与进度）· bible 一 全本圣经 · hc 二 海�
 python3 build.py                 # 生成全部 *.html（构建时核对所有引文）
 python3 tools/verify_exact.py    # 原文库与 CCI 数据逐条对照
 python3 tools/check_links.py     # 站内链接、目录锚点、重复 id
+python3 tools/verify_recite.py   # 背诵版（一条一行）与 CCI 原文逐字一致
+python3 tools/verify_refs.py     # 经文参考行内列表 == CCI 数据
+python3 tools/check_52.py        # 52 主日标题一致
+python3 tools/qa_toc.py hct.html --shots   # 目录拖拽/键盘/触摸/持久化
 python3 tools/audit_all.py       # 所有引号引文 vs CCI 数据与爬取页面
 python3 tools/qa.py [--shots] [--nojs] [--rm]   # Playwright：5 个宽度、no-JS、reduced-motion
 ```

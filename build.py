@@ -81,7 +81,7 @@ def index_body():
 <div class="steps">'''+steps+'''</div></section>'''
     vis=[("🗺️","SVG 地图与路线","海德堡、图尔奈、低地国家、多德雷赫特、日内瓦与苏黎世等地图。","hc.html#hcd-geo"),("🧭","时间线","每份文件一条动画时间线。","bc.html#bcd-tl"),("🏗️","HC 三部分动画结构条","按问数比例画出罪·救·谢。","hc.html#hcd-struct"),
          ("🧩","BC 37 条地图","七群着色的方块，点任一块跳到原文。","bc.html#bcd-map"),("🌷","TULIP ↔ 抗辩派五点","分层面板：抗辩派 vs 多特的回答。","dort.html#dd-tulip"),("📋","主题×文件对照表","十四个主题，三份文件的链接矩阵。","compare.html#cp-xmap"),
-         ("📜","签署书","CCI 签署书原文与结构分解。","compare.html#cp-sub"),("🧠","思维导图 · 翻卡 · 自测","口诀、24 张翻卡、15 题自测、52 周计划。","memory.html#mem-mind"),("⚖️","威斯敏斯特对照","十五个主题的“实质同／措辞异／强调异”。","westminster.html#wm-table")]
+         ("📜","签署书","CCI 签署书原文与结构分解。","compare.html#cp-sub"),("🧠","思维导图 · 翻卡 · 自测","口诀、24 张翻卡、15 题自测、52 周计划。","memory.html#mem-mind"),("↔️","可拖宽的目录","拖目录右缘的金色手柄调宽（宽度会记住）；手机上抽屉也能拉宽；方向键微调，双击还原。","index.html#idx-vis"),("🔤","背诵版一条一行","使徒·尼西亚·亚他那修：一条（一点）一行，小句连读；全显、首字提示、全遮、跟读。","creedsx.html#cr-ap"),("🔍","三信经深度对比","总表、问题→信经流程、时间线与地图、同异矩阵、为何是三份。","creedsx.html#cr-cmp"),("🌐","参考站互证","七个教会与神学院页面的逐字引文与“有没有提”矩阵。","compare.html#cp-ref"),("⚖️","威斯敏斯特对照","十五个主题的“实质同／措辞异／强调异”。","westminster.html#wm-table")]
     v="".join(f'<a class="card vcard" href="{u}" style="--c:#d4af37"><div class="ct"><span>{i}</span>{t}</div><p>{p}</p></a>' for i,t,p,u in vis)
     guide='''<section class="l2 reveal" id="idx-vis"><h3><span class="n">·</span>'''+ic("cross")+'''本站的视觉与互动工具</h3><div class="grid g3">'''+v+'''</div>
 '''+key("<b>读法：</b>每个深读页先给“整本圣经的位置”，再给“逐条的局部”。左侧目录可以收起；没有 JavaScript 时所有内容仍然全部可见。颜色约定：<span class=hl-f>蓝＝父</span>、<span class=hl-s>金＝子</span>、<span class=hl-g>绿＝圣灵</span>。")+note("三项联合信条原文来自 CCI；讲解、图表与比较是本站的学习材料。哪些是逐字、哪些是转述、哪些 CCI 上没有，见"+'<a href="sources.html">第十二部分</a>。')+'</section>'
