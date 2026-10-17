@@ -1,0 +1,416 @@
+{
+ "cc_doctrinal": {
+  "url": "https://www.ccreformed.org/doctrinal-commitment/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 23559
+ },
+ "cc_subscription": {
+  "url": "https://www.ccreformed.org/签署书/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 3062
+ },
+ "cc_justification": {
+  "url": "https://www.ccreformed.org/on-justification/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 3798
+ },
+ "cc_youth": {
+  "url": "https://www.ccreformed.org/youth-profession/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1012
+ },
+ "cc_liturgical": {
+  "url": "https://www.ccreformed.org/liturgical-forms/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1201
+ },
+ "cc_churchorder": {
+  "url": "https://www.ccreformed.org/church-order/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 21173
+ },
+ "cc_sundayschool": {
+  "url": "https://www.ccreformed.org/sunday-school/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1366
+ },
+ "cc_threeforms": {
+  "url": "https://www.ccreformed.org/threeforms/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 102
+ },
+ "cc_apostles": {
+  "url": "https://www.ccreformed.org/apostles-creed/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 441
+ },
+ "cc_nicene": {
+  "url": "https://www.ccreformed.org/nicene-creed/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 611
+ },
+ "cc_athanasian": {
+  "url": "https://www.ccreformed.org/athanasian-creed/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1702
+ },
+ "cc_bc": {
+  "url": "https://www.ccreformed.org/belgic-confession/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 16113
+ },
+ "cc_hc": {
+  "url": "https://www.ccreformed.org/heidelberg-catechism/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 24285
+ },
+ "cc_dort": {
+  "url": "https://www.ccreformed.org/canons-of-dort/",
+  "site": "ccreformed.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 20228
+ },
+ "rb_threeforms": {
+  "url": "https://www.reformedbeginner.net/three-forms-of-unity/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 4547
+ },
+ "rb_dort": {
+  "url": "https://www.reformedbeginner.net/canons-of-dort/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 20007
+ },
+ "rb_hc": {
+  "url": "https://www.reformedbeginner.net/海德堡要理问答/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 24061
+ },
+ "rb_bc": {
+  "url": "https://www.reformedbeginner.net/比利时信条/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 15889
+ },
+ "rb_creeds": {
+  "url": "https://www.reformedbeginner.net/ecumenical-creeds/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 724
+ },
+ "rb_apostles": {
+  "url": "https://www.reformedbeginner.net/ecumenical-creeds/apostles-creed/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1654
+ },
+ "rb_nicene": {
+  "url": "https://www.reformedbeginner.net/ecumenical-creeds/nicene-creed/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2833
+ },
+ "rb_athanasian": {
+  "url": "https://www.reformedbeginner.net/ecumenical-creeds/athanasian-creed/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 6506
+ },
+ "rb_chalcedon": {
+  "url": "https://www.reformedbeginner.net/chalcedon-definition/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 565
+ },
+ "rb_westminster": {
+  "url": "https://www.reformedbeginner.net/westminster-standards/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 827
+ },
+ "rb_faith": {
+  "url": "https://www.reformedbeginner.net/statement-of-faith/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 5069
+ },
+ "rb_heresy": {
+  "url": "https://www.reformedbeginner.net/all-about-heresy/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 7288
+ },
+ "rb_ascension": {
+  "url": "https://www.reformedbeginner.net/christs-ascension-to-a-local-heaven/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 15952
+ },
+ "rb_means": {
+  "url": "https://www.reformedbeginner.net/mysteries-of-god-and-means-of-grace/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 19447
+ },
+ "rb_afterdeath": {
+  "url": "https://www.reformedbeginner.net/what-happens-after-death-and-before-resurrection/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2863
+ },
+ "rb_sacramental": {
+  "url": "https://www.reformedbeginner.net/sacramental-scaffolding-calvin-on-the-continuity-of-the-old-and-new-covenants/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 4240
+ },
+ "rb_republication": {
+  "url": "https://www.reformedbeginner.net/why-is-republication-so-controversial/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2720
+ },
+ "rb_justification": {
+  "url": "https://www.reformedbeginner.net/statement-on-justification/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1099
+ },
+ "rb_extra": {
+  "url": "https://www.reformedbeginner.net/behold-something-marvelous-the-chalcedonian-logic-of-the-extra-calvinisticum/",
+  "site": "reformedbeginner.net",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 3962
+ },
+ "crts_who": {
+  "url": "https://canadianreformedseminary.ca/about/who-we-are/",
+  "site": "canadianreformedseminary.ca",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 829
+ },
+ "crts_history": {
+  "url": "https://canadianreformedseminary.ca/about/history/",
+  "site": "canadianreformedseminary.ca",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2434
+ },
+ "crts_discover": {
+  "url": "https://canadianreformedseminary.ca/about/discover-crts/",
+  "site": "canadianreformedseminary.ca",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2182
+ },
+ "crts_welcome": {
+  "url": "https://canadianreformedseminary.ca/about/welcome-from-the-principal/",
+  "site": "canadianreformedseminary.ca",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2124
+ },
+ "canrc_history": {
+  "url": "https://canrc.org/history",
+  "site": "canrc.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 6228
+ },
+ "canrc_worship": {
+  "url": "https://canrc.org/worship",
+  "site": "canrc.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2072
+ },
+ "canrc_unity": {
+  "url": "https://canrc.org/unity",
+  "site": "canrc.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 4880
+ },
+ "urcna_belgic": {
+  "url": "https://www.urcna.org/belgic",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 52676
+ },
+ "urcna_heidelberg": {
+  "url": "https://www.urcna.org/heidelberg",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 57043
+ },
+ "urcna_canons": {
+  "url": "https://www.urcna.org/canons",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 68262
+ },
+ "urcna_about": {
+  "url": "https://www.urcna.org/about",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 8376
+ },
+ "urcna_beliefs": {
+  "url": "https://www.urcna.org/beliefs",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1863
+ },
+ "urcna_apostles": {
+  "url": "https://www.urcna.org/apostles",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 883
+ },
+ "urcna_nicene": {
+  "url": "https://www.urcna.org/nicene",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1392
+ },
+ "urcna_athanasian": {
+  "url": "https://www.urcna.org/athanasian",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 4145
+ },
+ "urcna_threeforms": {
+  "url": "https://www.urcna.org/threeforms",
+  "site": "urcna.org",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 1735
+ },
+ "hrc_doctrine": {
+  "url": "https://heritagereformed.com/about-the-hrc/doctrinal-emphasis-major-teachings/",
+  "site": "heritagereformed.com",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 7315
+ },
+ "hrc_experiential": {
+  "url": "https://heritagereformed.com/about-the-hrc/experiential-emphasis-applicatory-and-discriminatory-preaching/",
+  "site": "heritagereformed.com",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 4909
+ },
+ "hrc_biblical": {
+  "url": "https://heritagereformed.com/about-the-hrc/biblical-emphasis-church-home-school/",
+  "site": "heritagereformed.com",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2300
+ },
+ "hrc_history": {
+  "url": "https://heritagereformed.com/about-the-hrc/goal-and-vision-origin-and-history/",
+  "site": "heritagereformed.com",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2228
+ },
+ "hrc_practical": {
+  "url": "https://heritagereformed.com/about-the-hrc/practical-emphasis-holiness-and-commitment/",
+  "site": "heritagereformed.com",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 6575
+ },
+ "wts_values": {
+  "url": "https://www.wts.edu/about/mission-values",
+  "site": "wts.edu",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 4815
+ },
+ "wts_history": {
+  "url": "https://www.wts.edu/about/history",
+  "site": "wts.edu",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 7192
+ },
+ "crts_tw": {
+  "url": "https://crts.edu/en/intro/",
+  "site": "crts.edu",
+  "fetched": "2026-10-17",
+  "how": "curl+BeautifulSoup main text",
+  "chars": 2754
+ },
+ "opc_confessions": {
+  "url": "https://www.opc.org/confessions.html",
+  "site": "opc.org",
+  "how": "WebFetch (curl from box times out); page body as returned"
+ },
+ "opc_sc": {
+  "url": "https://www.opc.org/sc.html",
+  "site": "opc.org",
+  "how": "WebFetch, selected Q&As copied verbatim from the returned page (not the whole catechism)"
+ },
+ "prca_search": {
+  "url": "https://www.prca.org/about/official-standards/creeds/three-forms-of-unity/canons-of-dordrecht",
+  "site": "prca.org",
+  "how": "prca.org returns HTTP 429 to the box; text below is the search-engine excerpt (WebSearch) of that page, not a full fetch"
+ }
+}
