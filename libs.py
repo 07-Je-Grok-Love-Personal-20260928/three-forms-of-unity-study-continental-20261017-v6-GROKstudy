@@ -130,4 +130,6 @@ def part_creedsx():
     x+='</div>'
     x+=L3("at-txt","CCI 导言与原文整段（逐字）",block("athanasian","亚他那修信经")+hard("<b>编号差异（已核对）：</b>CCI 导言说“第二部分包括第29-43点”，但其正文编号只到第42点（第42点是“这是大公信仰……阿们”）。对读：BC 8–11、18–19。"),"scroll",cls="tx")
     b += L2("cr-at","10.4","亚他那修信经 · 42 点 · 11 组（背诵版）",x)
+    import c_cr3
+    b += c_cr3.part()
     return L1("creedsx","十","附录：三大信经原文与背诵版（CCI）","scroll","CCI《赞美手册》中文版逐字收录；背诵版一行一句；逐句讲解见姊妹站。", b)

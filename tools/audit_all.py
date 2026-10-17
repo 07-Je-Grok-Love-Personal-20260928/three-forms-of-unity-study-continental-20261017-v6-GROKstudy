@@ -5,7 +5,7 @@ def strip(t):
     t=re.sub(r'(?s)<(script|style)[^>]*>.*?</\1>','',t); t=re.sub(r'<[^>]+>','',t); return html.unescape(t)
 def norm(s): return re.sub(r'[\s，。；：、！？“”‘’「」『』"\'（）()…—–·,.;:﹑\u200b\xa0\-\*\[\]⟦⟧]|\\n','',s)
 corp=''
-for f in glob.glob('data/*.json'): corp+=open(f,encoding='utf-8').read()
+for f in glob.glob('data/*.json')+glob.glob('data/ref/*.txt'): corp+=open(f,encoding='utf-8').read()
 try:
     for v in json.load(open('/workspace/cci_crawl/corpus.json')).values(): corp+=v['text']
 except Exception as e: print('no crawl corpus',e)

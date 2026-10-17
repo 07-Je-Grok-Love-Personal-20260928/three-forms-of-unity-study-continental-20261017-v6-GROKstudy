@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from core import *
+import c_refs
 from c_common import *
 from widgets import *
 
@@ -94,4 +95,5 @@ def part_compare():
         ["教会学校","教会规章第58条（"+mu("co58")+"）","三项联合信条"],
         ["抵挡异端","《烛台宣言》3.3“教义的价值”："+M("cs33","教义的价值就是藉着遵行神的命令来尊崇他")+"（"+mu("cs33","原文")+"）","BC 29、32"]],"cmp")
       + app("如果你在教会里负责教导：把 CCI 的这些页面当作“使用说明书”，用本站第二至四部分当“教材”。"))
+    b += c_refs.l2()
     return L1("compare","五","三份文件比较、签署与接受","scale","体裁、问题、相互关系，以及签署书与三大信经的接受。", b)

@@ -248,8 +248,8 @@ html{scroll-padding-top:16px}
 @keyframes slidein{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
 @keyframes glowl{0%{box-shadow:0 0 0 0 rgba(212,175,55,.5)}100%{box-shadow:0 0 0 14px rgba(212,175,55,0)}}
 /* 罗盘 */
-.cmp{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:18px;align-items:center;margin:14px 0 6px}
-.cmp svg{width:100%;height:auto;max-width:420px;margin:auto;display:block}
+div.cmp{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:18px;align-items:center;margin:14px 0 6px}
+div.cmp svg{width:100%;height:auto;max-width:420px;margin:auto;display:block}
 .cseg path{stroke:rgba(7,13,34,.6);stroke-width:1.5;transition:transform .25s,filter .25s,fill .25s;transform-origin:170px 170px;cursor:pointer}
 .cseg.p0 path,.lg.p0 i{fill:#d4af37;background:#d4af37}.cseg.p1 path,.lg.p1 i{fill:#e07a5f;background:#e07a5f}.cseg.p2 path,.lg.p2 i{fill:#5aa9e6;background:#5aa9e6}.cseg.p3 path,.lg.p3 i{fill:#81b29a;background:#81b29a}
 .cseg:hover path,.cseg:focus path{transform:scale(1.05);filter:brightness(1.25)}
@@ -260,7 +260,7 @@ html{scroll-padding-top:16px}
 @keyframes segin{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
 .cleg{display:grid;gap:8px}.lg{display:flex;align-items:center;gap:10px;font-weight:700}.lg i{width:16px;height:16px;border-radius:5px;display:inline-block;flex:none}
 .cn{color:var(--mut);font-size:.85rem;margin:6px 0 0}
-@media(max-width:700px){.cmp{grid-template-columns:1fr}}
+@media(max-width:700px){div.cmp{grid-template-columns:1fr}}
 /* 背诵版 */
 .rtool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 12px;padding:10px 12px;border-radius:14px;background:rgba(212,175,55,.08);border:1px solid var(--gb)}
 .rtool .btn{font-size:.85rem;padding:6px 14px;display:inline-flex;gap:6px;align-items:center}.rtool .btn .ic{width:1em;height:1em}
@@ -327,3 +327,27 @@ body.tocdrag iframe{pointer-events:none}
 .rf1{display:inline;white-space:normal}.rf1 .nb{display:inline-block;min-width:1.45em;height:1.45em;line-height:1.45em;padding:0 .35em;margin-right:.32em;border-radius:99px;text-align:center;font:700 .72rem Georgia,serif;color:#0a1230;background:linear-gradient(135deg,var(--gold),var(--gold2));vertical-align:.06em}
 .rf1:not(:last-child)::after{content:"·";margin:0 .6em;color:var(--gold);font-weight:700}
 .rf1:nth-child(3n+1) .nb{background:linear-gradient(135deg,#5aa9e6,#9fd0f7)}.rf1:nth-child(3n+2) .nb{background:linear-gradient(135deg,#81b29a,#a8dcc0)}
+.cl+.cl{margin-left:.12em}.rls li .rt{text-wrap:pretty}
+.rls li .rt{text-align:left}
+@media(max-width:560px){.l3.rcs{padding:10px 9px}.l3.rcs .rart{background:none;border:0;padding:2px 0}.rls li{padding:2px 4px}}
+/* ===== v3：参考站引文、对照矩阵、长度条、同异卡 ===== */
+.xq{quotes:none;display:inline;padding:1px 6px;border-radius:6px;background:rgba(129,178,154,.14);border-bottom:2px solid rgba(129,178,154,.55);color:#e4f3ea;font-style:normal}
+.xq[lang=en]{font-family:Georgia,"Times New Roman",serif;font-size:.95em;background:rgba(90,169,230,.12);border-bottom-color:rgba(90,169,230,.55);color:#e2f0fb}
+.tr{display:block;margin-top:5px;color:var(--mut);font-size:.8rem}
+.xqt td:nth-child(2){min-width:260px}
+.mx td,.mx th{text-align:center}.mx td:first-child,.mx th:first-child{text-align:left}
+.mky,.mkn{display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;font-weight:800;font-size:.85rem}
+.mky{background:rgba(129,178,154,.28);color:#bff0d3;box-shadow:0 0 0 1px rgba(129,178,154,.5)}.mkn{color:#7f8aa8;background:rgba(255,255,255,.04)}
+.lbars{display:grid;gap:10px;margin:12px 0}
+.lbr{display:grid;grid-template-columns:7.2em minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.lbr .lbn{color:var(--c);font-weight:700}.lbr .lbt{height:14px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.lbr .lbt i{display:block;height:100%;width:var(--w);border-radius:99px;background:linear-gradient(90deg,var(--c),#fff8);box-shadow:0 0 14px var(--c)}
+.lbr small{grid-column:2/4;color:var(--mut);margin-top:-4px}
+.js .lbars:not(.in) .lbt i{width:0}.js .lbars.in .lbt i{animation:growb 1.2s cubic-bezier(.2,.8,.2,1) backwards}
+@media(max-width:480px){.lbr{grid-template-columns:5.6em minmax(0,1fr)}.lbr b{grid-column:2}.lbr small{grid-column:2}}
+.cmp2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:10px 0}
+.cm{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.1)}.cm h5{margin:0 0 6px;font-size:1.02rem}.cm ul{margin:0;padding-left:1.2em}.cm li{margin:4px 0}
+.cm.same{background:rgba(129,178,154,.1);border-color:rgba(129,178,154,.4)}.cm.same h5{color:#a8dcc0}
+.cm.diff{background:rgba(224,122,95,.1);border-color:rgba(224,122,95,.4)}.cm.diff h5{color:#ffb4a0}
+table.cmp.xqt td:first-child,table.cmp.mx td:first-child{white-space:normal;min-width:8.5em;font-weight:600}
+table.cmp td{vertical-align:top}
