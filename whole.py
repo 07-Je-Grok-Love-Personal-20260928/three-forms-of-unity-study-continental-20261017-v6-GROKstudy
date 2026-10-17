@@ -31,7 +31,7 @@ def whole_block(pid, title, intro, steps, bt_rows, ct_cards, ct_note, rr_cards, 
     CUR["zero"] = 1
     l3 = L3(f"{pid}-w1", "整本圣经先行：这份文本在全书中的位置", intro + flow(steps), "book", "先整体")
     l3 += L3(f"{pid}-w2", "圣经神学：救恩史主线与代表经文",
-             '<p class="sub">圣经神学看的是“神怎样一步步启示、一步步成就”。下表只列经文出处，不改写经文。</p>' +
+             '<p class="sub">圣经神学看的是神怎样一步步启示、一步步成就。下表只列经文出处，不改写经文。</p>' +
              stk(["文本部分", "圣经主线", "代表经文"], bt_rows), "map", "主线")
     l3 += L3(f"{pid}-w3", "圣约神学：约的结构与三位一体的分工", cards(ct_cards, "g2") + note(ct_note), "link", "圣约")
     l3 += L3(f"{pid}-w4", "欧陆改革宗读法：怎样读、怎样用、与谁并读", cards(rr_cards, "g3"), "church", "改革宗")

@@ -551,3 +551,4 @@ table.stk td:first-child::before{display:none!important}
 .js .metro:not(.in) .mst{opacity:0}.js .metro.in .mst{animation:mpop .6s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:calc(var(--i)*.22s + .2s)}
 @keyframes mpop{from{opacity:0;transform:translateY(8px)}}
 @media(prefers-reduced-motion:reduce){.js .metro .mline,.js .metro .mst{animation:none!important;opacity:1!important;stroke-dashoffset:0!important}}
+.l3t{font-size:max(.86rem,14.2px)!important}.ms{font-size:18px!important}.mt{font-size:19px!important}.metro svg{min-width:900px}
