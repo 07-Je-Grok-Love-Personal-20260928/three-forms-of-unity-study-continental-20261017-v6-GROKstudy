@@ -300,3 +300,5 @@ body{font-feature-settings:"palt" 0;letter-spacing:.012em}
 .l2{scroll-margin-top:16px}.l3{scroll-margin-top:16px}
 @media(prefers-reduced-motion:reduce){.l3.reveal.in .l3h,.js .l3.reveal.in{animation:none!important}.js .cmp:not(.in) .cseg path{opacity:1;transform:none}.js .l3:not(.in) .abar i{width:var(--w,50%)}}
 @media(max-width:560px){.l3h{gap:6px 8px}.n3{font-size:.68em}.rart{grid-template-columns:1fr}.rno{width:2em;height:2em}}
+/* 全站原有 .rt（绝对定位的圆环文字）与背诵行 .rt 同名：在背诵列表内还原为行内文字 */
+.rls li .rt{position:static;inset:auto;display:inline;place-content:normal;text-align:inherit}
