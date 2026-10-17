@@ -12,7 +12,7 @@ def stats(items):
     return '<div class="vst reveal">'+"".join(f'<div style="--c:{c}"><i>{i}</i><b data-count="{n}">{n}</b><small>{t}</small></div>' for i,n,t,c in items)+'</div>'
 def colchart(id,title,items,note="",label_every=1,unit="",legend=None,H_=220):
     """items: (标签,数值,颜色,提示,链接,标记)。纵向柱；横向在窄屏滚动，不撑破页面。"""
-    n=len(items); W=1040; pl,pr,pt,pb=40,8,16,36; bw=(W-pl-pr)/n; mx=max(v for _,v,*_ in items)
+    n=len(items); W=1040; pl,pr,pt,pb=56,8,18,38; bw=(W-pl-pr)/n; mx=max(v for _,v,*_ in items)
     s=f'<figure class="cchart reveal"><p class="shint">← 左右滑动看全部柱子 →</p><div class="cscroll"><svg viewBox="0 0 {W} {H_}" role="img" aria-label="{H.escape(title)}">'
     for k in (0,.5,1):
         y=H_-pb-k*(H_-pt-pb); s+=f'<line x1="{pl}" y1="{y:.0f}" x2="{W-pr}" y2="{y:.0f}" class="gr"/><text x="{pl-6}" y="{y+4:.0f}" text-anchor="end" class="ax">{round(mx*k)}</text>'

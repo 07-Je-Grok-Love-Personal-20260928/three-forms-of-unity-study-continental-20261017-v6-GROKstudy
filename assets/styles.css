@@ -470,3 +470,32 @@ em.sc1{display:block;font-style:normal;font-size:.84rem;color:var(--k1);margin:2
 }
 
 @media(max-width:700px){.cchart .shint{display:block;font-size:.76rem;color:var(--mut);margin:0 0 4px}}
+
+/* ===== v6 字号体系：根字号随屏幕放大，rem 全部等比；正文行高 1.8；最小字号 ≈14px ===== */
+html{font-size:16.5px}
+@media(min-width:700px){html{font-size:17px}}
+@media(min-width:1100px){html{font-size:17.5px}}
+body{font-size:1rem;line-height:1.8;font-family:"PingFang SC","HarmonyOS Sans SC","Noto Sans SC","Source Han Sans SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif}
+#toc a{font-size:1rem;line-height:1.5}#toc .t1 ol a{font-size:.94rem}#toc .t3 a{font-size:.88rem;line-height:1.5;padding:4px 8px 4px 10px}
+td,th{line-height:1.7}table{font-size:.96rem}
+p,li{line-height:1.8}
+.zh,.rls li{line-height:2}
+/* 小字号地板：标签、徽章、脚注、图注一律 ≥14px（装饰符号除外） */
+main small,.l3s,.kick,.cwc,.xs,.fnh,i.lb,.xch,.pc,.pch,.qr,.kchip,.hchip,.ychip,.shint,.readchip,.bcn,main figcaption,.dpl,.tr,main label,.rfi,.rfd>summary,.rf1,.lg2,.sc1,.n3,.cn,.cn1,.src,.srcl,.pp,.xq,.badge,.mky,.mkn,.rhint,.kw i,.chp span,.legend span,.bl,.bv,.ah small,.xb,.xh,.xd,.exn,.lyi small,.bcl{font-size:max(.86rem,14.2px)}
+.tg:not(button),.btn,.rtool .btn,.rno,.rno.sm{font-size:max(.86rem,14.2px)}
+sup.fn,.nb{font-size:max(.78em,13px)}
+button.tg,.tg2{font-size:1.05rem}
+.bt small{font-size:max(.8rem,13.5px)}
+main small,main .kchip,main .hchip,main .shint,main .cw>b,main .bcn a,main .subth a,main .exb i,main .nb,main .fnh,main figcaption,main label{font-size:max(.86rem,14.2px)!important}
+main sup.fn{font-size:max(.78em,13px)!important}
+main .bt small{font-size:max(.8rem,13.5px)!important}
+main .h3ax,main .h3ax span,main em.sc1,main .dqt h5{font-size:max(.88rem,14.5px)!important}
+main .bt small{font-size:max(.84rem,14px)!important}
+/* v6 SVG 文字：加大并保证窄屏缩放后 ≥14px（宽图在窄屏横向滑动） */
+.cchart .ax{font-size:16px!important}.cchart svg{min-width:940px}
+@media(max-width:1100px){.cchart .shint{display:block!important}}
+.tl-zh{font-size:21px!important}.tl-en{font-size:16px!important}.tl-s{font-size:16px!important}.tl-h{font-size:18px!important}.tl-note{font-size:16px!important}.tl-let{font-size:24px!important}
+@media(max-width:800px){.tulipf{overflow-x:auto}.tulipf svg{min-width:700px}}
+.cseg text{font:700 15px Georgia,serif!important}.csm{font:700 16px sans-serif!important}
+.rvt{font-size:20px!important}
+.dc2{font-size:11px!important}

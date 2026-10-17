@@ -40,9 +40,9 @@ def compass():
         p=(lambda a,rr:(cx+rr*math.cos(a),cy+rr*math.sin(a)))
         x0,y0=p(a0,R); x1,y1=p(a1,R); x2,y2=p(a1,r); x3,y3=p(a0,r)
         t,part=HC52[n][0],HC52[n][1]
-        am=(a0+a1)/2; lx,ly=p(am,R+13)
+        am=(a0+a1)/2; lx,ly=p(am,R+17)
         out.append(f'<a href="#hd-ld{n}" class="cseg {PCLS[part]}" style="--d:{n*22}ms" data-n="{n}"><title>主日{n} · {t}</title><path d="M{x0:.1f} {y0:.1f}A{R} {R} 0 0 1 {x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}A{r} {r} 0 0 0 {x3:.1f} {y3:.1f}Z"/>'
-                   +(f'<text x="{lx:.1f}" y="{ly+3.5:.1f}" text-anchor="middle">{n}</text>' if n in (1,5,10,15,20,25,31,32,36,40,45,50) else '')+'</a>')
+                   +(f'<text x="{lx:.1f}" y="{ly+5:.1f}" text-anchor="middle">{n}</text>' if n in (1,5,10,15,20,25,31,32,36,40,45,50) else '')+'</a>')
     leg="".join(f'<span class="lg {PCLS[k]}"><i></i>{lab} · 主日{lo}'+(f"–{hi}" if hi!=lo else "")+'</span>' for k,lab,lo,hi in PART_RANGE)
     return ('<div class="cmp reveal"><svg viewBox="-14 -14 368 368" role="img" aria-label="52 主日罗盘：点按任一主日跳到对应标题"><circle cx="170" cy="170" r="92" class="chub"/>'+"".join(out)
             +'<text x="170" y="160" text-anchor="middle" class="cbig">52</text><text x="170" y="184" text-anchor="middle" class="csm">主日 · 129 问</text></svg>'
