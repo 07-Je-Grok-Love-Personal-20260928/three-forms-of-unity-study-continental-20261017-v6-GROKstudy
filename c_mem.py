@@ -2,6 +2,7 @@
 from core import *
 from c_common import *
 from c_hcdata import HCD
+from libs import rdet,hc_rows,bc_rows,dort_rows
 from c_titles import HC52,BC37,BC_GROUPS,PART_RANGE,DORT_SUB
 
 FLIPS=[
@@ -92,6 +93,21 @@ def titles_l2():
         li+=f'<li style="--c:#e07a5f"><b>驳</b><span><b>错谬反驳</b>：逐条驳斥抗辩派的错谬</span><a href="dtt.html#dort-{h["id"]}-{len(h["items"])}">原文</a></li>'
         x+=L3(f"mm-dt{h['id']}",h["title"],f'<ul class="subth">{li}</ul>',"shield",cls="mmg")
     out+=L2("mem-dt","11.4","多特信经四项标题速记",x)
+    # 经文速查（紧凑行内编号；文字逐字取自 CCI 数据）
+    x='<p>下列经文参考<b>逐字取自 CCI 原页</b>，一行一个主日／条／项，编号徽章行内连读；点开每组即可。每行都与第七至九部分原文页的“经文参考”一致。</p>'
+    for part,lab,lo,hi in PART_RANGE:
+        rows=[]
+        for n in range(lo,hi+1):
+            r=hc_rows(n); fl=[v for _,l in r for v in l]
+            if fl: rows.append((f"主日{n}",fl))
+        x+=L3(f"mm-rh{PC[part]}",f"HC 经文速查 · {lab}（主日{lo}–{hi}）",rdet(f"主日{lo}–{hi}",rows,sum(len(l) for _,l in rows)),"book",cls="mmg")
+    for gid,lab,col,lo,hi,ico in BC_GROUPS:
+        rows=[r for n in range(lo,hi+1) for r in bc_rows(n)]
+        x+=L3(f"mm-rb{gid}",f"BC 经文速查 · {lab}（第{lo}–{hi}条）",rdet(f"第{lo}–{hi}条",rows,sum(len(l) for _,l in rows)),"scroll",cls="mmg")
+    for h in J("dort")["heads"]:
+        rows=dort_rows(h["id"],1,len(h["items"]))
+        x+=L3(f"mm-rd{h['id']}",f"Dort 经文速查 · {h['title']}",rdet(h["title"].split(" ")[0],rows,sum(len(l) for _,l in rows)),"shield",cls="mmg")
+    out+=L2("mem-rf","11.5","经文参考速查（HC · BC · Dort，逐字取自 CCI）",x)
     return out
 
 def part_mem():

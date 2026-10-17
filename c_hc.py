@@ -5,6 +5,7 @@ from widgets import *
 from c_hcdata import HCD
 from c_titles import HC52,PART_RANGE
 import re
+from libs import rdet,hc_rows
 
 PARTS_HC=[("第一部 论人的罪和愁苦",11,"主日1–4 · 问1–11（含“唯一的安慰”）","#e07a5f","#ld1"),
           ("第二部 论我们的得救",74,"主日5–31 · 问12–85（中保、信心与信经、称义、圣礼）","#d4af37","#ld5"),
@@ -25,7 +26,7 @@ def ld_l3(n):
       f'<p><i class="lb">精义</i>{e}</p>'
       f'<p><i class="lb">CCI 概述</i>{QI(n,ibsum(n))}（{ibl(n,"《我属于》第"+ibk(n)+"课")}'+("；该课合并了几个主日" if "-" in ibk(n) else "")+'）</p>'
       f'<p class="k"><i class="lb">应用</i>{a}</p><p><i class="lb">对照</i>{xr(n)}</p>'
-      f'<p class="lk"><a href="#ld{n}">读主日{n}全文（{qr}）</a> · <a href="memory.html#mm-ld{n}">记忆页：速记与已背熟</a></p>')
+      +rdet(f"问{q1}"+(f"–{q2}" if q2!=q1 else ""),hc_rows(n),sum(len(x) for _,x in hc_rows(n)))+f'<p class="lk"><a href="#ld{n}">读主日{n}全文（{qr}）</a> · <a href="memory.html#mm-ld{n}">记忆页：速记与已背熟</a></p>')
     return L3(f"hd-ld{n}",f"主日{n} · {t}",body,icon,sub=qr,cls=f"ldc {PCLS[part]}")
 def ld_items(lo,hi,col=None):
     return "".join(ld_l3(n) for n in range(lo,hi+1))

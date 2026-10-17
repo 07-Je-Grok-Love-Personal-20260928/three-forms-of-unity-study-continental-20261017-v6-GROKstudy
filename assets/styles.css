@@ -365,3 +365,17 @@ table.cmp td{vertical-align:top}
  .xq{transition:background .3s}.xq:hover{background:rgba(243,217,139,.2)}
  #tocgrip::before{animation:gripin 1.6s 1s ease-out 2}@keyframes gripin{50%{height:120px;box-shadow:0 0 18px rgba(243,217,139,.7)}}
 }
+/* v20261017-4 紧凑经文行（深读页/记忆页） */
+.rfd{margin:6px 0 8px;border:1px solid rgba(212,175,55,.28);border-radius:12px;background:rgba(255,255,255,.035);overflow:hidden}
+.rfd>summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:6px 12px;font-size:.84rem;color:var(--gold2);font-weight:600;user-select:none}
+.rfd>summary::-webkit-details-marker{display:none}
+.rfd>summary::after{content:"▾";margin-left:auto;transition:transform .25s;color:var(--gold)}
+.rfd[open]>summary::after{transform:rotate(180deg)}
+.rfd>summary small{font-weight:400;color:var(--mut);font-size:.74rem}
+.rfd>summary .rfi{display:inline-block;transition:transform .3s}.rfd:hover>summary .rfi{transform:scale(1.2) rotate(-6deg)}
+.rfd[open]{background:rgba(212,175,55,.05)}
+.rfd .refs2.rq{margin:0;padding:5px 12px;border-top:1px dashed rgba(255,255,255,.1);min-width:0;overflow-wrap:anywhere}
+.rfd .refs2.rq .fnh{min-width:3.4em;font-weight:700;color:#9fd0f7;margin-right:8px}
+.rfd[open] .refs2.rq{animation:rfin .35s both}
+@keyframes rfin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rfd[open] .refs2.rq{animation:none}.rfd>summary::after,.rfd>summary .rfi{transition:none}}

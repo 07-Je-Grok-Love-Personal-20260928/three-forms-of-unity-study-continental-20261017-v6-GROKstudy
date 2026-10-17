@@ -20,6 +20,7 @@ def _first(ref,txt):
     elif txt.find("。")>=0: t=t+"。"
     return t
 def bc37_l2():
+    from libs import rdet,bc_rows
     from c_titles import BC37,BC_GROUPS
     from quotes import BC
     x=('<p>37 条按七群分，每条一个三级标题（编号 3.2.1–3.2.37）：<b>短标题</b>（本站学习标题）、<b>口诀</b>、<b>CCI 首句</b>（逐字摘引）与原文链接；CCI 的正式条目标题见第八部分。颜色＝所属群。</p>'
@@ -29,7 +30,7 @@ def bc37_l2():
         for n in range(lo,hi+1):
             t,kw,ic_=BC37[n]; q=_first("BC "+str(n),BC[n])
             body=(f'<div class="l3m"><span class="pch p2" style="background:{col}">{lab}</span><span class="qr">{BCT[n]}</span><span class="kw">{"".join(f"<i>{w}</i>" for w in kw.replace("＋","·").split("·"))}</span></div>'
-                  f'<p><i class="lb">CCI 首句</i>{Q("BC "+str(n),q)}</p><p class="lk"><a href="bct.html#bc-{n}">读第{n}条全文（CCI 原文）</a> · <a href="memory.html#mem-bc">记忆页：标题速记</a></p>')
+                  f'<p><i class="lb">CCI 首句</i>{Q("BC "+str(n),q)}</p>'+rdet(f"第{n}条",bc_rows(n),sum(len(x) for _,x in bc_rows(n)))+f'<p class="lk"><a href="bct.html#bc-{n}">读第{n}条全文（CCI 原文）</a> · <a href="memory.html#mem-bc">记忆页：标题速记</a></p>')
             x+=L3(f"bcd-a{n}",f"第{n}条 · {t}",body,ic_,sub=f"BC {n}",cls="ldc")
     return L2("bcd-37","3.2","37 条主题标题目录：短标题、口诀与首句",x)
 

@@ -16,6 +16,26 @@ def chips(items):
 def refs_ol(lst):
     if not lst: return ""
     return "".join(f'<span class="rf1" role="listitem"><b class="nb">{i}</b>{H.escape(x)}</span>' for i,x in enumerate(lst,1))
+def rrow(label,lst):
+    """深读页/记忆页的紧凑经文行：label + 行内编号徽章（文字逐字取自 data）。"""
+    return f'<div class="refs2 rq" role="list" aria-label="{H.escape(label)} 经文参考"><span class="fnh">{H.escape(label)}</span>'+refs_ol(lst)+'</div>'
+def rdet(summary,rows,total,cls=""):
+    """折叠容器（<details>，无 JS 也可用）：rows 为 [(label,list)]。"""
+    if not rows: return ""
+    return (f'<details class="rfd {cls}"><summary><span class="rfi">📖</span> 经文参考 · {H.escape(summary)}<small>共 {total} 条</small></summary>'
+            +"".join(rrow(l,x) for l,x in rows)+'</details>')
+def hc_rows(ld):
+    """某主日：[(问N, 参考列表)]，按原文 h4→ref 顺序。"""
+    rows=[];q=None
+    for b in J("hc")["lds"][ld-1]["blocks"]:
+        if b["t"]=="h4": q=re.match(r"\s*(\d+)",b["x"]).group(1)
+        elif b["t"]=="ref": rows.append((f"问{q}",b["x"]))
+    return rows
+def bc_rows(n):
+    return [(f"第{n}条",b["x"]) for b in J("bc")["articles"][n-1]["blocks"] if b["t"]=="ref"]
+def dort_rows(head,lo,hi):
+    h=[x for x in J("dort")["heads"] if x["id"]==head][0]
+    return [(f"{h['num']}.{it['n']}" if it['n']!=len(h['items']) else f"{h['num']} 驳",b["x"]) for it in h["items"] if lo<=it["n"]<=hi for b in it["blocks"] if b["t"]=="ref"]
 def blocks_html(bl):
     out=""
     for b in bl:

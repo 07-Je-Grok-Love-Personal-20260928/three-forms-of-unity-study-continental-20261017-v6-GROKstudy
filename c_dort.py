@@ -55,6 +55,7 @@ def layers():
     return f'<div class="dlayers reveal" data-dl>{nav}{"".join(P)}</div>'
 
 def dort4_l2():
+    from libs import rdet,dort_rows
     from c_titles import DORT_SUB
     cols={"section1":"#d4af37","section2":"#5aa9e6","section3-4":"#e07a5f","section5":"#81b29a"}
     ico={"section1":"key","section2":"cross","section3-4":"dove","section5":"shield"}
@@ -67,7 +68,7 @@ def dort4_l2():
         li+=f'<li style="--c:#e07a5f"><b>驳</b><span><b>错谬反驳</b>：逐条驳斥抗辩派的错谬</span><a href="dtt.html#dort-{h["id"]}-{n}">原文</a></li>'
         body=(f'<div class="l3m"><span class="pch p2" style="background:{c}">第{h["num"]}项</span><span class="qr">{n-1} 条 + 错谬反驳</span></div>'
               f'<div class="abar" style="--w:{round((n-1)/mx*100)}%"><i></i></div>'
-              f'<ul class="subth">{li}</ul><p class="lk"><a href="dtt.html#dt-{h["id"]}">读本项全文（CCI 原文）</a></p>')
+              f'<ul class="subth">{li}</ul>'+"".join(rdet(f"{r}（{t}）",dort_rows(h["id"],lo,hi),sum(len(x) for _,x in dort_rows(h["id"],lo,hi))) for r,t,kw,lo,hi in sub)+rdet("错谬反驳",dort_rows(h["id"],n,n),sum(len(x) for _,x in dort_rows(h["id"],n,n)))+f'<p class="lk"><a href="dtt.html#dt-{h["id"]}">读本项全文（CCI 原文）</a></p>')
         x+=L3(f'dd-h{h["num"]}',h["title"],body,ico[h["id"]],sub=f'{n-1} 条',cls="ldc")
     return L2("dd-4","4.2","四项教义主题目录：子主题与条目范围",x)
 
