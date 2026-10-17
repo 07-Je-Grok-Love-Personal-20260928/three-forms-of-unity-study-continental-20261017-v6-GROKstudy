@@ -1,0 +1,8 @@
+node_modules
+.netrc
+.env
+CNAME
+_shots/
+__pycache__/
+*.secret
+__pycache__/
