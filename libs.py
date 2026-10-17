@@ -15,12 +15,12 @@ def chips(items):
     return '<nav class="chips" aria-label="快速跳转">'+"".join(f'<a href="#{i}" title="{t}">{l}</a>' for i,l,t in items)+'</nav>'
 def refs_ol(lst):
     if not lst: return ""
-    return '<ol class="fnl">'+"".join(f"<li>{H.escape(x)}</li>" for x in lst)+'</ol>'
+    return "".join(f'<span class="rf1" role="listitem"><b class="nb">{i}</b>{H.escape(x)}</span>' for i,x in enumerate(lst,1))
 def blocks_html(bl):
     out=""
     for b in bl:
         if b["t"]=="p": out+=f'<p class="ex">{fn(b["x"])}</p>'
-        elif b["t"]=="ref": out+='<div class="fnh">经文参考</div>'+refs_ol(b["x"])
+        elif b["t"]=="ref": out+='<div class="refs2" role="list" aria-label="经文参考"><span class="fnh">📖 经文参考</span>'+refs_ol(b["x"])+'</div>'
         elif b["t"]=="h4": out+=f'<h4 class="qh">{H.escape(b["x"])}</h4>'
     return out
 

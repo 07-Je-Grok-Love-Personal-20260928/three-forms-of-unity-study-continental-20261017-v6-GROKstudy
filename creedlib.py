@@ -10,10 +10,11 @@ def pieces(text,seps="；。！"):
     if cur.strip(): out.append(cur)
     return [p for p in out]
 def lines(text):
-    """一条再按“，”切成行（保留标点）。"""
-    return [p.strip() for p in pieces(text,"，；。！") if p.strip()]
+    """紧凑版：一条（一点）就是一行；条内的小句保持原标点、连成一行，在窄屏自然折行。"""
+    return [text.strip()]
 def li(t,pn=""):
-    return f'<li><span class="rt">{H.escape(t,quote=False)}</span></li>'
+    cl="".join(f'<i class="cl">{H.escape(p,quote=False)}</i>' for p in pieces(t,"，；。！") if p)
+    return f'<li><span class="rt">{cl}</span></li>'
 def art(no,text_lines,cls=""):
     return f'<div class="rart {cls}"><span class="rno">{no}</span><ul class="rls">'+"".join(li(t) for t in text_lines)+'</ul></div>'
 

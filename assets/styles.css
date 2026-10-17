@@ -302,3 +302,28 @@ body{font-feature-settings:"palt" 0;letter-spacing:.012em}
 @media(max-width:560px){.l3h{gap:6px 8px}.n3{font-size:.68em}.rart{grid-template-columns:1fr}.rno{width:2em;height:2em}}
 /* 全站原有 .rt（绝对定位的圆环文字）与背诵行 .rt 同名：在背诵列表内还原为行内文字 */
 .rls li .rt{position:static;inset:auto;display:inline;place-content:normal;text-align:inherit}
+/* ===== v20261017-3：目录可拖拽调宽 ===== */
+:root{--twm:min(86vw,330px)}
+#tocgrip{position:fixed;top:0;bottom:0;left:calc(var(--tw) - 7px);width:14px;z-index:52;cursor:col-resize;touch-action:none;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;outline:none}
+#tocgrip::before{content:"";width:4px;height:54px;border-radius:4px;background:linear-gradient(180deg,rgba(212,175,55,.2),rgba(243,217,139,.7),rgba(212,175,55,.2));transition:height .25s,box-shadow .25s,width .25s}
+#tocgrip::after{content:"⋮";position:absolute;color:#0a1230;font-size:.8rem;font-weight:800;pointer-events:none;opacity:0;transition:opacity .2s}
+#tocgrip:hover::before,#tocgrip:focus-visible::before,body.tocdrag #tocgrip::before{height:110px;width:8px;box-shadow:0 0 16px rgba(243,217,139,.65)}
+#tocgrip:hover::after,#tocgrip:focus-visible::after,body.tocdrag #tocgrip::after{opacity:1}
+body.tochide #tocgrip{display:none}
+body.tocdrag{user-select:none;-webkit-user-select:none;cursor:col-resize}
+body.tocdrag #toc,body.tocdrag #main{transition:none!important}
+body.tocdrag iframe{pointer-events:none}
+@media(max-width:1099px){#toc{width:var(--twm)}#tocgrip{display:none;left:calc(var(--twm) - 7px)}body.tocopen #tocgrip{display:flex}#tocgrip::before{height:72px;width:6px}}
+@media(max-width:1099px) and (pointer:coarse){#tocgrip{width:26px;left:calc(var(--twm) - 13px)}}
+/* ===== 背诵版：一条一行；经文参考：行内编号 ===== */
+.rls li{padding:3px 8px}
+.rls li .rt{display:block}
+.cl{font-style:normal}.cl+.cl{margin-left:.3em}.cl:nth-child(even){color:#d9e6ff}
+.rc.m-hide .rls li .rt .cl,.rc.m-cue .rls li .rt .cl{color:inherit!important}
+.rart{align-items:center;padding:6px 10px;margin:6px 0}
+@media(max-width:560px){.rart{grid-template-columns:auto minmax(0,1fr);gap:8px;padding:5px 8px}.rno{width:1.9em;height:1.9em;font-size:.8rem}.rls li{font-size:1rem;line-height:1.75}}
+.refs2{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 0;margin:4px 0 8px;font-size:.84rem;line-height:1.7;color:#b9c3dc}
+.refs2 .fnh{margin:0 10px 0 0;font-size:.78rem;color:var(--gold2);letter-spacing:.06em;white-space:nowrap}
+.rf1{display:inline;white-space:normal}.rf1 .nb{display:inline-block;min-width:1.45em;height:1.45em;line-height:1.45em;padding:0 .35em;margin-right:.32em;border-radius:99px;text-align:center;font:700 .72rem Georgia,serif;color:#0a1230;background:linear-gradient(135deg,var(--gold),var(--gold2));vertical-align:.06em}
+.rf1:not(:last-child)::after{content:"·";margin:0 .6em;color:var(--gold);font-weight:700}
+.rf1:nth-child(3n+1) .nb{background:linear-gradient(135deg,#5aa9e6,#9fd0f7)}.rf1:nth-child(3n+2) .nb{background:linear-gradient(135deg,#81b29a,#a8dcc0)}
