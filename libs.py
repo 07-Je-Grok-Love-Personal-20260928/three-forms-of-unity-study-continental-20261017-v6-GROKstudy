@@ -122,13 +122,14 @@ def part_creedsx():
     def block(key_,ztitle):
         d=C[key_]
         return f'<h4 class="qh">CCI 导言（原文）</h4><p class="ex">{H.escape(d["intro"])}</p><h4 class="qh">{H.escape(ztitle)}（原文）</h4>'+"".join(f'<p class="ex cr">{H.escape(p)}</p>' for p in d["paras"])+f'<p class="src">{src_link(d["url"])}</p>'
+    from c_core import AP_CORE,NI_CORE,AT_CORE,core_strip
     def parted(parts,titles,texts,pref,sec):
         x=CL.TOOL+'<div class="rc" data-recite>'
         for pn,pt,pico,nos in parts:
             x+=f'<h4 class="rpart">{ic(pico,"ic sm")}第{pn}段 · {pt}</h4>'
             for n in nos:
                 t,ico,sub=titles[n]
-                x+=L3(f"{pref}-a{n}",t,CL.art(n,CL.lines(texts[n])),ico,sub=sub,cls="ldc rcs")
+                x+=L3(f"{pref}-a{n}",t,core_strip((AP_CORE if pref=="ap" else NI_CORE)[n])+CL.art(n,CL.lines(texts[n])),ico,sub=sub,cls="ldc rcs")
         return x+'</div>'
     # 使徒信经
     ap=CL.apostles(C)
@@ -145,11 +146,13 @@ def part_creedsx():
         x+=f'<h4 class="rpart">{ic(pico,"ic sm")}{pn} · {pt}</h4>'
         for g in gs:
             nm,lo,hi,gi=CL.AT_GROUPS[g]
-            body="".join(CL.art(k,CL.lines(at[k])) for k in range(lo,hi+1))
+            body=core_strip(AT_CORE[g])+"".join(CL.art(k,CL.lines(at[k])) for k in range(lo,hi+1))
             x+=L3(f"at-g{g}",f"第{lo}–{hi}点 · {nm}" if hi!=lo else f"第{lo}点 · {nm}",body,gi,sub=f"{hi-lo+1} 点",cls="ldc rcs")
     x+='</div>'
     x+=L3("at-txt","CCI 导言与原文整段（逐字）",block("athanasian","亚他那修信经")+hard("<b>编号差异（已核对）：</b>CCI 导言说“第二部分包括第29-43点”，但其正文编号只到第42点（第42点是“这是大公信仰……阿们”）。对读：BC 8–11、18–19。"),"scroll",cls="tx")
     b += L2("cr-at","10.4","亚他那修信经 · 42 点 · 11 组（背诵版）",x)
     import c_cr3
     b += c_cr3.part()
+    import c_refx
+    b += c_refx.l2("creedsx")
     return L1("creedsx","十","附录：三大信经原文与背诵版（CCI）","scroll","CCI《赞美手册》中文版逐字收录；背诵版一行一句；逐句讲解见姊妹站。", b)

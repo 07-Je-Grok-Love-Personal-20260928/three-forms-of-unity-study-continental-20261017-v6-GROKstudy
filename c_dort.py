@@ -57,6 +57,7 @@ def layers():
 def dort4_l2():
     from libs import rdet,dort_rows
     from c_titles import DORT_SUB
+    from c_core import DORT_CORE,DORT_SUBCORE,core_strip
     cols={"section1":"#d4af37","section2":"#5aa9e6","section3-4":"#e07a5f","section5":"#81b29a"}
     ico={"section1":"key","section2":"cross","section3-4":"dove","section5":"shield"}
     mx=max(len(h["items"]) for h in _dt["heads"])
@@ -64,10 +65,11 @@ def dort4_l2():
        +'<div class="dh4">'+"".join(f'<a href="#dd-h{h["num"]}" style="--c:{cols[h["id"]]}"><b>第{h["num"]}项</b><small>{h["title"].split(" ",1)[-1]}</small><small>{len(h["items"])-1} 条 + 驳</small></a>' for h in _dt["heads"])+'</div>')
     for h in _dt["heads"]:
         sub=DORT_SUB[h["id"]]; c=cols[h["id"]]; n=len(h["items"])
-        li="".join(f'<li style="--c:{c}"><b>{r}</b><span><b>{t}</b>：{kw}</span><a href="dtt.html#dort-{h["id"]}-{lo}">原文</a></li>' for r,t,kw,lo,hi in sub)
+        li="".join(f'<li style="--c:{c}"><b>{r}</b><span><b>{t}</b>：{kw}<em class="sc1">核心：{DORT_SUBCORE[(h["id"],r)]}</em></span><a href="dtt.html#dort-{h["id"]}-{lo}">原文</a></li>' for r,t,kw,lo,hi in sub)
         li+=f'<li style="--c:#e07a5f"><b>驳</b><span><b>错谬反驳</b>：逐条驳斥抗辩派的错谬</span><a href="dtt.html#dort-{h["id"]}-{n}">原文</a></li>'
         body=(f'<div class="l3m"><span class="pch p2" style="background:{c}">第{h["num"]}项</span><span class="qr">{n-1} 条 + 错谬反驳</span></div>'
               f'<div class="abar" style="--w:{round((n-1)/mx*100)}%"><i></i></div>'
+              +core_strip(DORT_CORE[h["id"]])+
               f'<ul class="subth">{li}</ul>'+"".join(rdet(f"{r}（{t}）",dort_rows(h["id"],lo,hi),sum(len(x) for _,x in dort_rows(h["id"],lo,hi))) for r,t,kw,lo,hi in sub)+rdet("错谬反驳",dort_rows(h["id"],n,n),sum(len(x) for _,x in dort_rows(h["id"],n,n)))+f'<p class="lk"><a href="dtt.html#dt-{h["id"]}">读本项全文（CCI 原文）</a></p>')
         x+=L3(f'dd-h{h["num"]}',h["title"],body,ico[h["id"]],sub=f'{n-1} 条',cls="ldc")
     return L2("dd-4","4.2","四项教义主题目录：子主题与条目范围",x)
@@ -191,4 +193,8 @@ def part_dort():
           ["Clarence Stam 的 HC 主日52讲道","指出 HC、BC 37 与 Dort 第五项都以“真信徒能持守信仰”的安慰作结（转述）",A(CCI+"/sermons/heidelberg-catechism/lord-day-52","lord-day-52")],
           ["Dort 导言","“改革宗教会的所有圣职人员在就职前都必须签署文书”认同三大联合信条（CCI 原文）",A(_dt["url"],"CCI 多特信经总页")]],"cmp")
       + app("读书小组建议：Dort 第一项与第五项合读，第二项与 HC 主日5–6合读，第三、四项与 HC 主日2–4、20合读——这样 Dort 就回到了“安慰”的框架。"))
+    import c_viz
+    b += c_viz.viz_dort()
+    import c_refx
+    b += c_refx.l2("dort")
     return L1("dort","四","多特信经深读","shield","抗辩书、大会与四项教义：TULIP 的术语说明、驳谬与牧养；逐字原文见第九部分。", b)

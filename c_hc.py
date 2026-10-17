@@ -6,6 +6,8 @@ from c_hcdata import HCD
 from c_titles import HC52,PART_RANGE
 import re
 from libs import rdet,hc_rows
+from c_core import HC_CORE,core_strip
+from c_refx import youth_chip
 
 PARTS_HC=[("第一部 论人的罪和愁苦",11,"主日1–4 · 问1–11（含“唯一的安慰”）","#e07a5f","#ld1"),
           ("第二部 论我们的得救",74,"主日5–31 · 问12–85（中保、信心与信经、称义、圣礼）","#d4af37","#ld5"),
@@ -22,8 +24,8 @@ def ld_l3(n):
     t,e,a,bc,dt,oth,flag=HCD[n]; q1,q2=HCRANGE[n]
     _,part,kw,icon=HC52[n]; qr=f"问{q1}"+(f"–{q2}" if q2!=q1 else "")
     mark={"K":'<span class="kchip">重点</span>',"H":'<span class="hchip">难点</span>'}.get(flag,"")
-    body=(f'<div class="l3m"><span class="pch {PCLS[part]}">{part}</span><span class="qr">{qr}</span>{mark}<span class="kw">{"".join(f"<i>{w}</i>" for w in kw.replace("＋","·").split("·"))}</span></div>'
-      f'<p><i class="lb">精义</i>{e}</p>'
+    body=(f'<div class="l3m"><span class="pch {PCLS[part]}">{part}</span><span class="qr">{qr}</span>{mark}{youth_chip(n)}<span class="kw">{"".join(f"<i>{w}</i>" for w in kw.replace("＋","·").split("·"))}</span></div>'
+      +core_strip(HC_CORE[n])+f'<p><i class="lb">精义</i>{e}</p>'
       f'<p><i class="lb">CCI 概述</i>{QI(n,ibsum(n))}（{ibl(n,"《我属于》第"+ibk(n)+"课")}'+("；该课合并了几个主日" if "-" in ibk(n) else "")+'）</p>'
       f'<p class="k"><i class="lb">应用</i>{a}</p><p><i class="lb">对照</i>{xr(n)}</p>'
       +rdet(f"问{q1}"+(f"–{q2}" if q2!=q1 else ""),hc_rows(n),sum(len(x) for _,x in hc_rows(n)))+f'<p class="lk"><a href="#ld{n}">读主日{n}全文（{qr}）</a> · <a href="memory.html#mm-ld{n}">记忆页：速记与已背熟</a></p>')
@@ -170,4 +172,8 @@ def part_hc():
           ["《我属于》（I Belong）","按主日逐课讲解，每课有“概述”与“解说”；本站所引“CCI 概述”均出于此",A(CCI+"/books/i-belong/1","i-belong/1 … 52")]],"cmp")
       + app("如果你是小组带领人：照 CCI 的做法，把 HC 放进主日下午或周间的学习里，用本页 2.8 的“精义—应用—对照”作备课大纲，每次一个主日，一年读完一遍。")
       + note("以上 CCI 页面均为本站转述或很短的摘引，并附原页链接；没有复制讲道或《我属于》的课文全文。"))
+    import c_viz
+    b += c_viz.viz_hc()
+    import c_refx
+    b += c_refx.l2("hc")
     return L1("hc","二","海德堡要理问答深读","book","从“唯一的安慰”出发：三部分、52 主日、成因与应用；逐字原文见第七部分。", b)

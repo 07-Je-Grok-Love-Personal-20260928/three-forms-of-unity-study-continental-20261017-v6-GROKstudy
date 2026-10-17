@@ -110,6 +110,28 @@ def titles_l2():
     out+=L2("mem-rf","11.5","经文参考速查（HC · BC · Dort，逐字取自 CCI）",x)
     return out
 
+def core_l2():
+    from c_core import HC_CORE,BC_CORE,DORT_CORE,AP_CORE,NI_CORE,AT_CORE,core_tbl
+    from c_titles import PART_RANGE,BC_GROUPS
+    from c_common import _dt
+    import creedlib as CL
+    x=('<p>每个主日、每条信条、每项教义和每个信经条目各配一组：<b>🎯 核心一句</b>（抓住本质）、<b>🧠 记忆钩</b>（口诀、数字、前后对比）、<b>💡 为何重要</b>。这些是本站撰写的学习用语，不是 CCI 原文；每行编号可点回深读页。</p>'
+       +'<div class="legend"><span class="cwk k1">🎯 核心</span><span class="cwk k2">🧠 记忆钩</span><span class="cwk k3">💡 为何重要</span></div>')
+    for k,lab,lo,hi in PART_RANGE:
+        rows=[(f"主日{n}",HC52[n][0],HC_CORE[n],f"hc.html#hd-ld{n}") for n in range(lo,hi+1)]
+        x+=L3(f"mr-hc{PC[k]}",f"HC 核心速记 · {lab}（主日{lo}"+(f"–{hi}" if hi!=lo else "")+"）",core_tbl(rows),"list",cls="mmg")
+    for g,lab,col,lo,hi,ico in BC_GROUPS:
+        rows=[(f"第{n}条",BC37[n][0],BC_CORE[n],f"bc.html#bcd-a{n}") for n in range(lo,hi+1)]
+        x+=L3(f"mr-bc{g}",f"BC 核心速记 · {lab}（第{lo}–{hi}条）",core_tbl(rows),ico,cls="mmg")
+    rows=[(f"第{h['num']}项",h["title"].split(" ",1)[-1],DORT_CORE[h["id"]],f"dort.html#dd-h{h['num']}") for h in _dt["heads"]]
+    x+=L3("mr-dt","Dort 核心速记 · 四项",core_tbl(rows),"shield",cls="mmg")
+    rows=[(f"第{n}条",CL.AP_TITLES[n][0],AP_CORE[n],f"creedsx.html#ap-a{n}") for n in range(1,13)]
+    x+=L3("mr-ap","使徒信经核心速记 · 12 条",core_tbl(rows),"scroll",cls="mmg")
+    rows=[(f"第{n}节",CL.NI_TITLES[n][0],NI_CORE[n],f"creedsx.html#ni-a{n}") for n in range(1,14)]
+    x+=L3("mr-ni","尼西亚信经核心速记 · 13 节",core_tbl(rows),"scroll",cls="mmg")
+    rows=[(f"第{lo}–{hi}点" if hi!=lo else f"第{lo}点",nm,AT_CORE[g],f"creedsx.html#at-g{g}") for g,(nm,lo,hi,gi) in CL.AT_GROUPS.items()]
+    x+=L3("mr-at","亚他那修信经核心速记 · 11 组",core_tbl(rows),"scroll",cls="mmg")
+    return L2("mem-core","11.7","核心速记总表：核心一句 · 记忆钩 · 为何重要",x)
 def part_mem():
     b = L2("mem-mn","11.1","口诀",
       '<div class="mn reveal"><p><b class="hl-s">HC：罪 · 救 · 谢</b>——主日 1–4 / 5–31 / 32–52；问1 的安慰串起全书。</p>'
@@ -142,4 +164,7 @@ def part_mem():
       '<p>每周一个主日（HC）＋一条“伴读”：第 1–37 周配比利时信条第 n 条；第 38–50 周读多特信经；第 51 周复习错谬反驳；第 52 周总复习。每周建议：周一读正文，周二读本站讲解，周三背一问或一句，周四写三句总结，主日听讲道时对照。</p>'
       + table(["周","海德堡（HC）","伴读（BC / Dort）","说明"],plan(),"cmp wk")
       + app("可以和教会的 HC 讲道同步：CCI 教会规章第52条要求每个主日宣讲一次 HC 的教义。若教会按主日顺序讲，把本表第 n 周对应成你教会的第 n 个主日。"))
+    b += core_l2()
+    import c_refx
+    b += c_refx.l2("memory")
     return L1("memory","十一","记忆与自测","brain","口诀、导图、翻卡、自测与 52 周计划。", b)
