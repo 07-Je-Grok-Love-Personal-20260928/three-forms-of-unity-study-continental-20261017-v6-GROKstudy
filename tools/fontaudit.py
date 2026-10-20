@@ -16,7 +16,7 @@ with sync_playwright() as p:
     b=p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
     for f in pages:
         for w in (390,1280):
-            pg=b.new_context(viewport={'width':w,'height':900}).new_page(); pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(250); pg.add_style_tag(content='main section.l2,main section.l3{content-visibility:visible!important}')  # v8：测量时强制渲染 content-visibility:auto 的区块
+            pg=b.new_context(viewport={'width':w,'height':900}).new_page(); pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(250); pg.evaluate("s=>{const e=document.createElement('style');e.textContent=s;document.head.appendChild(e)}",'main section.l2,main section.l3{content-visibility:visible!important}')  # v8：测量时强制渲染 content-visibility:auto 的区块
             for k,fs,t in pg.evaluate(JS,mn):
                 e=agg[(k,w)]; e[0]=min(e[0],fs); e[1]+=1; e[2]=e[2] or f+':'+t
 for (k,w),(fs,n,s) in sorted(agg.items(),key=lambda x:x[1][0]): print(f'{w:5} {fs:5} x{n:<4} {k:34} {s}')
