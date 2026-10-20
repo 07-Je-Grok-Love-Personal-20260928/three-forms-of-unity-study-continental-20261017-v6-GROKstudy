@@ -611,7 +611,7 @@ body{--bgimg:radial-gradient(1100px 650px at 85% -12%,rgba(79,209,197,.16) 0,tra
 .js .mmap.reveal.in .mm-b{animation:mmin .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*90ms)}
 @keyframes mmin{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
 @media(min-width:900px){.mmap{grid-template-columns:minmax(0,1fr) minmax(170px,230px) minmax(0,1fr);column-gap:34px;align-items:center}
- .mm-c{grid-column:2;align-self:stretch}.mm-b.L{grid-column:1}.mm-b.R{grid-column:3}
+ .mm-c{grid-column:2;grid-row:1 / span var(--rows);align-self:stretch}.mm-b.L{grid-column:1;grid-row:var(--r)}.mm-b.R{grid-column:3;grid-row:var(--r)}
  .mm-b.L::after,.mm-b.R::after{content:"";position:absolute;top:50%;width:34px;height:2px;background:linear-gradient(90deg,var(--c),transparent)}
  .mm-b.L::after{right:-34px;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 20%,transparent))}
  .mm-b.R::after{left:-34px;background:linear-gradient(270deg,var(--c),color-mix(in srgb,var(--c) 20%,transparent))}}

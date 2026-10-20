@@ -105,10 +105,10 @@ def mindmap(k):
     name,core,meta,br,sum_=M[k]
     n=len(br); left=(n+1)//2
     out=f'<div class="mmap reveal" style="--rows:{left}" role="group" aria-label="{name}思维导图">'
-    out+=f'<div class="mm-c" style="grid-row:1 / span {left}"><div class="mm-orb" aria-hidden="true"></div><b>{name}</b><span>{core}</span><small>{meta}</small></div>'
+    out+=f'<div class="mm-c"><div class="mm-orb" aria-hidden="true"></div><b>{name}</b><span>{core}</span><small>{meta}</small></div>'
     for i,(t,c,ic,rg,leaves) in enumerate(br):
         side="L" if i<left else "R"; row=(i if i<left else i-left)+1
-        out+=(f'<div class="mm-b {side}" style="--c:{c};--i:{i};grid-row:{row}"><h6><span aria-hidden="true">{ic}</span>{t}<small>{rg}</small></h6><ul>'
+        out+=(f'<div class="mm-b {side}" style="--c:{c};--i:{i};--r:{row}"><h6><span aria-hidden="true">{ic}</span>{t}<small>{rg}</small></h6><ul>'
               +"".join(f'<li>{H.escape(x)}</li>' for x in leaves)+'</ul></div>')
     out+='</div>'
     return out+f'<p class="mm-sum">🧭 <b>一句话：</b>{sum_}</p>'
