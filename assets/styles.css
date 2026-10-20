@@ -637,7 +637,7 @@ q.pdfq{quotes:"“" "”";color:#d9f2e3;background:rgba(129,178,154,.12);border-
 @media(prefers-reduced-motion:reduce){.mm-orb,.js .sline.armed .sl-st.on .sl-ic,.js .mmap.reveal.in .mm-b{animation:none!important}.js .mmap.reveal:not(.in) .mm-b{opacity:1;transform:none}.sl-bar i,.sl-st{transition:none!important}.js .sline.armed .sl-st.on{transform:none}}
 /* ===== v7 END ===== */
 /* ===== v8 START：性能 · 笔记标记 · 配色 ===== */
-:root{--c-god:#6cb8ff;--c-chr:#f2c94c;--c-sp:#6fd3a0;--c-sal:#ff8f7e;--c-cov:#c3a6ff;--c-ch:#4fd1c5;--c-ref:#ffb86b;--c-hl:rgba(242,201,76,.36);--c-x:#ff7b8a;--teal:#4fd1c5;--violet:#b49cff;--coral:#ff8f7e}
+:root{--c-god:#6cb8ff;--c-chr:#f2c94c;--c-sp:#6fd3a0;--c-sal:#ff8f7e;--c-cov:#c3a6ff;--c-ch:#4fd1c5;--c-ref:#ffb86b;--c-hl:rgba(255,200,60,.55);--c-x:#ff7b8a;--teal:#4fd1c5;--violet:#b49cff;--coral:#ff8f7e}
 /* —— 性能：背景单独成层；少用毛玻璃；长区块按需渲染 —— */
 body::before{transform:translateZ(0);will-change:transform}
 .fab{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(13,24,56,.95)}
@@ -653,7 +653,7 @@ html:not(.jsok) #toc .t1.closed>ol{display:block}html:not(.jsok) #toc .t1.closed
 /* —— 笔记标记 —— */
 .d-god{--dc:var(--c-god)}.d-chr{--dc:var(--c-chr)}.d-sp{--dc:var(--c-sp)}.d-sal{--dc:var(--c-sal)}.d-cov{--dc:var(--c-cov)}.d-ch{--dc:var(--c-ch)}
 .mk-k{font-weight:800;color:var(--dc,#fff)}
-.mk-hl,.cw.k1>span,.mi .cwk1{background:linear-gradient(transparent 52%,var(--c-hl) 0);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .12em}
+.mk-hl{background:linear-gradient(transparent 52%,var(--c-hl) 0);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .12em}
 .mk-u,.call.key>b~b,.call.key b:not(:first-child){text-decoration:underline solid var(--gold) 2px;text-underline-offset:.28em;text-decoration-skip-ink:none}
 .mk-x,.call.hard b:not(:first-child),p.h b{text-decoration:underline wavy var(--c-x) 1.5px;text-underline-offset:.3em;text-decoration-skip-ink:none}
 .mk-ref{color:var(--c-ref);background:rgba(255,184,107,.1);border-radius:6px;padding:0 .25em;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -678,7 +678,7 @@ html:not(.jsok) .mktog{display:none}
 .rls .cl:first-child{font-weight:700;color:#fff}
 /* 关闭标记 */
 .mkoff .mk-k{font-weight:inherit;color:inherit}.mkoff .mk-u,.mkoff .mk-x,.mkoff .call.key b,.mkoff .call.hard b,.mkoff p.h b{text-decoration:none}
-.mkoff .mk-ref{background:none;color:inherit;padding:0}.mkoff .mk-hl,.mkoff .cw.k1>span{background:none}
+.mkoff .mk-ref{background:none;color:inherit;padding:0}.mkoff .mk-hl{background:none}
 .mkoff .mk-app{border-left-color:rgba(255,255,255,.08)!important;background:none!important}
 .mkoff .kw>i::before,.mkoff .cwcs>.cwc::before{display:none}.mkoff .rls .cl:first-child{font-weight:inherit;color:inherit}
 /* 词频图 */
