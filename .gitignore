@@ -6,3 +6,4 @@ _shots/
 __pycache__/
 *.secret
 __pycache__/
+.netlify/
