@@ -3,8 +3,8 @@ var d=document,b=d.body,rm=matchMedia('(prefers-reduced-motion: reduce)').matche
 var T=window.TEC||{pages:[]},PG=b.dataset.page,KEY='tfu1.read',QK='tfu1.quiz';
 function ld(k,def){try{var v=JSON.parse(localStorage.getItem(k));return v==null?def:v}catch(e){return def}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-/* reveal */
-if(!rm&&'IntersectionObserver'in window){d.documentElement.classList.add('js');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});$$('.reveal').forEach(function(el){io.observe(el)});setTimeout(function(){$$('.reveal').forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in')})},50)}
+/* reveal */ /* v8 perf */
+if(!rm&&'IntersectionObserver'in window){d.documentElement.classList.add('js');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});$$('.reveal').forEach(function(el){io.observe(el)})}
 /* toc */
 var wide=function(){return innerWidth>=1100};
 function tog(){if(wide())b.classList.toggle('tochide');else b.classList.toggle('tocopen')}
@@ -14,17 +14,21 @@ $$('.tg').forEach(function(t){t.onclick=function(){var li=t.closest('.t1');li.cl
 $$('#toc .t1').forEach(function(li){if(!li.classList.contains('cur')){li.classList.add('closed');var g=$('.tg',li);if(g)g.setAttribute('aria-expanded','false')}});
 $$('.tg2').forEach(function(t){t.onclick=function(){var li=t.closest('.t2');li.classList.toggle('closed');t.setAttribute('aria-expanded',!li.classList.contains('closed'))}});
 var links={};$$('#toc .t1.cur a').forEach(function(a){var h=a.getAttribute('href');links[h.split('#')[1]]=a});
-var secs=$$('section.l1[id],section.l2[id],section.l3[id]'),cur=null;
+var secs=$$('section.l1[id],section.l2[id],section.l3[id]');
 var rd=ld(KEY,{}),mine=rd[PG]||[];
 function markRead(id){if(mine.indexOf(id)<0){mine.push(id);rd[PG]=mine;sv(KEY,rd);var a=links[id];if(a)a.classList.add('done');upd()}}
 function upd(){var c=$('#pgread');if(c)c.textContent=mine.length}
 mine.forEach(function(id){var a=links[id];if(a)a.classList.add('done')});
-var pend=$$('.reveal');function sweep(){if(!pend.length)return;pend=pend.filter(function(el){if(el.classList.contains('in'))return false;if(el.getBoundingClientRect().top<innerHeight){el.classList.add('in');return false}return true})}
-function spy(){sweep();var y=innerHeight*0.25,act=null;for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<y)act=secs[i];if(secs[i].classList.contains('l2')&&r.top<innerHeight*0.6&&r.bottom>0)markRead(secs[i].id)}
-var id=act&&act.id;if(act&&act.classList.contains('l1')){var f=$('.l2',act);if(f&&f.getBoundingClientRect().top<y)id=f.id}
-if(id!==cur){$$('#toc a.on').forEach(function(a){a.classList.remove('on')});var a=links[id];if(a){a.classList.add('on');var l1=a.closest('.t1');if(l1){l1.classList.remove('closed')}var t2=a.closest('.t2.has');if(t2){t2.classList.remove('closed');var g2=$('.tg2',t2);if(g2)g2.setAttribute('aria-expanded','true')}if(wide()&&!b.classList.contains('tochide')){var t=$('#toc'),r2=a.getBoundingClientRect();if(r2.top<60||r2.bottom>innerHeight-40)t.scrollTop+=r2.top-innerHeight/2}}cur=id}
-var h=d.documentElement,m=h.scrollHeight-innerHeight;var p=$('#prog');if(p)p.style.width=(m>0?h.scrollTop/m*100:0)+'%'}
-var tk=0;addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(function(){spy();tk=0})}},{passive:true});spy();upd();
+var cur=null,band=new Set(),order=new Map();secs.forEach(function(x,i){order.set(x,i)});
+function setAct(id){if(id===cur)return;$$('#toc a.on').forEach(function(a){a.classList.remove('on')});var a=links[id];if(a){a.classList.add('on');var l1=a.closest('.t1');if(l1){l1.classList.remove('closed')}var t2=a.closest('.t2.has');if(t2){t2.classList.remove('closed');var g2=$('.tg2',t2);if(g2)g2.setAttribute('aria-expanded','true')}if(wide()&&!b.classList.contains('tochide')){var t=$('#toc');requestAnimationFrame(function(){var r2=a.getBoundingClientRect();if(r2.top<60||r2.bottom>innerHeight-40)t.scrollTop+=r2.top-innerHeight/2})}}cur=id}
+if('IntersectionObserver'in window){
+ var ioA=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)band.add(e.target);else band.delete(e.target)});var best=null,bi=-1;band.forEach(function(x){var i=order.get(x);if(i>bi){bi=i;best=x}});if(best)setAct(best.id)},{rootMargin:'0px 0px -75% 0px'});
+ var ioR=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){markRead(e.target.id);ioR.unobserve(e.target)}})},{rootMargin:'0px 0px -40% 0px'});
+ secs.forEach(function(x){ioA.observe(x);if(x.classList.contains('l2'))ioR.observe(x)})}
+var p=$('#prog'),H=0,de=d.documentElement;function measure(){H=Math.max(1,de.scrollHeight-innerHeight)}measure();
+if('ResizeObserver'in window)new ResizeObserver(function(){measure();prog()}).observe(b);addEventListener('resize',measure,{passive:true});
+function prog(){if(p)p.style.transform='scaleX('+Math.min(1,scrollY/H).toFixed(4)+')'}
+var tk=0;addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(function(){prog();tk=0})}},{passive:true});prog();upd();
 
 /* toc resize */
 (function(){var g=$('#tocgrip'),toc=$('#toc');if(!g||!toc)return;var root=d.documentElement,KD='tfu1.tw',KM='tfu1.twm',sx=0,sw=0,dragging=false;
@@ -116,3 +120,7 @@ document.querySelectorAll('[data-sline]').forEach(function(box){var st=[].slice.
  if(!rm&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.disconnect();play()}})},{threshold:.35});io.observe(box)}
 });})();
 /* ===== v7 END ===== */
+
+/* v8 笔记标记开关（存于本机浏览器） */
+(function(){var de=document.documentElement,K='mk.off';function paint(){var off=de.classList.contains('mkoff');document.querySelectorAll('[data-mktog]').forEach(function(b){b.setAttribute('aria-pressed',String(!off));b.textContent=off?'标记：关':'标记：开'})}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mktog]');if(!b)return;de.classList.toggle('mkoff');try{localStorage.setItem(K,de.classList.contains('mkoff')?'1':'0')}catch(x){}paint()});paint()})();

@@ -15,7 +15,7 @@ with sync_playwright() as p:
     b=p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
     pg=b.new_page(viewport={'width':1280,'height':900})
     for f in pages:
-        pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(300)
+        pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(300); pg.add_style_tag(content='main section.l2,main section.l3{content-visibility:visible!important}')  # v8：测量时强制渲染 content-visibility:auto 的区块
         r=pg.evaluate(JS)
         for x in r: print(f,x); bad+=1
     b.close()

@@ -29,7 +29,7 @@ with sync_playwright() as p:
             ctx=b.new_context(viewport={'width':w,'height':900},java_script_enabled=not nojs,reduced_motion='reduce' if rm else 'no-preference')
             pg=ctx.new_page(); errs=[]
             pg.on('pageerror',lambda e:errs.append(str(e))); pg.on('console',lambda m:errs.append(m.text) if m.type=='error' else None)
-            pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(300)
+            pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(300); pg.add_style_tag(content='main section.l2,main section.l3{content-visibility:visible!important}')  # v8：测量时强制渲染 content-visibility:auto 的区块
             if opn: pg.evaluate("document.querySelectorAll('details').forEach(e=>e.open=true)")
             if not nojs:
                 # 滚动一遍以触发 reveal / 进度
