@@ -34,7 +34,7 @@ with sync_playwright() as p:
             if not nojs:
                 # 滚动一遍以触发 reveal / 进度
                 h=pg.evaluate('document.documentElement.scrollHeight')
-                for y in range(0,h,700): pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(25)
+                pg.evaluate('''async(h)=>{const f=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));for(let y=0;y<h;y+=700){window.scrollTo(0,y);await f();}}''',h)  # 单次 evaluate 内滚动，免去每步往返
                 pg.evaluate('window.scrollTo(0,0)'); pg.wait_for_timeout(200)
             ov=pg.evaluate(JS_OVER); cl=pg.evaluate(JS_CLIP); vis=pg.evaluate(JS_VIS)
             bad=[]
