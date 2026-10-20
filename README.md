@@ -1,6 +1,6 @@
 # 三项联合信条 · 欧陆改革宗深读
 
-**版本标签：three-forms-of-unity-study-continental-20261020-v7-CCstudy**（页脚版本 v20261020-7）
+**版本标签：three-forms-of-unity-study-continental-20261020-v7-GROKstudy**（页脚版本 v20261020-7）
 
 比利时信条（BC）、海德堡要理问答（HC）、多特信经（Dort）的中文多页学习站：先从整本圣经与圣约看，再逐条深读，并附比较、签署书、威斯敏斯特对照、背诵与自测。
 
@@ -11,19 +11,19 @@
 | 部署 | 地址 |
 |---|---|
 | GitHub Pages | https://07-je-grok-love-personal-20260928.github.io/three-forms-of-unity-study-continental-GROKstudy/ |
-| Netlify | https://three-forms-of-unity-study-continental-20261020-v7-ccser.netlify.app/ |
-| Surge | https://three-forms-of-unity-study-continental-20261020-v7-ccser.surge.sh/ |
+| Netlify | https://three-forms-of-unity-study-continental-20261020-v7-grokser.netlify.app/ |
+| Surge | https://three-forms-of-unity-study-continental-20261020-v7-grokser.surge.sh/ |
 | 代码仓库 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy |
 
-命名：仓库名只含主题（…-GROKstudy，以后不再改名）；Netlify / Surge 域名为“主题-日期-版本-ccser”（这两处只能小写），每个版本一个新域名，旧域名继续在线。
+命名：仓库名只含主题（…-GROKstudy，以后不再改名）；Netlify / Surge 域名为“主题-日期-版本-grokser”（这两处只能小写），每个版本一个新域名，旧域名继续在线。
 
-姊妹站（三大公教会信经）：https://three-ecumenical-creeds-study-continental-20261020-v10-ccser.surge.sh/
+姊妹站（三大公教会信经）：https://three-ecumenical-creeds-study-continental-20261020-v10-grokser.surge.sh/
 
 ## 版本记录
 
 | 版本 | 更新内容 | 仍可访问的链接 |
 |---|---|---|
-| **v7 · v20261020-7**（当前） | 用敬拜手册 2015 版补 CCI 缺的内容（HC 11 个印刷小标题、主日敬拜流程），并与 CCI 逐字比对，差异列在来源页（正文仍用 CCI）；六份文件各加五步动画故事线（起因→危机→会议→文本→果效，每步带出处）与思维导图；记忆页加 7 个常见疑问；39 处自拟短语去掉引号，改为虚线“本站用语”；按文件区分配色。 | 见上表 |
+| **v7 · v20261020-7**（当前） | 用敬拜手册 2015 版补 CCI 缺的内容（HC 11 个印刷小标题、主日敬拜流程），并与 CCI 逐字比对，差异列在来源页（正文仍用 CCI）；六份文件各加五步动画故事线（起因→危机→会议→文本→果效，每步带出处）与思维导图；记忆页加 7 个常见疑问；39 处自拟短语去掉引号，改为虚线“本站用语”；按文件区分配色。 | 见上表（同一版本另有备用镜像：[Netlify](https://three-forms-of-unity-study-continental-20261020-v7-ccser.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261020-v7-ccser.surge.sh/)） |
 | v6 · v20261017-6 | 全站字号体系（根字号 16.5–17.5px，小字 ≥14px）；每页“本页一眼”；BC、Dort 导读区块（整本圣经、圣经神学、圣约神学、改革宗读法、六角度）；辅助区块默认折叠；SVG 动画时间轴。 | 旧版本：[Netlify](https://three-forms-of-unity-study-continental-20261017-v6-grokstudy.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261017-v6-grokstudy.surge.sh/) |
 | v5 · v20261017-5 | 每个主日、BC 条、Dort 项加“核心一句 · 记忆钩 · 为何重要”；核心速记总表；参考站互证；HC/BC/Dort 篇幅数据图与北美地图。 | 旧版本：[Netlify](https://three-forms-of-unity-study-continental-20261017.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261017.surge.sh/)（v1–v5 共用这两个域名，现显示 v5） |
 | v4 · v20261017-4 | 深读页与记忆页加紧凑经文参考行（780 条，程序核对）；重点/难点标签。 | 同上（已被 v5 覆盖） |
