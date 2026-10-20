@@ -4,6 +4,7 @@ import json,re,html as H
 from core import *
 import core
 from c_common import *
+import pdf15,storymap
 import c_bible,c_hc,c_bc,c_dort,c_compare,c_west,c_mem,c_src,libs
 
 SITE="三项联合信条 · 欧陆改革宗深读"
@@ -88,7 +89,9 @@ def index_body():
     return hero+prog+guide
 BODY["index"]=index_body()
 core.CUR["f"]="index.html"
+import own
 for k,f,_,_ in PAGES:
-    h=rewrite(k,BODY[k]); open(f,"w",encoding="utf-8").write(page(k,h))
+    h=own.mark(rewrite(k,BODY[k])); open(f,"w",encoding="utf-8").write(page(k,h))
+own.check()
 if UNRES: print("WARN unresolved links:",sorted(set(UNRES))[:40],len(UNRES))
 print("built",[(f,round(len(open(f,encoding="utf-8").read())/1024)) for _,f,_,_ in PAGES])

@@ -153,6 +153,9 @@ def part_creedsx():
     b += L2("cr-at","10.4","亚他那修信经 · 42 点 · 11 组（背诵版）",x)
     import c_cr3
     b += c_cr3.part()
+    import storymap as SM
+    b += L2("cr-sm","10.x","三大信经：故事线与思维导图",
+      L3("cr-sm-ap","使徒信经：洗礼的信经",SM.block("ap"),"dove")+L3("cr-sm-ni","尼西亚信经：会议的信经",SM.block("ni"),"flame")+L3("cr-sm-at","亚他那修信经：教学的信经",SM.block("at"),"shield"))
     import c_refx
     b += c_refx.l2("creedsx")
     return L1("creedsx","十","附录：三大信经原文与背诵版（CCI）","scroll","CCI《赞美手册》中文版逐字收录；背诵版一行一句；逐句讲解见姊妹站。", b)

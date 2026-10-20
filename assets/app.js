@@ -104,3 +104,15 @@ d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest(
 $$('[data-secall]').forEach(function(x){x.onclick=function(){var on=x.dataset.secall==='open';$$('details.secd').forEach(function(e){e.open=on})}});
 })();
 })();
+/* ===== v7 START ===== */
+(function(){var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('[data-sline]').forEach(function(box){var st=[].slice.call(box.querySelectorAll('.sl-st')),n=st.length,cur=-1,tm=null,bar=box.querySelector('.sl-bar i'),pos=box.querySelector('.sl-pos'),pb=box.querySelector('[data-sl=play]');
+ function show(i){cur=(i+n)%n;st.forEach(function(s,j){s.classList.toggle('on',j===cur);s.classList.toggle('done',j<cur)});if(bar)bar.style.setProperty('--p',(n>1?cur/(n-1)*100:100)+'%');if(pos)pos.textContent=(cur+1)+' / '+n}
+ function stop(){if(tm){clearInterval(tm);tm=null}if(pb)pb.textContent='▶ 播放'}
+ function play(){stop();if(cur>=n-1)show(0);else show(cur+1);if(pb)pb.textContent='⏸ 暂停';tm=setInterval(function(){if(cur>=n-1){stop();return}show(cur+1)},rm?3200:2300)}
+ box.classList.add('armed');show(0);
+ box.addEventListener('click',function(e){var b=e.target.closest('[data-sl]');if(!b)return;var a=b.getAttribute('data-sl');if(a==='play'){tm?stop():play()}else{stop();show(cur+(a==='next'?1:-1))}});
+ st.forEach(function(s,j){s.addEventListener('click',function(e){if(e.target.closest('a'))return;stop();show(j)})});
+ if(!rm&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.disconnect();play()}})},{threshold:.35});io.observe(box)}
+});})();
+/* ===== v7 END ===== */
