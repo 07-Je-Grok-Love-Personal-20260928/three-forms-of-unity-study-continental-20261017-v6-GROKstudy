@@ -164,12 +164,12 @@ def core_strip(c,cls=""):
             f'<div class="cw k3"><b>💡 为何重要</b><span>{why}</span></div></div>')
 def core_row(t):
     return f'<p class="cw1"><i class="lb">核心</i>{t}</p>'
-def core_tbl(rows,cls=""):
+def core_tbl(rows,cls="",why=True):
     """rows: (编号, 标题, (core,hook,why), 链接或空)。返回紧凑表格；窄屏由 .tw 横向滚动，不撑破页面。"""
-    out=f'<div class="tw"><table class="cmp coretb {cls}"><thead><tr><th>#</th><th>核心一句</th><th>记忆钩</th><th>为何重要</th></tr></thead><tbody>'
+    out=f'<div class="tw"><table class="cmp coretb {cls}"><thead><tr><th>#</th><th>核心一句</th><th>记忆钩</th>'+('<th>为何重要</th>' if why else '')+'</tr></thead><tbody>'
     for no,t,c,href in rows:
-        core,hook,why=c
+        core,hook,wy=c
         chips="".join(f'<i class="cwc c{n%5}">{H.escape(w)}</i>' for n,w in enumerate(x for x in hook.split("·") if x))
         lab=f'<a href="{href}">{no}</a>' if href else no
-        out+=f'<tr><td class="cn1"><b>{lab}</b><small>{t}</small></td><td>{core}</td><td class="cwcs">{chips}</td><td>{why}</td></tr>'
+        out+=f'<tr><td class="cn1"><b>{lab}</b><small>{t}</small></td><td><span class="mk-hl">{core}</span></td><td class="cwcs">{chips}</td>'+(f'<td>{wy}</td>' if why else '')+'</tr>'
     return out+'</tbody></table></div>'

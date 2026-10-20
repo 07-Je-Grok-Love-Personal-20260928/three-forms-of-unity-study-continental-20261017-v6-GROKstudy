@@ -115,23 +115,23 @@ def core_l2():
     from c_titles import PART_RANGE,BC_GROUPS
     from c_common import _dt
     import creedlib as CL
-    x=('<p>每个主日、每条信条、每项教义和每个信经条目各配一组：<b>🎯 核心一句</b>（抓住本质）、<b>🧠 记忆钩</b>（口诀、数字、前后对比）、<b>💡 为何重要</b>。这些是本站撰写的学习用语，不是 CCI 原文；每行编号可点回深读页。</p>'
-       +'<div class="legend"><span class="cwk k1">🎯 核心</span><span class="cwk k2">🧠 记忆钩</span><span class="cwk k3">💡 为何重要</span></div>')
+    x=('<p>每个主日、每条信条、每项教义和每个信经条目各配一组：<b>🎯 核心一句</b>（抓住本质）、<b>🧠 记忆钩</b>（口诀、数字、前后对比）、（“为何重要”在各深读页）。本站学习用语，非 CCI 原文；编号可点回深读页。</p>'
+       +'<div class="legend"><span class="cwk k1">🎯 核心</span><span class="cwk k2">🧠 记忆钩</span></div>')
     for k,lab,lo,hi in PART_RANGE:
         rows=[(f"主日{n}",HC52[n][0],HC_CORE[n],f"hc.html#hd-ld{n}") for n in range(lo,hi+1)]
-        x+=L3(f"mr-hc{PC[k]}",f"HC 核心速记 · {lab}（主日{lo}"+(f"–{hi}" if hi!=lo else "")+"）",core_tbl(rows),"list",cls="mmg")
+        x+=L3(f"mr-hc{PC[k]}",f"HC 核心速记 · {lab}（主日{lo}"+(f"–{hi}" if hi!=lo else "")+"）",core_tbl(rows,why=False),"list",cls="mmg")
     for g,lab,col,lo,hi,ico in BC_GROUPS:
         rows=[(f"第{n}条",BC37[n][0],BC_CORE[n],f"bc.html#bcd-a{n}") for n in range(lo,hi+1)]
-        x+=L3(f"mr-bc{g}",f"BC 核心速记 · {lab}（第{lo}–{hi}条）",core_tbl(rows),ico,cls="mmg")
+        x+=L3(f"mr-bc{g}",f"BC 核心速记 · {lab}（第{lo}–{hi}条）",core_tbl(rows,why=False),ico,cls="mmg")
     rows=[(f"第{h['num']}项",h["title"].split(" ",1)[-1],DORT_CORE[h["id"]],f"dort.html#dd-h{h['num']}") for h in _dt["heads"]]
-    x+=L3("mr-dt","Dort 核心速记 · 四项",core_tbl(rows),"shield",cls="mmg")
+    x+=L3("mr-dt","Dort 核心速记 · 四项",core_tbl(rows,why=False),"shield",cls="mmg")
     rows=[(f"第{n}条",CL.AP_TITLES[n][0],AP_CORE[n],f"creedsx.html#ap-a{n}") for n in range(1,13)]
-    x+=L3("mr-ap","使徒信经核心速记 · 12 条",core_tbl(rows),"scroll",cls="mmg")
+    x+=L3("mr-ap","使徒信经核心速记 · 12 条",core_tbl(rows,why=False),"scroll",cls="mmg")
     rows=[(f"第{n}节",CL.NI_TITLES[n][0],NI_CORE[n],f"creedsx.html#ni-a{n}") for n in range(1,14)]
-    x+=L3("mr-ni","尼西亚信经核心速记 · 13 节",core_tbl(rows),"scroll",cls="mmg")
+    x+=L3("mr-ni","尼西亚信经核心速记 · 13 节",core_tbl(rows,why=False),"scroll",cls="mmg")
     rows=[(f"第{lo}–{hi}点" if hi!=lo else f"第{lo}点",nm,AT_CORE[g],f"creedsx.html#at-g{g}") for g,(nm,lo,hi,gi) in CL.AT_GROUPS.items()]
-    x+=L3("mr-at","亚他那修信经核心速记 · 11 组",core_tbl(rows),"scroll",cls="mmg")
-    return L2("mem-core","11.7","核心速记总表：核心一句 · 记忆钩 · 为何重要",x)
+    x+=L3("mr-at","亚他那修信经核心速记 · 11 组",core_tbl(rows,why=False),"scroll",cls="mmg")
+    return L2("mem-core","11.7","核心速记总表：核心一句 · 记忆钩",x)
 def part_mem():
     b = L2("mem-mn","11.1","口诀",
       '<div class="mn reveal"><p><b class="hl-s">HC：罪 · 救 · 谢</b>——主日 1–4 / 5–31 / 32–52；问1 的安慰串起全书。</p>'
@@ -177,4 +177,17 @@ def part_mem():
     b += L2("mem-qa","11.x","读敬拜手册时常有的 7 个疑问",
       '<p>每个疑问用一两句回答，并指到原文；先读回答，再点链接读条文。</p><div class="qa7">'
       + "".join(f'<div class="qa reveal"><h5>❓ {q}</h5><p>{a}</p></div>' for q,a in qa) + '</div>')
+    import notes, json as _j
+    def _t(k):
+        d=_j.load(open(f"data/{k}.json",encoding="utf-8"))
+        if k=="hc": return "".join(b["x"] for l in d["lds"] for b in l["blocks"] if b["t"] in("p","h4"))
+        if k=="bc": return "".join(b["x"] for a in d["articles"] for b in a["blocks"] if b["t"] in("p","h4"))
+        return "".join(b["x"] for h in d["heads"] for i in h["items"] for b in i["blocks"] if b["t"] in("p","h4"))
+    docs=[("海德堡",_t("hc")),("比利时",_t("bc")),("多特",_t("dort"))]
+    terms=[("基督","d-chr"),("恩典","d-sal"),("信心","d-sal"),("圣灵","d-sp"),("拣选","d-sal"),("教会","d-ch"),("律法","d-ch"),("安慰","d-sal"),("圣约","d-cov"),("感恩","d-sal")]
+    b += L2("mem-marks","11.x","核心词频与笔记标记速查",
+      '<p>三份文件里反复出现的词，就是它们的重心。下图按 CCI 中文原文逐字计数（构建时统计）：<b class="mk-k d-chr">基督</b>在三份文件里都居首。</p>'
+      + notes.wfreq(docs,terms)
+      + key("读图：海德堡的高频词是<b>安慰</b>与<b>感恩</b>（经验与生活），多特的高频词是<b>拣选</b>与<b>恩典</b>（救恩的源头），比利时信条覆盖最广（教会、律法、圣灵）。")
+      + table(["标记","样式","用于","怎样记"],notes.MARK_TABLE))
     return L1("memory","十一","记忆与自测","brain","口诀、导图、翻卡、自测与 52 周计划。", b)
