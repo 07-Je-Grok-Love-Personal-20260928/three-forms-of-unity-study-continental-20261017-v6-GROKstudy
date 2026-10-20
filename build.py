@@ -45,7 +45,7 @@ def toc_html(cur):
             if not kids: return f'<li class="t2"><a href="{f}#{sid}">{st}</a></li>'
             return (f'<li class="t2 has closed"><div class="t2r"><a href="{f}#{sid}">{st}</a><button class="tg2" type="button" aria-label="展开或收起三级标题" aria-expanded="false">▾</button></div><ol>'
                     +"".join(f'<li class="t3"><a href="{f}#{i}">{tt}</a></li>' for i,tt in kids)+"</ol></li>")
-        t+=f'<li class="t1{" cur" if page==cur else ""}" data-page="{page}"><div class="t1r"><a href="{f}#{id}">{title}</a><button class="tg" type="button" aria-label="展开或收起" aria-expanded="true">▾</button></div><ol>'+"".join(sub(s) for s in subs)+"</ol></li>"
+        t+=f'<li class="t1{" cur" if page==cur else " closed"}" data-page="{page}"><div class="t1r"><a href="{f}#{id}">{title}</a><button class="tg" type="button" aria-label="展开或收起" aria-expanded="{"true" if page==cur else "false"}">▾</button></div><ol>'+"".join(sub(s) for s in subs)+"</ol></li>"
     return t+"</ol></nav>"
 def tabs(cur):
     return '<nav class="ptabs" aria-label="页面导航">'+"".join(f'<a href="{f}"{" class=on aria-current=page" if k==cur else ""}>{t}</a>' for k,f,t,_ in PAGES)+'</nav>'
@@ -60,9 +60,9 @@ def page(cur,body):
     n={k:len(re.findall(r'<section class="l2',h)) for k,h in BODY.items()}
     title=LABEL[cur]+" · "+SITE if cur!="index" else "三项联合信条 · 欧陆改革宗深读（比利时信条·海德堡要理问答·多特信经）"
     desc=DESC.get(cur) or re.sub(r'<[^>]+>','',re.search(r'<p class="lead">(.*?)</p>',body).group(1))+" "+SITE+"。"
-    return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} {V}</title><meta name="description" content="{H.escape(desc[:150])}"><meta name="theme-color" content="#070d22"><script>try{{var s=document.documentElement.style,a=+localStorage.getItem("tfu1.tw"),m=+localStorage.getItem("tfu1.twm"),w=innerWidth;if(a>=220&&a<=Math.min(680,w*.6))s.setProperty("--tw",a+"px");if(m>=240&&m<=Math.min(560,w*.94))s.setProperty("--twm",m+"px")}}catch(e){{}}</script><link rel="stylesheet" href="assets/styles.css?v={V}"></head><body data-page="{cur}" data-total="{n.get(cur,0)}">
+    return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} {V}</title><meta name="description" content="{H.escape(desc[:150])}"><meta name="theme-color" content="#070d22"><script>try{{var de=document.documentElement;de.classList.add("jsok");if(localStorage.getItem("mk.off")==="1")de.classList.add("mkoff");var s=de.style,a=+localStorage.getItem("tfu1.tw"),m=+localStorage.getItem("tfu1.twm"),w=innerWidth;if(a>=220&&a<=Math.min(680,w*.6))s.setProperty("--tw",a+"px");if(m>=240&&m<=Math.min(560,w*.94))s.setProperty("--twm",m+"px")}}catch(e){{}}</script><link rel="stylesheet" href="assets/styles.css?v={V}"></head><body data-page="{cur}" data-total="{n.get(cur,0)}">
 <div id="prog"></div>{toc_html(cur)}<div id="tocgrip" role="separator" aria-orientation="vertical" aria-label="拖动调整目录宽度（左右方向键微调，双击还原）" title="拖动调整目录宽度；双击还原" tabindex="0"></div><button id="tocbtn" class="fab" aria-label="显示目录" aria-controls="toc" type="button">☰ 目录</button>
-<main id="main">{tabs(cur)}{'' if cur=='index' else f'<p class="readchip">本页已读 <b id="pgread">0</b> / {n.get(cur,0)} 个小节（仅存于本机浏览器）</p>'}{'<div class="secbar"><b>🎯 阅读建议</b><span>先读彩色的核心、重点、难点；标有“辅助”的区块默认折叠，需要时再展开。</span><button class="btn ghost" type="button" data-secall="open">展开全部辅助</button><button class="btn ghost" type="button" data-secall="close">收起全部辅助</button></div>' if 'class="secd"' in body else ''}{body}{pager(cur)}<footer class="foot"><p>{SITE} · <b>{V}</b></p><p>以圣经为最高权威；信条与信经为从属标准。三项联合信条与三大信经原文取自 <a href="https://ccifellowship.org/books/book-of-praise" target="_blank" rel="noopener">CCI《赞美手册》中文版</a>。姊妹站：<a href="{CREEDS_SITE}" target="_blank" rel="noopener">三大公教会信经 · 欧陆改革宗深读</a>。</p></footer></main>
+<main id="main">{tabs(cur)}{'' if cur=='index' else f'<p class="readchip">本页已读 <b id="pgread">0</b> / {n.get(cur,0)} 个小节</p>'}{'<div class="secbar"><b>🎯 阅读建议</b><span>先读彩色标记；“辅助”区块默认折叠。</span><button class="btn ghost" type="button" data-secall="open">展开全部辅助</button><button class="btn ghost" type="button" data-secall="close">收起全部辅助</button></div>' if 'class="secd"' in body else ''}{body}{pager(cur)}<footer class="foot"><p>{SITE} · <b>{V}</b></p><p>以圣经为最高权威；信条与信经为从属标准。三项联合信条与三大信经原文取自 <a href="https://ccifellowship.org/books/book-of-praise" target="_blank" rel="noopener">CCI《赞美手册》中文版</a>。姊妹站：<a href="{CREEDS_SITE}" target="_blank" rel="noopener">三大公教会信经 · 欧陆改革宗深读</a>。</p></footer></main>
 <script>window.TEC={json.dumps({"v":V,"pages":[{"k":k,"f":f,"t":t,"n":n.get(k,0)} for k,f,t,_ in PAGES[1:]]},ensure_ascii=False)}</script>
 <script src="assets/app.js?v={V}" defer></script></body></html>'''
 def index_body():
@@ -90,8 +90,17 @@ def index_body():
 BODY["index"]=index_body()
 core.CUR["f"]="index.html"
 import own
+import notes,trim
+DEEP={"bible","hc","bc","dort","compare","westminster","memory"}; RECITE={"creedsx"}
+MKS={};CUT={}
 for k,f,_,_ in PAGES:
-    h=own.mark(rewrite(k,BODY[k])); open(f,"w",encoding="utf-8").write(page(k,h))
+    h=own.mark(rewrite(k,BODY[k]))
+    h,c=trim.cut(k,h); CUT[k]=c
+    out=page(k,h)
+    out,st=notes.apply(out,deep=k in DEEP,recite=k in RECITE); MKS[k]=st
+    open(f,"w",encoding="utf-8").write(out)
+trim.check()
+print("marks",{k:v for k,v in MKS.items() if v}); print("trim chars",CUT,sum(CUT.values()))
 own.check()
 if UNRES: print("WARN unresolved links:",sorted(set(UNRES))[:40],len(UNRES))
 print("built",[(f,round(len(open(f,encoding="utf-8").read())/1024)) for _,f,_,_ in PAGES])
