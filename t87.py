@@ -104,6 +104,8 @@ BAR = ('<div class="rxbar" role="group" aria-label="背诵版折叠"><b>🎙️ 
 THEMES = [("night", "🌌", "深夜星空", "#070d22"), ("dawn", "🌅", "晨光暖白", "#f7f1e6"), ("jade", "🏞️", "青绿山水", "#031c1b"), ("grape", "🍇", "葡萄紫韵", "#150b26")]
 INIT = ('<script>try{var T=localStorage.getItem("ui.theme");if(T&&/^(night|dawn|jade|grape)$/.test(T)){document.documentElement.setAttribute("data-theme",T);'
         'var M={night:"#070d22",dawn:"#f7f1e6",jade:"#031c1b",grape:"#150b26"};document.querySelector(\'meta[name="theme-color"]\').setAttribute("content",M[T])}}catch(e){}</script>')
+THBAR = ('<div class="thbar" role="group" aria-label="主题配色"><span>🎨 主题</span>' + "".join(
+    f'<button type="button" role="menuitemradio" data-theme-set="{k}" style="--sw:{c}" title="{n}"><i></i>{e}<b>{n}</b></button>' for k, e, n, c in THEMES) + '</div>')
 def switcher():
     return ('<div id="thm"><button id="thmb" class="fab2" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="thmm" title="切换主题配色">🎨<span>主题</span></button>'
             '<div id="thmm" role="menu" aria-label="主题配色">' + "".join(
@@ -125,6 +127,7 @@ def post(h, fold=False):
             k = h.find('<section class="l1"')
             h = h[:k] + BAR + h[k:]
     h = h.replace('<button id="tocbtn"', switcher() + '<button id="tocbtn"', 1)
+    h = h.replace('<main id="main">', '<main id="main">' + THBAR, 1)
     return h
 
 # ===== D · 图标记忆地图 + 问答结构图 =====
