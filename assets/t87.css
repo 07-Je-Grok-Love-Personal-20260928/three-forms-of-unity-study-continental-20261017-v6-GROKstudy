@@ -132,3 +132,7 @@ html[data-theme=dawn] .core1{background:#fff6dc}
 html.coreonly main section.l2>*:not(h3):not(.core1){display:none}
 html.coreonly main section.l2{padding-bottom:4px;margin-bottom:8px;content-visibility:visible;contain-intrinsic-size:none}
 html.coreonly main section.l2:not(:has(.core1)){display:none}
+/* t88 · 首页步骤序号：大字 ≥3:1（WCAG AA 大字） */
+.sno{color:rgba(var(--A),.75)}html[data-theme=dawn] .sno{color:#8a5a00}
+/* t88 · 晨光主题：内联浅色强调字压暗到 AA */
+html[data-theme=dawn] main b[style="color:#5aa9e6"]{color:#1d5f96!important}html[data-theme=dawn] main b[style="color:#81b29a"]{color:#2f6b4f!important}html[data-theme=dawn] main b[style="color:#d4af37"]{color:#7a4f00!important}html[data-theme=dawn] main b[style="color:#e07a5f"]{color:#a8412a!important}
