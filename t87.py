@@ -68,7 +68,7 @@ def _toc(nav):
     out = []; last = 0
     for m in re.finditer(r'<a href="([^"#]*)#([^"]+)">(.*?)</a>', nav):
         lv = lvl_of(m.start())
-        out.append(nav[last:m.start()]); out.append(f'<a href="{m.group(1)}#{m.group(2)}">{te(emo(m.group(2), m.group(3), lv))}{m.group(3)}</a>'); last = m.end()
+        out.append(nav[last:m.start()]); out.append(f'<a href="{m.group(1)}#{m.group(2)}" data-e="{emo(m.group(2), m.group(3), lv)}">{m.group(3)}</a>'); last = m.end()  # t88：图标用 ::before 渲染，目录少约 490 个节点
     out.append(nav[last:])
     return "".join(out).replace('href="index.html">🏠 首页', 'href="index.html">' + te("🏠") + '首页')
 
@@ -90,10 +90,10 @@ def _qa(h):
 def _fold(h):
     def rf(m):
         n = m.group(0).count('class="rf1"')
-        return f'<details class="rfx"><summary><span class="rxs">📖 经文参考</span><small>{n} 条 · 点开</small></summary>{m.group(0)}</details>'
+        return f'<details class="rfx"><summary>📖 经文参考 · {n} 条</summary>{m.group(0)}</details>'
     h = re.sub(r'<div class="refs2" role="list" aria-label="经文参考">.*?</div>', rf, h, flags=re.S)
     h = re.sub(r'<p class="src">((?:(?!</p>).)*?class="srcl"(?:(?!</p>).)*)</p>',
-               lambda m: f'<details class="rfx rsrc"><summary><span class="rxs">🔗 原文页 · 学习课程</span><small>点开</small></summary><p class="src">{m.group(1)}</p></details>', h, flags=re.S)
+               lambda m: f'<details class="rfx rsrc"><summary>🔗 原文页 · 学习课程</summary><p class="src">{m.group(1)}</p></details>', h, flags=re.S)
     h = re.sub(r'<div class="cws ([^"]*)">(.*?</div>)</div>',
                lambda m: f'<details class="rfx rtip"><summary><span class="rxs">💡 学习提示</span><small>核心一句 · 记忆钩 · 为何重要</small></summary><div class="cws {m.group(1)}">{m.group(2)}</div></details>', h, flags=re.S)
     return h
@@ -129,7 +129,7 @@ def post(h, fold=False):
 
 # ===== D · 图标记忆地图 + 问答结构图 =====
 def _tile(href, e, num, title, col, i):
-    return f'<a class="icm-t" href="{href}" style="--c:{col};--i:{i}"><i aria-hidden="true">{e}</i><b>{num}</b><small>{H.escape(title)}</small></a>'
+    return f'<a class="icm-t" href="{href}" style="--c:{col};--i:{i}" data-e="{e}"><b>{num}</b><small>{H.escape(title)}</small></a>'
 def map_hc(pref):
     from c_titles import HC52, PART_COL
     t = "".join(_tile(f"{pref}{n}", HC[n], n, HC52[n][0], PART_COL[HC52[n][1]], n) for n in range(1, 53))

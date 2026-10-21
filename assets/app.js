@@ -20,14 +20,14 @@ function markRead(id){if(mine.indexOf(id)<0){mine.push(id);rd[PG]=mine;sv(KEY,rd
 function upd(){var c=$('#pgread');if(c)c.textContent=mine.length}
 mine.forEach(function(id){var a=links[id];if(a)a.classList.add('done')});
 var cur=null,band=new Set(),order=new Map();secs.forEach(function(x,i){order.set(x,i)});
-function setAct(id){if(id===cur)return;$$('#toc a.on').forEach(function(a){a.classList.remove('on')});var a=links[id];if(a){a.classList.add('on');var l1=a.closest('.t1');if(l1){l1.classList.remove('closed')}var t2=a.closest('.t2.has');if(t2){t2.classList.remove('closed');var g2=$('.tg2',t2);if(g2)g2.setAttribute('aria-expanded','true')}if(wide()&&!b.classList.contains('tochide')){var t=$('#toc');requestAnimationFrame(function(){var r2=a.getBoundingClientRect();if(r2.top<60||r2.bottom>innerHeight-40)t.scrollTop+=r2.top-innerHeight/2})}}cur=id}
+function setAct(id){if(id===cur)return;$$('#toc a.on').forEach(function(a){a.classList.remove('on')});var a=links[id];if(a){a.classList.add('on');/* t88：滚动时不再自动展开/收起目录分组（消除目录内的布局位移），只高亮可见的上级 */$$('#toc .onp').forEach(function(x){x.classList.remove('onp')});var vis=a,t2=a.closest('.t2.has');if(t2&&t2.classList.contains('closed')){var pa=$('.t2r>a',t2);if(pa){pa.classList.add('onp');vis=pa}}var l1=a.closest('.t1');if(l1&&l1.classList.contains('closed')){var pb=$('.t1r>a',l1);if(pb){pb.classList.add('onp');vis=pb}}a=vis;if(wide()&&!b.classList.contains('tochide')){var t=$('#toc');requestAnimationFrame(function(){var r2=a.getBoundingClientRect();if(r2.top<60||r2.bottom>innerHeight-40)t.scrollTop+=r2.top-innerHeight/2})}}cur=id}
 if('IntersectionObserver'in window){
  var ioA=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)band.add(e.target);else band.delete(e.target)});var best=null,bi=-1;band.forEach(function(x){var i=order.get(x);if(i>bi){bi=i;best=x}});if(best)setAct(best.id)},{rootMargin:'0px 0px -75% 0px'});
  var ioR=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){markRead(e.target.id);ioR.unobserve(e.target)}})},{rootMargin:'0px 0px -40% 0px'});
  secs.forEach(function(x){ioA.observe(x);if(x.classList.contains('l2'))ioR.observe(x)})}
 var p=$('#prog'),H=0,de=d.documentElement;function measure(){H=Math.max(1,de.scrollHeight-innerHeight)}measure();
 if('ResizeObserver'in window)new ResizeObserver(function(){measure();prog()}).observe(b);addEventListener('resize',measure,{passive:true});
-function prog(){if(p)p.style.transform='scaleX('+Math.min(1,scrollY/H).toFixed(4)+')'}
+var SDA=!rm&&window.CSS&&CSS.supports&&CSS.supports('animation-timeline: scroll()');function prog(){if(SDA)return;if(p)p.style.transform='scaleX('+Math.min(1,scrollY/H).toFixed(4)+')'}
 var tk=0;addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(function(){prog();tk=0})}},{passive:true});prog();upd();
 
 /* toc resize */

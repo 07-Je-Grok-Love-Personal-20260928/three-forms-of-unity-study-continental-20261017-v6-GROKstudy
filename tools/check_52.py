@@ -17,12 +17,12 @@ for f,pref in (('hc.html','hd-ld'),('hct.html','ld')):
     chk(f+' 正文',got)
     # 目录（任意页的目录都应含 52 个）
     toc={}
-    for m in re.finditer(r'<li class="t3"><a href="'+f+r'#'+pref+r'(\d+)">(?:<span class="te"[^>]*>[^<]*</span>)?[\d.]+ 主日\d+ · (.*?)</a>',h): toc[int(m.group(1))]=html.unescape(m.group(2))
+    for m in re.finditer(r'<li class="t3"><a href="'+f+r'#'+pref+r'(\d+)"(?: data-e="[^"]*")?>[\d.]+ 主日\d+ · (.*?)</a>',h): toc[int(m.group(1))]=html.unescape(m.group(2))
     chk(f+' 目录',toc)
 # 目录在其它页
 for f in ('index.html','memory.html','bc.html'):
     h=rd(f); toc={}
-    for m in re.finditer(r'<li class="t3"><a href="hc\.html#hd-ld(\d+)">(?:<span class="te"[^>]*>[^<]*</span>)?[\d.]+ 主日\d+ · (.*?)</a>',h): toc[int(m.group(1))]=html.unescape(m.group(2))
+    for m in re.finditer(r'<li class="t3"><a href="hc\.html#hd-ld(\d+)"(?: data-e="[^"]*")?>[\d.]+ 主日\d+ · (.*?)</a>',h): toc[int(m.group(1))]=html.unescape(m.group(2))
     chk(f+' 目录(hc)',toc)
 # 记忆页
 h=rd('memory.html'); got={}

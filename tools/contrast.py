@@ -29,7 +29,7 @@ with sync_playwright() as p:
             ctx=b.new_context(viewport={'width':1280,'height':900},reduced_motion='reduce')
             ctx.add_init_script(f"try{{localStorage.setItem('ui.theme','{th}')}}catch(e){{}}")
             pg=ctx.new_page(); pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(250)
-            pg.evaluate("s=>{const e=document.createElement('style');e.textContent=s;document.head.appendChild(e)}",'main section.l2,main section.l3{content-visibility:visible!important}')
+            pg.evaluate("s=>{const e=document.createElement('style');e.textContent=s;document.head.appendChild(e)}",'main section.l2,main section.l3,main figure,main .icm{content-visibility:visible!important}')
             r=pg.evaluate(JS,base); n+=r['n']; bad+=r['bad']; g+=r.get('grad',0)
             for k,v in r['ex'].items(): ex.setdefault(k,[0,v[1],v[2],f]); ex[k][0]+=v[0]
             ctx.close()

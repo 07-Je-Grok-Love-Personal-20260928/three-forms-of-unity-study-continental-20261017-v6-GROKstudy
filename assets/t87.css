@@ -15,8 +15,8 @@ html[data-theme=dawn] #toc{box-shadow:1px 0 0 rgba(176,124,18,.25)}
 html[data-theme=dawn] .fab{background:rgba(255,250,240,.9)}
 /* A · 记忆图标 */
 .te{display:inline-block;min-width:1.45em;margin-right:.28em;text-align:center;font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif;font-style:normal;font-weight:400;line-height:1;transform-origin:50% 60%}
-#toc a .te{font-size:.95em}
-#toc a:hover .te,#toc a.on .te{animation:tepop .5s cubic-bezier(.3,1.6,.5,1)}
+#toc a[data-e]::before{content:attr(data-e);display:inline-block;min-width:1.45em;margin-right:.28em;text-align:center;font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif;font-size:.95em;font-weight:400;line-height:1}
+#toc a.on[data-e]::before{animation:tepop .5s cubic-bezier(.3,1.6,.5,1)}
 h2>.te{font-size:.9em}h3>.te{font-size:.92em}.l3h>.te{font-size:.95em}
 @keyframes tepop{0%{transform:scale(.7) rotate(-12deg)}100%{transform:none}}
 /* B · 问答分色 */
@@ -57,7 +57,7 @@ html.thx body,html.thx #toc,html.thx #main{transition:background-color .35s,colo
 @media (max-width:520px){.fab2 span{display:none}#thm{bottom:66px}}
 /* D · 轻量动画（只用 transform/opacity） */
 .te.pulse{animation:tepop .6s both}
-@media (prefers-reduced-motion:reduce){#toc a .te,.te,details.rfx[open]>*:not(summary){animation:none!important}#thmm{transition:none}}
+@media (prefers-reduced-motion:reduce){#toc a::before,.te,details.rfx[open]>*:not(summary){animation:none!important}#thmm{transition:none}}
 @media print{#thm,.rxbar{display:none}details.rfx>*{display:block}}
 /* D · 图标记忆地图 / 问答结构图 */
 .icm,.qac{margin:16px 0 22px;padding:16px clamp(12px,2vw,20px);border-radius:18px;border:1px solid var(--gb);background:linear-gradient(135deg,rgba(var(--A),.08),rgba(var(--W),.02) 60%)}
@@ -69,7 +69,7 @@ html.thx body,html.thx #toc,html.thx #main{transition:background-color .35s,colo
 .icm-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
 .icm-t{position:relative;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:6px;align-items:center;min-width:0;padding:8px 9px;border-radius:12px;text-decoration:none;background:rgba(var(--W),.04);border:1px solid rgba(var(--W),.08);border-top:3px solid var(--c);transition:transform .2s,background .2s,box-shadow .2s}
 .icm-t:hover{transform:translateY(-3px);background:rgba(var(--W),.08);box-shadow:0 8px 20px rgba(0,0,0,.2)}
-.icm-t i{grid-row:1/3;font-style:normal;font-size:1.45rem;line-height:1;font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif}
+.icm-t::before{content:attr(data-e);grid-row:1/3;font-style:normal;font-size:1.45rem;line-height:1;font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif}
 .icm-t b{font-size:.78rem;color:var(--mut);font-weight:700;line-height:1.2}
 .icm-t small{font-size:.8rem;line-height:1.35;color:var(--tx);overflow-wrap:anywhere}
 .icm-n{margin:10px 0 0;font-size:.82rem;color:var(--mut)}
@@ -92,3 +92,17 @@ html.mkoff .mk-d{text-decoration:none}
 @media (prefers-reduced-motion:reduce){.js .icm.reveal .icm-t{opacity:1;transform:none;transition:none}}
 html[data-theme=dawn] .cwc{color:color-mix(in srgb,var(--cc) 50%,#140d02)}
 html[data-theme=dawn] .kchip,html[data-theme=dawn] .hchip{color:#3a2500}
+/* ===== t88 · 性能：只保留合成层动画（transform/opacity），去掉持续重绘 ===== */
+.js .l3.reveal.in{animation:none}
+.route{animation:none}.js .map.in .route{animation:drawr 2.2s ease-out backwards}
+.pt.hl circle{animation:none}
+.call.key::after{animation-iteration-count:1}
+.fab,.fab2,.rxbar,#thmm{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.fab,.fab2{background:rgba(var(--D),.94)}#thmm{background:rgba(var(--D),.98)}
+@media(min-width:1100px){#toc{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(180deg,rgba(var(--D),.93),rgba(var(--D),.86))}}
+#toc{contain:strict;overscroll-behavior:contain}
+main section.l3{content-visibility:auto;contain-intrinsic-size:auto 560px}
+main figure,main .icm{content-visibility:auto;contain-intrinsic-size:auto 460px}
+#toc a.onp{color:var(--gtx,var(--gold2));background:rgba(var(--A),.14);box-shadow:inset 3px 0 0 var(--gold)}
+@supports (animation-timeline: scroll()){#prog{width:100%!important;transform-origin:0 50%;animation:progx linear both;animation-timeline:scroll(root)}@keyframes progx{from{transform:scaleX(0)}to{transform:scaleX(1)}}}
+@media (prefers-reduced-motion:reduce){#prog{animation:none}}
