@@ -89,7 +89,7 @@ def index_body():
     return hero+prog+guide
 BODY["index"]=index_body()
 core.CUR["f"]="index.html"
-import own
+import own,t87
 import notes,trim
 DEEP={"bible","hc","bc","dort","compare","westminster","memory"}; RECITE={"creedsx"}
 MKS={};CUT={}
@@ -98,6 +98,7 @@ for k,f,_,_ in PAGES:
     h,c=trim.cut(k,h); CUT[k]=c
     out=page(k,h)
     out,st=notes.apply(out,deep=k in DEEP,recite=k in RECITE); MKS[k]=st
+    out=t87.post(out,fold=k in {"hct","bct","dtt","creedsx"})
     open(f,"w",encoding="utf-8").write(out)
 trim.check()
 print("marks",{k:v for k,v in MKS.items() if v}); print("trim chars",CUT,sum(CUT.values()))
