@@ -120,3 +120,15 @@ html:not(.jsok) .thbar{display:none}
 .thbar button:hover{transform:translateY(-1px);border-color:var(--gold)}
 .thbar button[aria-checked=true]{border-color:var(--gold);background:rgba(var(--A),.16);color:var(--gtx,var(--gold2));font-weight:700}
 @media(max-width:560px){.thbar b{display:none}.thbar button{padding:5px 9px}}
+/* t88 · 一句话核心（荧光底＋加粗＋实线下划；节号记忆钉）*/
+.core1{display:block;margin:4px 0 14px;padding:10px 14px;border-radius:12px;background:rgba(var(--A),.08);border-left:4px solid var(--gold);line-height:1.7}
+.core-n{display:inline-block;margin-right:8px;vertical-align:1px;font-style:normal;font:700 .78rem/1 ui-monospace,monospace;padding:4px 7px;border-radius:999px;background:var(--gold);color:#1a1405}
+.core-l{display:inline-block;margin-right:10px;font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--gtx,var(--gold2))}
+.mk-core{font-weight:700;color:var(--tx);background:linear-gradient(transparent 58%,rgba(var(--A),.32) 58%);text-decoration:underline solid var(--gold);text-decoration-thickness:2px;text-underline-offset:5px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+html.mkoff .mk-core{background:none;text-decoration:none}
+html[data-theme=dawn] .mk-core{background:linear-gradient(transparent 56%,#ffe08a 56%)}
+html[data-theme=dawn] .core1{background:#fff6dc}
+/* 只看核心：每节只留标题＋一句话核心 */
+html.coreonly main section.l2>*:not(h3):not(.core1){display:none}
+html.coreonly main section.l2{padding-bottom:4px;margin-bottom:8px}
+html.coreonly main section.l2:not(:has(.core1)){display:none}

@@ -177,6 +177,19 @@ def mark_years(h):
     body = re.sub('\x00(\\d+)\x00', lambda m: keep[int(m.group(1))], body)
     return h[:i] + body + h[j:], n[0]
 
+def add_cores(h, site):
+    """t88：每个深读 L2 小节标题下插入一句话核心（mk-core 标记 + 节号记忆钉）。"""
+    import t88core
+    D = t88core.TFU if site == "tfu" else t88core.TEC
+    def f(m):
+        sid, h3 = m.group(1), m.group(2)
+        c = D.get(sid)
+        if not c: return m.group(0)
+        num = re.search(r'<span class="n">([^<]+)</span>', h3)
+        peg = f'<i class="core-n">{num.group(1)}</i>' if num else ''
+        return (m.group(0) + f'<p class="core1">{peg}<span class="core-l">一句话核心</span><span class="mk-core">{c}</span></p>')
+    return re.sub(r'<section class="l2[^"]*" id="([^"]+)"><h3>(.*?)</h3>', f, h, flags=re.S)
+
 def extras(h, page, site):
     """site: 'tfu' 或 'tec'。在页面第一个 L2 之前插入图标地图/结构图；深读页加年份虚线标记。"""
     blk = ""
@@ -193,8 +206,14 @@ def extras(h, page, site):
     if blk:
         k = h.find('<section class="l2', h.find('<main'))
         h = h[:k] + blk + h[k:]
+    h = add_cores(h, site)
+    import t88edit
+    h, _ne = t88edit.apply(h, page, site)
     n = 0
     if 'class="mklegend"' in h:
         h, n = mark_years(h)
         h = h.replace('<span class="lg lg-def">定义框</span>', '<span class="mk-d">1563 年</span><span class="lg lg-def">定义框</span>', 1)
+        if 'class="core1"' in h:
+            h = h.replace('<span class="mk-k d-chr">关键术语</span>', '<span class="mk-core">一句话核心</span><span class="mk-k d-chr">关键术语</span>', 1)
+            h = h.replace('data-mktog aria-pressed="true">标记：开</button>', 'data-mktog aria-pressed="true">标记：开</button><button type="button" class="btn ghost mktog" data-coreonly aria-pressed="false">只看核心：关</button>', 1)
     return h, n

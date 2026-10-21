@@ -10,3 +10,6 @@ if(box&&btn){btn.addEventListener('click',function(e){e.stopPropagation();var o=
  d.addEventListener('keydown',function(e){if(e.key==='Escape'){box.classList.remove('open');btn.setAttribute('aria-expanded','false')}});mark()}
 [].forEach.call(d.querySelectorAll('[data-rx]'),function(b){b.addEventListener('click',function(){var o=b.getAttribute('data-rx')==='open';[].forEach.call(d.querySelectorAll('details.rfx'),function(x){x.open=o})})});
 })();
+;(function(){var de=document.documentElement,K='ui.core';try{if(localStorage.getItem(K)==='1')de.classList.add('coreonly')}catch(x){}
+function paint(){var on=de.classList.contains('coreonly');document.querySelectorAll('[data-coreonly]').forEach(function(b){b.setAttribute('aria-pressed',String(on));b.textContent=on?'只看核心：开':'只看核心：关'})}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-coreonly]');if(!b)return;de.classList.toggle('coreonly');try{localStorage.setItem(K,de.classList.contains('coreonly')?'1':'0')}catch(x){}paint();b.scrollIntoView({block:'center'})});paint()})();
