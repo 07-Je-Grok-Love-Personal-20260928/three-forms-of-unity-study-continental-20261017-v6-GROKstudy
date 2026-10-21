@@ -9,7 +9,8 @@ html[data-theme=dawn] body{--bgimg:radial-gradient(1100px 700px at 85% -10%,#ffe
 /* 浅色主题：SVG 图示保持夜色底（图内配色为深底设计），其内文字不压暗 */
 html[data-theme=dawn] figure,html[data-theme=dawn] .mapw,html[data-theme=dawn] .ring2{--W:255,255,255;--D:10,18,44;--hi:#fff;--dk:0%;--tx:#e8ecf6;--mut:#b9c3dc;--gold2:#f3d98b;--A:212,175,55;--A2:243,217,139}
 html[data-theme=dawn] figure{background:#0e1a3c;border-radius:16px;color:#e8ecf6}
-html[data-theme=dawn] .btn:not(.ghost),html[data-theme=dawn] #toc a.on{--dk:0%;color:#17130b}
+html[data-theme=dawn] .btn:not(.ghost){--dk:0%;color:#17130b}
+html[data-theme=dawn] #toc a.on,html[data-theme=dawn] #toc a.on *{color:#2a1a00!important}html[data-theme=dawn] #toc a.on{background:linear-gradient(90deg,#f1cf78,#f8e4b0)!important}
 html[data-theme=dawn] #toc{box-shadow:1px 0 0 rgba(176,124,18,.25)}
 html[data-theme=dawn] .fab{background:rgba(255,250,240,.9)}
 /* A · 记忆图标 */
@@ -58,3 +59,34 @@ html.thx body,html.thx #toc,html.thx #main{transition:background-color .35s,colo
 .te.pulse{animation:tepop .6s both}
 @media (prefers-reduced-motion:reduce){#toc a .te,.te,details.rfx[open]>*:not(summary){animation:none!important}#thmm{transition:none}}
 @media print{#thm,.rxbar{display:none}details.rfx>*{display:block}}
+/* D · 图标记忆地图 / 问答结构图 */
+.icm,.qac{margin:16px 0 22px;padding:16px clamp(12px,2vw,20px);border-radius:18px;border:1px solid var(--gb);background:linear-gradient(135deg,rgba(var(--A),.08),rgba(var(--W),.02) 60%)}
+.icm-h,.qac-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;margin-bottom:10px}
+.icm-h>b,.qac-h>b{color:var(--gold2);font-size:1.02rem}
+.icm-k{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:.8rem;color:var(--mut)}
+.icm-k span{display:inline-flex;align-items:center;gap:5px}.icm-k i{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.icm-s{margin:12px 0 6px;font-size:.92rem;color:var(--tx)}
+.icm-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.icm-t{position:relative;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:6px;align-items:center;min-width:0;padding:8px 9px;border-radius:12px;text-decoration:none;background:rgba(var(--W),.04);border:1px solid rgba(var(--W),.08);border-top:3px solid var(--c);transition:transform .2s,background .2s,box-shadow .2s}
+.icm-t:hover{transform:translateY(-3px);background:rgba(var(--W),.08);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.icm-t i{grid-row:1/3;font-style:normal;font-size:1.45rem;line-height:1;font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif}
+.icm-t b{font-size:.78rem;color:var(--mut);font-weight:700;line-height:1.2}
+.icm-t small{font-size:.8rem;line-height:1.35;color:var(--tx);overflow-wrap:anywhere}
+.icm-n{margin:10px 0 0;font-size:.82rem;color:var(--mut)}
+.js .icm.reveal .icm-t{opacity:0;transform:translateY(8px) scale(.96);transition:opacity .4s calc(var(--i)*12ms),transform .4s calc(var(--i)*12ms) cubic-bezier(.2,.8,.2,1)}
+.js .icm.reveal.in .icm-t{opacity:1;transform:none}
+.js .icm.reveal.in .icm-t:hover{transform:translateY(-3px);transition-delay:0s}
+.qac-f{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.qac-s{flex:1 1 130px;min-width:0;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(var(--W),.04);border-left:4px solid var(--c)}
+.qac-s.q{--c:var(--gold)}.qac-s.a{--c:var(--abd)}.qac-s.r{--c:#5aa9e6}.qac-s.l{--c:#a78bfa}
+.qac-s i{grid-row:1/3;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--c);color:#120c02;font:800 .85rem system-ui,sans-serif;font-style:normal}
+.qac-s b{color:var(--tx)}.qac-s small{font-size:.76rem;color:var(--mut)}
+.qac-a{align-self:center;color:var(--gold2);font-size:1.1rem}
+.qac-n{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.qac-n span{padding:4px 12px;border-radius:999px;background:rgba(var(--A),.12);font-size:.85rem;color:var(--mut)}.qac-n b{color:var(--gold2);margin-right:3px;font-size:1.05rem}
+@media (max-width:560px){.qac-a{display:none}.icm-g{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}}
+/* E · 年份：蓝色虚线 */
+.mk-d{text-decoration:underline dashed #6cb8ff;text-decoration-thickness:2px;text-underline-offset:4px;font-variant-numeric:tabular-nums}
+html[data-theme=dawn] .mk-d{text-decoration-color:#2a6fb0}
+html.mkoff .mk-d{text-decoration:none}
+@media (prefers-reduced-motion:reduce){.js .icm.reveal .icm-t{opacity:1;transform:none;transition:none}}

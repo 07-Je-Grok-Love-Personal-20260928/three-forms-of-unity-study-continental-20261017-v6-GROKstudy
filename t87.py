@@ -83,7 +83,7 @@ def _body(h):
     return h
 
 def _qa(h):
-    h = re.sub(r'<h4 class="qh">(\s*\d+\.\s*问：)', r'<h4 class="qh qq">\1', h)
+    h = re.sub(r'<h4 class="qh">(\s*\d+[.．]\s*问[：:])', r'<h4 class="qh qq">\1', h)
     h = re.sub(r'<p class="ex">(答：)', r'<p class="ex qa">\1', h)
     return h
 
@@ -126,3 +126,72 @@ def post(h, fold=False):
             h = h[:k] + BAR + h[k:]
     h = h.replace('<button id="tocbtn"', switcher() + '<button id="tocbtn"', 1)
     return h
+
+# ===== D · 图标记忆地图 + 问答结构图 =====
+def _tile(href, e, num, title, col, i):
+    return f'<a class="icm-t" href="{href}" style="--c:{col};--i:{i}"><i aria-hidden="true">{e}</i><b>{num}</b><small>{H.escape(title)}</small></a>'
+def map_hc(pref):
+    from c_titles import HC52, PART_COL
+    t = "".join(_tile(f"{pref}{n}", HC[n], n, HC52[n][0], PART_COL[HC52[n][1]], n) for n in range(1, 53))
+    key = "".join(f'<span style="--c:{c}"><i></i>{k}</span>' for k, c in PART_COL.items())
+    return f'<div class="icm reveal"><div class="icm-h"><b>🧩 图标记忆地图 · 52 主日一图看完</b><span class="icm-k">{key}</span></div><div class="icm-g">{t}</div><p class="icm-n">先记图标，再记标题：看到 ❤️ 想到“唯一的安慰”，看到 🪞 想到“律法是镜子”。点任一格跳到该主日。图标与主日标题为本站学习辅助。</p></div>'
+def map_bc(pref):
+    from c_titles import BC37, BC_GROUPS
+    col = {n: c for _, _, c, lo, hi, _ in BC_GROUPS for n in range(lo, hi + 1)}
+    t = "".join(_tile(f"{pref}{n}", BC[n], n, BC37[n][0], col[n], n) for n in range(1, 38))
+    key = "".join(f'<span style="--c:{c}"><i></i>{g}</span>' for _, g, c, _, _, _ in BC_GROUPS)
+    return f'<div class="icm reveal"><div class="icm-h"><b>🧩 图标记忆地图 · 比利时信条 37 条</b><span class="icm-k">{key}</span></div><div class="icm-g">{t}</div><p class="icm-n">七种颜色＝七群；图标是记忆钩（本站学习辅助）。点任一格跳到该条。</p></div>'
+def map_creeds(ap, ni, at):
+    import creedlib as CL
+    a = "".join(_tile(f"{ap}{n}", AP[n], n, CL.AP_TITLES[n][0], "#5aa9e6", n) for n in range(1, 13))
+    b = "".join(_tile(f"{ni}{n}", NI[n], n, CL.NI_TITLES[n][0], "#d4af37", n) for n in range(1, 14))
+    c = "".join(_tile(f"{at}{k}", AT[k], f"{v[1]}–{v[2]}" if v[1] != v[2] else v[1], v[0], "#81b29a", i) for i, (k, v) in enumerate(CL.AT_GROUPS.items(), 1))
+    return (f'<div class="icm reveal"><div class="icm-h"><b>🧩 图标记忆地图 · 三大信经</b><span class="icm-k"><span style="--c:#5aa9e6"><i></i>使徒 12 条</span><span style="--c:#d4af37"><i></i>尼西亚 13 节</span><span style="--c:#81b29a"><i></i>亚他那修 11 组</span></span></div>'
+            f'<h5 class="icm-s">🕊️ 使徒信经 · 洗礼的信经</h5><div class="icm-g">{a}</div><h5 class="icm-s">👑 尼西亚信经 · 会议的信经</h5><div class="icm-g">{b}</div><h5 class="icm-s">🛡️ 亚他那修信经 · 教学的信经</h5><div class="icm-g">{c}</div>'
+            '<p class="icm-n">一条一图：🌍 创造主 → 👑 独生子 → 👶 降生 → ✝️ 受难 → 🌅 复活 → ☁️ 升天 → ⚖️ 审判 → 🔥 圣灵 → ⛪ 教会 → 🕊️ 赦罪 → 🌱 复活 → ♾️ 永生。图标为本站学习辅助。</p></div>')
+def qa_chart(nq, nref):
+    return ('<div class="qac reveal" role="img" aria-label="问答结构图"><div class="qac-h"><b>🔎 问答结构图：每一问都是同一个形状</b></div><div class="qac-f">'
+            '<div class="qac-s q"><i>Q</i><b>问</b><small>金色左条 · 粗体</small></div><span class="qac-a">➜</span>'
+            '<div class="qac-s a"><i>A</i><b>答</b><small>绿色左条 · 背诵主体</small></div><span class="qac-a">➜</span>'
+            '<div class="qac-s r"><i>📖</i><b>经文参考</b><small>默认折叠 · 点开核对</small></div><span class="qac-a">➜</span>'
+            '<div class="qac-s l"><i>🔗</i><b>原文页 · 课程</b><small>默认折叠</small></div></div>'
+            f'<div class="qac-n"><span><b>{nq}</b>问</span><span><b>52</b>主日</span><span><b>{nref}</b>条经文参考</span><span><b>3</b>部分：罪 · 救 · 谢</span></div>'
+            '<p class="icm-n">背诵法：遮住答，只看问 → 说出答 → 点开 📖 核对出处。</p></div>')
+
+YEAR = re.compile(r'(?<![\d.:：\-–])((?:1[0-9]{3}|20[0-2][0-9])(?:[–-](?:1[0-9]{3}|[0-9]{2}))?\s?年?|[3-9][0-9]{2}\s?年)(?![\d:：])')
+PROT = re.compile(r'<(script|style|svg|nav|a|h[1-6]|button|summary|th|code|title|select|label|textarea)\b[^>]*>.*?</\1>', re.S)
+def mark_years(h):
+    i = h.find('<main'); j = h.rfind('</main>')
+    body = h[i:j]; keep = []
+    def stash(m): keep.append(m.group(0)); return f'\x00{len(keep)-1}\x00'
+    body = PROT.sub(stash, body)
+    n = [0]
+    def sub_txt(seg):
+        if seg.startswith('<'): return seg
+        def y(m): n[0] += 1; return f'<span class="mk-d">{m.group(1)}</span>'
+        return YEAR.sub(y, seg)
+    body = "".join(sub_txt(x) for x in re.split(r'(<[^>]+>)', body))
+    body = re.sub('\x00(\\d+)\x00', lambda m: keep[int(m.group(1))], body)
+    return h[:i] + body + h[j:], n[0]
+
+def extras(h, page, site):
+    """site: 'tfu' 或 'tec'。在页面第一个 L2 之前插入图标地图/结构图；深读页加年份虚线标记。"""
+    blk = ""
+    if site == "tfu":
+        if page == "hct": blk = qa_chart(h.count('class="qh qq"'), h.count('class="rf1"')) + map_hc("#ld")
+        elif page == "bct": blk = map_bc("#bc-")
+        elif page == "creedsx": blk = map_creeds("#ap-a", "#ni-a", "#at-g")
+        elif page == "memory": blk = map_hc("hc.html#hd-ld") + map_bc("bc.html#bcd-a") + map_creeds("creedsx.html#ap-a", "creedsx.html#ni-a", "creedsx.html#at-g")
+    else:
+        if page == "hc": blk = qa_chart(h.count('class="qh qq"'), h.count('class="rf1"')) + map_hc("#ld")
+        elif page == "bc": blk = map_bc("#bc-")
+        elif page == "creeds": blk = map_creeds("#ap-a", "#ni-a", "#at-g")
+        elif page == "memory": blk = map_creeds("apostles.html#apx-", "nicene.html#nix-", "athanasian.html#atx-") + map_hc("hc.html#ld")
+    if blk:
+        k = h.find('<section class="l2', h.find('<main'))
+        h = h[:k] + blk + h[k:]
+    n = 0
+    if 'class="mklegend"' in h:
+        h, n = mark_years(h)
+        h = h.replace('<span class="lg lg-def">定义框</span>', '<span class="mk-d">1563 年</span><span class="lg lg-def">定义框</span>', 1)
+    return h, n

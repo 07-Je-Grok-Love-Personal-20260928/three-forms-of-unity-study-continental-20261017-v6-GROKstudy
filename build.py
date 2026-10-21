@@ -99,6 +99,7 @@ for k,f,_,_ in PAGES:
     out=page(k,h)
     out,st=notes.apply(out,deep=k in DEEP,recite=k in RECITE); MKS[k]=st
     out=t87.post(out,fold=k in {"hct","bct","dtt","creedsx"})
+    out,_ny=t87.extras(out,k,"tfu")
     open(f,"w",encoding="utf-8").write(out)
 trim.check()
 print("marks",{k:v for k,v in MKS.items() if v}); print("trim chars",CUT,sum(CUT.values()))
