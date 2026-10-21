@@ -27,6 +27,7 @@ with sync_playwright() as p:
     for f in pages:
         for w in W:
             ctx=b.new_context(viewport={'width':w,'height':900},java_script_enabled=not nojs,reduced_motion='reduce' if rm else 'no-preference')
+            if os.environ.get('THEME'): ctx.add_init_script("try{localStorage.setItem('ui.theme','%s')}catch(e){}"%os.environ['THEME'])
             pg=ctx.new_page(); errs=[]
             pg.on('pageerror',lambda e:errs.append(str(e))); pg.on('console',lambda m:errs.append(m.text) if m.type=='error' else None)
             pg.goto('file://'+os.path.abspath(f)); pg.wait_for_timeout(300); pg.evaluate("s=>{const e=document.createElement('style');e.textContent=s;document.head.appendChild(e)}",'main section.l2,main section.l3{content-visibility:visible!important}')  # v8：测量时强制渲染 content-visibility:auto 的区块
@@ -51,4 +52,4 @@ with sync_playwright() as p:
             if bad: fail+=1; print(tag,f,w,bad)
             ctx.close()
     b.close()
-print('QA',('nojs' if nojs else 'rm' if rm else 'normal'),'pages',len(pages),'widths',W,'fails',fail)
+print('QA',('nojs' if nojs else 'rm' if rm else 'normal'),'theme='+os.environ.get('THEME','night'),'open' if opn else 'collapsed','pages',len(pages),'widths',W,'fails',fail)
