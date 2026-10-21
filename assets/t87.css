@@ -130,5 +130,5 @@ html[data-theme=dawn] .mk-core{background:linear-gradient(transparent 56%,#ffe08
 html[data-theme=dawn] .core1{background:#fff6dc}
 /* 只看核心：每节只留标题＋一句话核心 */
 html.coreonly main section.l2>*:not(h3):not(.core1){display:none}
-html.coreonly main section.l2{padding-bottom:4px;margin-bottom:8px}
+html.coreonly main section.l2{padding-bottom:4px;margin-bottom:8px;content-visibility:visible;contain-intrinsic-size:none}
 html.coreonly main section.l2:not(:has(.core1)){display:none}
