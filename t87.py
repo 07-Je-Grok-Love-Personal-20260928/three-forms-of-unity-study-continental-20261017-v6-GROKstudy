@@ -134,7 +134,7 @@ def map_hc(pref):
     from c_titles import HC52, PART_COL
     t = "".join(_tile(f"{pref}{n}", HC[n], n, HC52[n][0], PART_COL[HC52[n][1]], n) for n in range(1, 53))
     key = "".join(f'<span style="--c:{c}"><i></i>{k}</span>' for k, c in PART_COL.items())
-    return f'<div class="icm reveal"><div class="icm-h"><b>🧩 图标记忆地图 · 52 主日一图看完</b><span class="icm-k">{key}</span></div><div class="icm-g">{t}</div><p class="icm-n">先记图标，再记标题：看到 ❤️ 想到“唯一的安慰”，看到 🪞 想到“律法是镜子”。点任一格跳到该主日。图标与主日标题为本站学习辅助。</p></div>'
+    return f'<div class="icm reveal"><div class="icm-h"><b>🧩 图标记忆地图 · 52 主日一图看完</b><span class="icm-k">{key}</span></div><div class="icm-g">{t}</div><p class="icm-n">先记图标，再记标题：看到 ❤️ 想到唯一的安慰，看到 🪞 想到律法这面镜子。点任一格跳到该主日。图标与主日标题为本站学习辅助。</p></div>'
 def map_bc(pref):
     from c_titles import BC37, BC_GROUPS
     col = {n: c for _, _, c, lo, hi, _ in BC_GROUPS for n in range(lo, hi + 1)}
