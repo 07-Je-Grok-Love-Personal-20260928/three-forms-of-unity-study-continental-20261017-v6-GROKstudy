@@ -17,7 +17,7 @@
 
 命名：仓库名只含主题（…-GROKstudy，以后不再改名）；Netlify / Surge 域名为“主题-日期-版本-grokser”（v10 起后缀按用户要求改回 grokser；这两处只能小写），每个版本一个新域名，旧域名继续在线。
 
-姊妹站（三大公教会信经）：https://three-ecumenical-creeds-study-continental-20261023-v14-grokser.surge.sh/
+姊妹站（三大公教会信经）：https://three-ecumenical-creeds-study-continental-20261023-v15-grokser.surge.sh/
 
 ## 发布（Releases）——随时恢复
 
@@ -25,7 +25,7 @@
 
 | 标签 | 说明 | 链接 |
 |---|---|---|
-| `v20261023-11` | v11 当前版本（2026-10-21 台北）：地图双层（概念图＋本地静态真实地图，无 CDN）、新史地地图、导航簇、历史文化背景块、标记加强 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261023-11 |
+| `v20261023-11` | v11 当前版本（2026-10-23 台北）：地图双层（概念图＋本地静态真实地图，无 CDN）、新史地地图、导航簇、历史文化背景块、标记加强 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261023-11 |
 | `v20261021-10` | v10（恢复点：t89 前的线上版本）（2026-10-21 台北）：性能（CLS≈0、去发光循环动画）、浅色主题原生图示、一键主题条、一句话核心与只看核心 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261021-10 |
 | `v20261021-9` | v9（恢复点：t88 前的线上版本 57c08e7，t88 未另打快照标签）（2026-10-21 台北）：记忆图标、干净背诵版、问答分色、四套主题 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261021-9 |
 | `v20261021-0` | 更新前快照（2026-10-21 台北）：t87 改动前的线上 main（e0772e0，与 v8 线上内容一致） | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261021-0 |

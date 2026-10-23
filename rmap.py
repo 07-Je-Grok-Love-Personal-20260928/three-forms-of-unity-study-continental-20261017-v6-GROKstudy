@@ -103,9 +103,10 @@ class Placer:
                 if s.free(b): s.add(b); return bx, by, an, d > r + 16
         return None
 # ---------- 真实地图（静态 SVG 文件） ----------
-def real_svg(spec, W=1000):
+def real_svg(spec, W=1000, fs=None):
+    """W=1000 桌面版；W=520 手机版（同一投影与纵横比，字号与标记按像素不变，缩到屏宽后仍可读）。"""
     P, sx, sy, H, land, lakes, riv = base(spec["bbox"], W, spec.get("fine", False))
-    fs = spec.get("fs", 19)
+    fs = fs or spec.get("fs", 19)
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="\'Noto Sans CJK SC\',\'PingFang SC\',\'Microsoft YaHei\',\'Source Han Sans SC\',sans-serif">',
          '<defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe6f5"/><stop offset="1" stop-color="#a9d0ea"/></linearGradient>',
          '<linearGradient id="ld" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf4e2"/><stop offset="1" stop-color="#efe2c0"/></linearGradient>']
@@ -250,11 +251,12 @@ def legend(spec):
     for i, m in enumerate(spec["markers"]):
         li.append(f'<li style="--c:{PAL[m.get("c", "blue")]};--t:{ink(PAL[m.get("c", "blue")])}" data-i="{i}" tabindex="0"><b class="rn">{i + 1}</b><span class="rmt"><b>{_h.escape(m["n"])}</b>{(" <i>" + _h.escape(m["en"]) + "</i>") if m.get("en") else ""} · <em>{_h.escape(m["y"])}</em>：{m["t"]}</span></li>')
     return f'<ol class="rm-leg">{"".join(li)}</ol>'
-def real_html(spec, svgW, svgH, hs, ver):
+def real_html(spec, svgW, svgH, hs, ver, hsm=None):
     t = _h.escape(spec["title"])
-    b = "".join(f'<button type="button" class="rm-hs" style="left:{x:.2f}%;top:{y:.2f}%" data-i="{i}" aria-label="{i + 1} {_h.escape(m["n"])}"></button>' for i, (m, (x, y)) in enumerate(hs))
+    hsm = hsm or hs
+    b = "".join(f'<button type="button" class="rm-hs" style="--x:{x:.2f}%;--y:{y:.2f}%;--mx:{mx:.2f}%;--my:{my:.2f}%" data-i="{i}" aria-label="{i + 1} {_h.escape(m["n"])}"></button>' for i, ((m, (x, y)), (_, (mx, my))) in enumerate(zip(hs, hsm)))
     return (f'<figure class="rmap"><div class="rmw"><div class="rmv"><div class="rm-in" style="aspect-ratio:{svgW}/{svgH}">'
-            f'<img src="assets/geo/{spec["id"]}.svg?v={ver}" width="{svgW}" height="{svgH}" loading="lazy" decoding="async" alt="{t}（真实地图：Natural Earth 海岸线与河流，标注 {len(hs)} 个地点）">{b}</div></div>'
+            f'<picture><source media="(max-width:700px)" srcset="assets/geo/{spec["id"]}-m.svg?v={ver}"><img src="assets/geo/{spec["id"]}.svg?v={ver}" width="{svgW}" height="{svgH}" loading="lazy" decoding="async" alt="{t}（真实地图：Natural Earth 海岸线与河流，标注 {len(hs)} 个地点）"></picture>{b}</div></div>'
             f'<button type="button" class="rm-go" aria-label="开启地图缩放与拖动">🔍 点按开启缩放 / 拖动</button>'
             f'<div class="rm-ctl"><button type="button" data-z="1" aria-label="放大">＋</button><button type="button" data-z="-1" aria-label="缩小">－</button><button type="button" data-z="0" aria-label="复位">⟲</button><button type="button" data-z="x" aria-label="结束缩放，恢复页面滚动">✕</button></div>'
             f'<div class="rm-tip" role="status" aria-live="polite"></div></div>'
@@ -270,7 +272,11 @@ def new_concept(spec):
     return f'<figure class="map in cmap">{concept_svg(spec)}<figcaption>{_h.escape(spec["title"])}（概念图：按经纬度投影的城市位置，不绘海岸线；编号与真实地图、下方列表一致；箭头为示意方向）</figcaption></figure>{st}'
 def build(spec, outdir, ver, concept_html=None):
     svg, W, H, hs = real_svg(spec)
+    for m in spec["markers"]: m.pop("_nolab", None)
+    svgm, _, _, hsm = real_svg(spec, 520, 16)
+    for m in spec["markers"]: m.pop("_nolab", None)
     os.makedirs(outdir, exist_ok=True)
     open(os.path.join(outdir, spec["id"] + ".svg"), "w").write(svg)
+    open(os.path.join(outdir, spec["id"] + "-m.svg"), "w").write(svgm)
     c = concept_html if concept_html is not None else new_concept(spec)
-    return pair(spec["id"], c, real_html(spec, W, H, hs, ver), spec["title"])
+    return pair(spec["id"], c, real_html(spec, W, H, hs, ver, hsm), spec["title"])

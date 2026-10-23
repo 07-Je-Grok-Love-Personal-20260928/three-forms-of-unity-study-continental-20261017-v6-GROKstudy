@@ -42,4 +42,5 @@ def apply(h, page, site):
         e = sec_end(h, HX["sid"]); h = h[:e] + hist89.html(HX) + h[e:]
     if "<body" in h and 'id="navc"' not in h:
         h = h.replace("</body>", NAV + "</body>", 1)
+    import t90; h = t90.apply(h, page, site)
     return h, n
