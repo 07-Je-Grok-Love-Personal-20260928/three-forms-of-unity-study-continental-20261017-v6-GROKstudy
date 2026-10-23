@@ -79,8 +79,8 @@ html[data-theme=dawn] html[data-theme=dawn] #navc button,html[data-theme=dawn] #
 .hxt span{position:absolute;transform:translateX(-50%);white-space:nowrap}.hxt span:first-child{transform:none}.hxt span:last-child{transform:translateX(-100%)}
 .hxl{list-style:none;margin:0;padding:0}
 .hxl li{padding:7px 0;border-top:1px dashed rgba(var(--A),.22);row-gap:3px;align-items:center}
-.hxy{font-variant-numeric:tabular-nums;font-size:.86rem;color:var(--c);filter:brightness(1.15);white-space:nowrap}
-html[data-theme=dawn] .hxy{filter:brightness(.62) saturate(1.3)}
+.hxy{font-variant-numeric:tabular-nums;font-size:.86rem;color:color-mix(in srgb,var(--c) 78%,#fff);white-space:nowrap}
+html[data-theme=dawn] .hxy{color:color-mix(in srgb,var(--c) 42%,#1a1206)}
 .hxk{position:relative;height:10px;border-radius:5px;background:rgba(var(--A),.12)}
 .hxk i{position:absolute;top:0;bottom:0;min-width:8px;border-radius:5px;background:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 60%,transparent);transform-origin:left center}
 .jsok .hx:not(.hxon) .hxk i{transform:scaleX(0)}
@@ -110,3 +110,4 @@ html[data-theme=dawn]:not(.mkoff) .mk-ref{background:rgba(185,131,20,.14)}
 #navc [hidden]{display:none}
 #navc .nv-t{transition:transform .35s cubic-bezier(.3,1.4,.5,1)}#navc.open .nv-t,#navc:hover .nv-t{transform:rotate(-35deg)}
 @media (prefers-reduced-motion:reduce){#navc .nv-t{transition:none}}
+.mapx figure.map,.mapx figure.rmap{content-visibility:visible;contain-intrinsic-size:none}
