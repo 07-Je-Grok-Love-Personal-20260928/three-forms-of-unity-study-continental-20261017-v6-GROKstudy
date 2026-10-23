@@ -1,18 +1,18 @@
 # 三项联合信条 · 欧陆改革宗深读
 
-**版本标签：three-forms-of-unity-study-continental-20261023-v11-GROKstudy**（页脚版本 v20261023-11）
+**版本标签：three-forms-of-unity-study-continental-20261023-v12-GROKstudy**（页脚版本 v20261023-12）
 
 比利时信条（BC）、海德堡要理问答（HC）、多特信经（Dort）的中文多页学习站：先从整本圣经与圣约看，再逐条深读，并附比较、签署书、威斯敏斯特对照、背诵与自测。
 
 **三项联合信条与三大信经原文，以及全站中文引号引文，均逐字取自 [CCI《赞美手册》中文版](https://ccifellowship.org/books/book-of-praise)**（构建时由程序核对）。CCI 没有的内容，用《中国改革宗教会敬拜手册》2015 版（用户提供的 PDF）补充，逐字摘引并标明“出自《中国改革宗教会敬拜手册》2015 版 第 N 页”（tools/verify_pdf.py 核对）；两者都没有的（如多特信经的序言与结语）本站不补，见“来源”页。
 
-## 当前版本链接（v11）
+## 当前版本链接（v12）
 
 | 部署 | 地址 |
 |---|---|
 | GitHub Pages | https://07-je-grok-love-personal-20260928.github.io/three-forms-of-unity-study-continental-GROKstudy/ |
-| Netlify | https://three-forms-of-unity-study-continental-20261023-v11-grokser.netlify.app/ |
-| Surge | https://three-forms-of-unity-study-continental-20261023-v11-grokser.surge.sh/ |
+| Netlify | https://three-forms-of-unity-study-continental-20261023-v12-grokser.netlify.app/ |
+| Surge | https://three-forms-of-unity-study-continental-20261023-v12-grokser.surge.sh/ |
 | 代码仓库 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy |
 
 命名：仓库名只含主题（…-GROKstudy，以后不再改名）；Netlify / Surge 域名为“主题-日期-版本-grokser”（v10 起后缀按用户要求改回 grokser；这两处只能小写），每个版本一个新域名，旧域名继续在线。
@@ -25,7 +25,8 @@
 
 | 标签 | 说明 | 链接 |
 |---|---|---|
-| `v20261023-11` | v11 当前版本（2026-10-23 台北）：地图双层（概念图＋本地静态真实地图，无 CDN）、新史地地图、导航簇、历史文化背景块、标记加强 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261023-11 |
+| `v20261023-12` | v12 当前版本（2026-10-23 台北）：性能（换主题、手机滚动与切图层）、手机地图适配屏宽、BC 概念图变矮、新增 5 套主题（共 9 套）、日期更正 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261023-12 |
+| `v20261023-11` | v11（恢复点：t90 前的线上版本 ebf0eab）（2026-10-23 台北）：地图双层（概念图＋本地静态真实地图，无 CDN）、新史地地图、导航簇、历史文化背景块、标记加强 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261023-11 |
 | `v20261021-10` | v10（恢复点：t89 前的线上版本）（2026-10-21 台北）：性能（CLS≈0、去发光循环动画）、浅色主题原生图示、一键主题条、一句话核心与只看核心 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261021-10 |
 | `v20261021-9` | v9（恢复点：t88 前的线上版本 57c08e7，t88 未另打快照标签）（2026-10-21 台北）：记忆图标、干净背诵版、问答分色、四套主题 | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261021-9 |
 | `v20261021-0` | 更新前快照（2026-10-21 台北）：t87 改动前的线上 main（e0772e0，与 v8 线上内容一致） | https://github.com/07-Je-Grok-Love-Personal-20260928/three-forms-of-unity-study-continental-GROKstudy/releases/tag/v20261021-0 |
@@ -36,7 +37,8 @@
 
 | 版本 | 更新内容 | 仍可访问的链接 |
 |---|---|---|
-| **v11 · v20261023-11**（当前） | 地图：每张地图改为双层——概念图（本站示意，标签防重叠）＋真实地图（Natural Earth 公有领域底图在构建时预投影为本地静态 SVG，assets/geo/，19–38 KB，懒加载，无第三方瓦片／CDN，中国大陆与台湾都可直接打开；点按开启缩放后才可拖动、滚轮或双指缩放，平时不挡页面滚动；编号标记按真实经纬度，图例可点）；修复：地图在目录／锚点跳转后不显示（原因是地图带淡入门槛，按需渲染占位使跳转落点偏移，地图停在透明状态；改为地图不设淡入，并加跳转落点校正）；新增史地地图（尼德兰起义与难民路线、罗马帝国与七次大公会议）；导航：右下角半透明导航簇（后退、前进、顶部、底部、首页、标记开关、跳到图例；悬停或点按展开，键盘可用，避开主题与目录按钮，适配刘海安全区，无脚本时隐藏）；内容：历史与文化背景块（时间条图＋事件表＋文化速写；本站概述，出处列于块尾；CCI 原文不动）；标记：四套主题统一的标记颜色变量，荧光与实线加粗。 | 见上表 |
+| **v12 · v20261023-12**（当前，2026-10-23 台北） | 性能（手机实测）：换主题不再做颜色过渡（样式重算约 270 ms → 约 50 ms）；手机去掉剩余毛玻璃；悬停/按下链接时预取同站页面（Speculation Rules）；跨页淡入淡出（View Transitions）；真实地图图片在接近视口时空闲预载。地图：手机真实地图改用 520 px 专用版本，整图适配屏宽、无横向滚动，点按后仍可双指/按钮缩放；BC 概念图裁去南部空白，手机高度约减半。主题：新增 🌸 樱花粉、🌊 深海蓝、🍂 秋叶琥珀、☁️ 云端灰白、🌿 护眼绿，共 9 套，菜单与顶部色点一键切换并记住，首屏无闪烁。日期：v11/v14 的日期更正为 2026-10-23（台北）。 | 见上表 |
+| **v11 · v20261023-11** | 地图：每张地图改为双层——概念图（本站示意，标签防重叠）＋真实地图（Natural Earth 公有领域底图在构建时预投影为本地静态 SVG，assets/geo/，19–38 KB，懒加载，无第三方瓦片／CDN，中国大陆与台湾都可直接打开；点按开启缩放后才可拖动、滚轮或双指缩放，平时不挡页面滚动；编号标记按真实经纬度，图例可点）；修复：地图在目录／锚点跳转后不显示（原因是地图带淡入门槛，按需渲染占位使跳转落点偏移，地图停在透明状态；改为地图不设淡入，并加跳转落点校正）；新增史地地图（尼德兰起义与难民路线、罗马帝国与七次大公会议）；导航：右下角半透明导航簇（后退、前进、顶部、底部、首页、标记开关、跳到图例；悬停或点按展开，键盘可用，避开主题与目录按钮，适配刘海安全区，无脚本时隐藏）；内容：历史与文化背景块（时间条图＋事件表＋文化速写；本站概述，出处列于块尾；CCI 原文不动）；标记：四套主题统一的标记颜色变量，荧光与实线加粗。 | 旧版本：[Netlify](https://three-forms-of-unity-study-continental-20261023-v11-grokser.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261023-v11-grokser.surge.sh/)（2026-10-23 台北） |
 | v10 · v20261021-10 | 性能：目录不再在滚动时自动展开（CLS 0.03–0.11 → ≤0.005），去掉卡片发光与无限循环动画，浮动按钮去毛玻璃，长小节／图示／图标地图按需渲染（content-visibility），进度条用滚动驱动动画（桌面 1280 滚动 55.8–58 fps → 58.8–59.9 fps）；主题：晨光暖白下地图与图示改为原生浅色着色（CSS 变量，不再是深色嵌块），页首一键主题条＋右下角主题按钮；内容：每个深读小节顶部“一句话核心”（本站学习用语，取自该节内容）＋“只看核心”开关，逐句删去导航赘语与重复引录（CCI 原文不动，verify_exact 核对）；标记：一句话核心荧光底＋金色实线＋节号记忆钉，图例同步，四主题一致。 | 旧版本：[Netlify](https://three-forms-of-unity-study-continental-20261021-v10-grokser.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261021-v10-grokser.surge.sh/) |
 | v9 · v20261021-9 | 目录与正文标题前加记忆图标（52 主日、37 条、多特条目、信经各条各一图）；原文/背诵区的经文参考、原文页链接与学习提示默认折叠（干净背诵版，一键全部展开/收起）；129 问问答分色（金色 Q 条、绿色 A 条）；四套可切换主题（🌌 深夜星空 · 🌅 晨光暖白 · 🏞️ 青绿山水 · 🍇 葡萄紫韵，存在本机，首屏前应用不闪烁）；图标记忆地图、问答结构图；年份蓝色虚线标记；主题对比度检查 tools/contrast.py（WCAG AA）。 | 旧版本：[Netlify](https://three-forms-of-unity-study-continental-20261021-v9-grokstudy.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261021-v9-grokstudy.surge.sh/) |
 | v8 · v20261020-8 | 性能：滚动高亮与“已读”改用 IntersectionObserver、进度条只用 transform、目录折叠写进 HTML（加载位移 CLS 约 0.1–0.27 → ≤0.10）、减少毛玻璃、长小节按需渲染、去掉全屏漂移动画；笔记标记系统（领域色术语、必背荧光、重点实线、难点波浪线、经文琥珀色、页首定义框、应用侧栏、记忆钉，图例可一键关闭）；记忆页核心词频图与标记速查表；删去讲解页的抓取/程序说明与重复列。 | 旧版本：[Netlify](https://three-forms-of-unity-study-continental-20261020-v8-grokser.netlify.app/) · [Surge](https://three-forms-of-unity-study-continental-20261020-v8-grokser.surge.sh/) |
