@@ -17,7 +17,7 @@ html.thx body,html.thx #toc,html.thx #main{transition:none!important}
 .thbar button i{transition:transform .2s}
 .thbar button[aria-checked=true] i{transform:scale(1.25);box-shadow:0 0 0 2px var(--gold)}
 /* ===== t90 · 笔记标记（所有主题共用变量） ===== */
-html:not(.mkoff) .mk-hl{background:linear-gradient(100deg,transparent .2em,var(--c-hl) .25em calc(100% - .25em),transparent calc(100% - .2em)) 0 62%/100% 48% no-repeat;border-radius:.3em}
+html:not(.mkoff) .mk-hl{background:linear-gradient(100deg,transparent .2em,var(--c-hl) .25em calc(100% - .25em),transparent calc(100% - .2em)) 0 96%/100% 44% no-repeat;border-radius:.3em}
 html:not(.mkoff) .mk-u{text-decoration-line:underline;text-decoration-style:solid;text-underline-offset:.3em}
 html:not(.mkoff) .mk-d{text-decoration-line:underline;text-decoration-style:dashed;text-decoration-thickness:2px;text-underline-offset:.3em}
 html:not(.mkoff) .mk-x{text-decoration-line:underline;text-decoration-style:wavy;text-underline-offset:.32em}
