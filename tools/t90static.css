@@ -71,4 +71,5 @@ html.jsok main section.l2>header,html.jsok main section.l2>h3,html.jsok .t90-in{
 .t90tl small{color:var(--mut);font-size:.8rem}
 /* 新浅色主题：金底小号码与原文标签改用深色主题字，保证 AA */
 html:is([data-theme=sakura],[data-theme=paper],[data-theme=eye]) .core-n{background:var(--gtx);color:#fff}
-html:is([data-theme=sakura],[data-theme=paper],[data-theme=eye]) i.lb{color:#fff}
+/* 浅色主题首页大标题：渐变起点原为白色，在浅底上看不见 → 改深色主题字起 */
+html:is([data-theme=dawn],[data-theme=sakura],[data-theme=paper],[data-theme=eye]) main h1{background-image:linear-gradient(90deg,var(--gtx),var(--gold) 60%,var(--gold2))}

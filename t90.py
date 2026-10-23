@@ -20,6 +20,8 @@ def apply(h, page, site, viz=None):
     ver = re.search(r'assets/t89\.css\?v=([^"]+)"', h).group(1)
     h = h.replace(f'<link rel="stylesheet" href="assets/t89.css?v={ver}">', f'<link rel="stylesheet" href="assets/t89.css?v={ver}"><link rel="stylesheet" href="assets/t90.css?v={ver}">', 1)
     h = h.replace(f'<script src="assets/t89.js?v={ver}" defer></script>', f'<script src="assets/t89.js?v={ver}" defer></script><script src="assets/t90.js?v={ver}" defer></script>', 1)
+    if site != 'tfu':  # 信经站 .l3 .lb 为金底（styles.css），新浅色主题下用白字保证 AA
+        h = h.replace('</head>', '<style>html:is([data-theme=sakura],[data-theme=paper],[data-theme=eye]) .l3 .lb{color:#fff}</style></head>', 1)
     # 首屏主题（在 CSS 之前执行，无闪烁）
     a = '/^(night|dawn|jade|grape)$/'; assert a in h, page
     h = h.replace(a, f'/^({ALLT})$/', 1)
