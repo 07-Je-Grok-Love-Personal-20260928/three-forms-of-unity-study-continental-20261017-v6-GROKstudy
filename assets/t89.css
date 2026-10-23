@@ -66,3 +66,47 @@ html:not(.jsok) #navc{display:none}
 #navc button:focus-visible,#navc a:focus-visible{outline:3px solid #f08a24;outline-offset:2px}
 html[data-theme=dawn] html[data-theme=dawn] #navc button,html[data-theme=dawn] #navc a{background:rgba(255,250,240,.94);color:#5a3a00}
 @media print{#navc,.mx-tabs,.rm-go,.rm-ctl{display:none!important}html.jsok .mapx .mx-r,html.jsok .mapx .mx-c{display:block!important}}
+/* t89 历史背景块 */
+.hx{margin:22px 0 10px;padding:14px 16px 12px;border-radius:18px;border:1px solid var(--gb);background:linear-gradient(135deg,rgba(var(--A),.10),rgba(77,171,247,.06) 60%,rgba(56,217,169,.06));position:relative;overflow:hidden}
+.hx::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#ff6b6b,#f0b429,#38d9a9,#4dabf7,#b197fc);background-size:200% 100%;animation:hxg 8s linear infinite}
+@keyframes hxg{to{background-position:200% 0}}
+.hxh{margin:2px 0 8px;font-size:1.05rem;line-height:1.45;font-weight:800;color:var(--hi,var(--tx))}.hxh small{font-size:.72rem;font-weight:500;opacity:.8;margin-left:6px}
+.hxc{margin:0 0 10px;line-height:1.7}.hxc b{color:var(--gtx,var(--gold2))}
+.hxleg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:.8rem;margin:0 0 8px;color:var(--mut)}
+.hxleg span{display:inline-flex;align-items:center;gap:4px}.hxleg i{width:14px;height:8px;border-radius:4px;background:var(--c)}
+.hxax,.hxl li{display:grid;grid-template-columns:6.6em 1fr;column-gap:10px}
+.hxax{font-size:.72rem;color:var(--mut);height:16px}.hxt{position:relative}
+.hxt span{position:absolute;transform:translateX(-50%);white-space:nowrap}.hxt span:first-child{transform:none}.hxt span:last-child{transform:translateX(-100%)}
+.hxl{list-style:none;margin:0;padding:0}
+.hxl li{padding:7px 0;border-top:1px dashed rgba(var(--A),.22);row-gap:3px;align-items:center}
+.hxy{font-variant-numeric:tabular-nums;font-size:.86rem;color:var(--c);filter:brightness(1.15);white-space:nowrap}
+html[data-theme=dawn] .hxy{filter:brightness(.62) saturate(1.3)}
+.hxk{position:relative;height:10px;border-radius:5px;background:rgba(var(--A),.12)}
+.hxk i{position:absolute;top:0;bottom:0;min-width:8px;border-radius:5px;background:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 60%,transparent);transform-origin:left center}
+.jsok .hx:not(.hxon) .hxk i{transform:scaleX(0)}
+.hx.hxon .hxk i{transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*70ms)}
+.hxe{grid-column:1/-1;line-height:1.7;font-size:.94rem}
+.hxi{display:inline-grid;place-items:center;width:1.6em;height:1.6em;margin-right:6px;border-radius:50%;background:color-mix(in srgb,var(--c,#f0b429) 22%,transparent);font-size:.85em;vertical-align:-.15em}
+.hxu{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:8px}
+.hxu li{padding:8px 10px;border-radius:12px;background:rgba(var(--A),.07);line-height:1.7}
+.hxs{margin:6px 0 0;font-size:.8rem;color:var(--mut)}
+@media (min-width:900px){.hxu{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){.hx::before{animation:none}.jsok .hx:not(.hxon) .hxk i{transform:none}}
+@media print{.jsok .hx:not(.hxon) .hxk i{transform:none}}
+/* t89 标记加强：四主题统一的颜色变量 */
+html{--mk-u:var(--gold)}
+html[data-theme=jade]{--c-hl:rgba(255,214,90,.42);--c-x:#ff93a3;--c-ref:#ffc685;--mk-u:#ffd166}
+html[data-theme=grape]{--c-hl:rgba(255,206,84,.46);--c-x:#ff9db2;--c-ref:#ffca8c;--mk-u:#ffd166}
+html[data-theme=dawn]{--c-hl:rgba(255,190,20,.5);--c-x:#c4253f;--c-ref:#8a4b00;--mk-u:#b07c12}
+html:not(.mkoff) .mk-hl{background:linear-gradient(transparent 46%,var(--c-hl) 0 92%,transparent 0);border-radius:2px}
+html:not(.mkoff) .mk-u{text-decoration-color:var(--mk-u);text-decoration-thickness:2.5px}
+html:not(.mkoff) .mk-x{text-decoration-thickness:2px}
+html:not(.mkoff) .mk-k{text-shadow:0 0 .01px currentColor}
+html[data-theme=dawn]:not(.mkoff) .mk-ref{background:rgba(185,131,20,.14)}
+.mklegend{position:relative}
+.mklegend.mkflash{animation:mkf 1.6s ease}
+@keyframes mkf{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 4px rgba(240,138,36,.55)}}
+#navc [data-nv=mk][aria-pressed=false]{opacity:.6;text-decoration:line-through}
+#navc [hidden]{display:none}
+#navc .nv-t{transition:transform .35s cubic-bezier(.3,1.4,.5,1)}#navc.open .nv-t,#navc:hover .nv-t{transform:rotate(-35deg)}
+@media (prefers-reduced-motion:reduce){#navc .nv-t{transition:none}}

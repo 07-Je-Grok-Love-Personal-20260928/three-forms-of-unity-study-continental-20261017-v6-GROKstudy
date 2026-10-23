@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 """t89 后处理：双层地图（概念图 + 真实地图）、新增史地地图、导航簇、资源引用。"""
 import re, os
-import rmap, maps89
+import rmap, maps89, hist89
 NAV = ('<div id="navc"><div class="nv-l" id="nvl">'
        '<button type="button" data-nv="back" aria-label="后退（浏览器上一步）" title="后退">←</button>'
        '<button type="button" data-nv="fwd" aria-label="前进（浏览器下一步）" title="前进">→</button>'
        '<button type="button" data-nv="top" aria-label="回到页面顶部" title="顶部">⤒</button>'
        '<button type="button" data-nv="bot" aria-label="到页面底部" title="底部">⤓</button>'
-       '<a href="index.html" aria-label="回到首页" title="首页">🏠</a></div>'
+       '<a href="index.html" aria-label="回到首页" title="首页">🏠</a>'
+       '<button type="button" data-nv="mk" aria-pressed="true" aria-label="笔记标记开关" title="笔记标记：开/关" hidden>🖍</button>'
+       '<button type="button" data-nv="leg" aria-label="跳到标记图例" title="标记图例" hidden>🔖</button></div>'
        '<button type="button" class="nv-t" aria-expanded="false" aria-controls="nvl" aria-label="页面导航：后退、前进、顶部、底部、首页" title="页面导航">🧭</button></div>')
 def sec_end(h, sid):
     i = h.find(f'id="{sid}"'); assert i > 0, sid
@@ -35,6 +37,9 @@ def apply(h, page, site):
         e = sec_end(h, sid)
         blk = f'<h4 class="mxh">🗺️ 史地补充：{spec["title"]}</h4>' + rmap.build(spec, out, ver)
         h = h[:e] + blk + h[e:]; n += 1
+    HX = (hist89.TFU if site == "tfu" else hist89.TEC).get(page + ".html")
+    if HX:
+        e = sec_end(h, HX["sid"]); h = h[:e] + hist89.html(HX) + h[e:]
     if "<body" in h and 'id="navc"' not in h:
         h = h.replace("</body>", NAV + "</body>", 1)
     return h, n
