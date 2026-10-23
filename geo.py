@@ -28,7 +28,7 @@ def mapsvg(id, title, pts, routes=(), hl=(), bbox=(-1,14,46,54), W=1040, off=Non
     if rhine:
         d = " ".join(("M" if i==0 else "L")+f"{xy(p)[0]:.0f},{xy(p)[1]:.0f}" for i,p in enumerate(RHINE))
         s += f'<path d="{d}" class="river"/>'
-        rx_,ry_ = xy((8.30,49.0)); s += f'<text x="{rx_+10:.0f}" y="{ry_:.0f}" class="rvt">莱茵河（示意）</text>'
+        rx_,ry_ = xy((8.30,49.0) if la0 < 48.7 else (7.60,50.36)); s += f'<text x="{rx_+10:.0f}" y="{ry_:.0f}" class="rvt">莱茵河（示意）</text>'
     for a,b in routes:
         (x1,y1),(x2,y2) = xy(a),xy(b); mx,my=(x1+x2)/2,(y1+y2)/2-min(70,abs(x2-x1)*0.18+20)
         s += f'<path d="M{x1:.0f},{y1:.0f} Q{mx:.0f},{my:.0f} {x2:.0f},{y2:.0f}" class="route"/>'
