@@ -68,7 +68,7 @@ html[data-theme=dawn] html[data-theme=dawn] #navc button,html[data-theme=dawn] #
 @media print{#navc,.mx-tabs,.rm-go,.rm-ctl{display:none!important}html.jsok .mapx .mx-r,html.jsok .mapx .mx-c{display:block!important}}
 /* t89 历史背景块 */
 .hx{margin:22px 0 10px;padding:14px 16px 12px;border-radius:18px;border:1px solid var(--gb);background:linear-gradient(135deg,rgba(var(--A),.10),rgba(77,171,247,.06) 60%,rgba(56,217,169,.06));position:relative;overflow:hidden}
-.hx::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#ff6b6b,#f0b429,#38d9a9,#4dabf7,#b197fc);background-size:200% 100%;animation:hxg 8s linear infinite}
+.hx::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,#ff6b6b,#f0b429,#38d9a9,#4dabf7,#b197fc);background-size:200% 100%}.hx.hxon::before{animation:hxg 2.4s ease-out 1}
 @keyframes hxg{to{background-position:200% 0}}
 .hxh{margin:2px 0 8px;font-size:1.05rem;line-height:1.45;font-weight:800;color:var(--hi,var(--tx))}.hxh small{font-size:.72rem;font-weight:500;opacity:.8;margin-left:6px}
 .hxc{margin:0 0 10px;line-height:1.7}.hxc b{color:var(--gtx,var(--gold2))}
@@ -101,7 +101,7 @@ html[data-theme=dawn]{--c-hl:rgba(255,190,20,.5);--c-x:#c4253f;--c-ref:#8a4b00;-
 html:not(.mkoff) .mk-hl{background:linear-gradient(transparent 46%,var(--c-hl) 0 92%,transparent 0);border-radius:2px}
 html:not(.mkoff) .mk-u{text-decoration-color:var(--mk-u);text-decoration-thickness:2.5px}
 html:not(.mkoff) .mk-x{text-decoration-thickness:2px}
-html:not(.mkoff) .mk-k{text-shadow:0 0 .01px currentColor}
+
 html[data-theme=dawn]:not(.mkoff) .mk-ref{background:rgba(185,131,20,.14)}
 .mklegend{position:relative}
 .mklegend.mkflash{animation:mkf 1.6s ease}
